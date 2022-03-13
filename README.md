@@ -19,3 +19,4 @@ Some introductory readings for the concepts.
 - Ball: Created by David Khai from the Noun Project https://thenounproject.com/icon/ball-1691965/
 - Pipes: https://www.kenney.nl/assets/puzzle-pack-2
 - Some edits using Inkscape: https://inkscape.org/
+- Custom click and drag code. Heavily modified for the actual implementation. https://javascript.info/mouse-drag-and-drop
