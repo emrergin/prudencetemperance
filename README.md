@@ -1,24 +1,21 @@
-# prudence
+# Prudence and Temperance Testing
 
-## Project setup
-```
-npm install
-```
+Web based experimentation for the concepts of Prudence and Temperance. Also will include treatments for Risk Aversion.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Joint project with [Mehmet Yiğit Gürdal](https://econ.boun.edu.tr/mehmet-yigit-gurdal-0)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+The front end will use Vue3 while the backend will use MongoDB and Node.js.
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Details
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Some introductory readings for the concepts.
+
+- https://www.mathematik.uni-ulm.de/carfi/vortraege/downloads/AER-2006-1.pdf
+- http://hschlesinger.people.ua.edu/uploads/2/6/8/4/26840405/prudence-temperance-res-final.pdf
+- http://www.restud.com/wp-content/uploads/2013/08/MS-17166-Manuscript.pdf
+
+## Sources
+
+- Ball: Created by David Khai from the Noun Project https://thenounproject.com/icon/ball-1691965/
+- Pipes: https://www.kenney.nl/assets/puzzle-pack-2
+- Some edits using Inkscape: https://inkscape.org/
