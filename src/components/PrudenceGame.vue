@@ -327,7 +327,7 @@ export default {
     display:flex;
     width:100%;
     justify-content: center;
-    gap: 121px;
+    gap: 105px;
 }
 
 .draggable{
@@ -337,7 +337,7 @@ export default {
 .droppable{
     padding-top:12px;
     padding-bottom: 12px;
-    width: 189px;
+    width: 197px;
     text-align:center;
     font-size: 3em;
     font-weight: bold;

@@ -9,13 +9,15 @@
             <span :style="{visibility: step>3? `visible` : `hidden`}"> hangi ucuna</span>  
             <span :style="{visibility: step>4? `visible` : `hidden`}"> takacağınızı seçeceksiniz.</span>  
             </p> 
-            <p :key=6 v-if="step>5">Farenizle küçük boruya tıklayın ve onu seçiminize sürükleyin.</p>
-            <p :key=7 v-if="step>6">Top her bir kavşak noktasına geldiğinde yüzde elli ihtimalle sağa, yüzde elli ihtimalle sola gidecek.</p>
-            <p :key=8 v-if="step>7">Boruların üzerindeki sayılar, top borunun o kısmından geçerse kazanacağınız ya da kaybedeceğiniz puanı göstermektedir.</p>
-            <p :key=9 v-if="step>8">Her tur, topun hareketi bitince, kazandığınız puan genel puanınıza eklenir.</p>
-            <div :key=10 v-if="step>9" class="centered">Hazırsanız başlayalım mı?</div> 
+            <p :key=6 v-if="step>5">Küçük boruya tıklayın ve onu seçtiğiniz yere sürükleyin.</p>
+            <p :key=7 v-if="step>7">Şimdi, topa tıklayın.</p>
+            <!-- Top her bir kavşak noktasına geldiğinde yüzde elli ihtimalle sağa, yüzde elli ihtimalle sola gidecek. -->
+            <p :key=8 v-if="step>8">Topun izlediği yol üzerindeki sayılar kazanacağınız ya da kaybedeceğiniz puanı göstermektedir.</p>
+            <p :key=9 v-if="step>9">Bu örnek turda {{odenek[durum-1].length===1? odenek[durum-1][0] :`${odenek[durum-1][0]}${odenek[durum-1][1]}=${odenek[durum-1][2]}`}} 
+            puan kazandınız. Her tur puanınız böyle belirlenecek.</p>
+            <div :key=10 v-if="step>10" class="centered">Hazırsanız başlayalım mı?</div> 
         </transition-group>
-            <button class="stepButton" @click="$emit('end', true)" v-if="step>10">              
+            <button class="stepButton" @click="$emit('end', true)" v-if="step>11">              
                 Hazırım!
             </button>         
 
@@ -23,9 +25,10 @@
 
     <div class="sutun2" id="sut2" >
         <img id="futbolTopu" ref="futbolTopu" src="../assets/soccer_ball.svg" 
-            oncontextmenu="return false" @click="hareket()"
-            :style="{opacity: step>2? `1` : `0.5`}"  class="beliren"/>
-        <div id="buyukEtiketler" :style="{opacity: step>2? `1` : `0.5`}"  class="beliren">
+            oncontextmenu="return false" @click="hareket()" class="beliren"
+            :class="[{kirmiziKenarli:step===7},{odakli:step>6},{odaksiz:step<=6} ]"/>
+        <div id="buyukEtiketler" class="beliren"
+        :class="[{kirmiziKenarli:step===9},{odakli:step>8},{odaksiz:step<=8} ]">
             <div id="solBuyukEtiket" class="buyukEtiket etiket">
                 +7
             </div>
@@ -43,7 +46,8 @@
         </div>
         <div id="kucukBoru" ref="kucukBoru" 
         oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false">
-        <div id="kucukEtiketler" :style="{opacity: step>10? `1` : `0.5`}"  class="beliren">
+        <div id="kucukEtiketler" class="beliren"
+        :class="[{kirmiziKenarli:step===9},{odakli:step>8},{odaksiz:step<=8} ]">
             <div id="solKucukEtiket" class="kucukEtiket etiket">
                 +2
             </div>
@@ -56,7 +60,7 @@
             />
         </div>
     </div>
-<div>{{step}}</div>
+<div>{{step}}-{{secim}}</div>
 </div>
 </template>
 <script>
@@ -64,12 +68,15 @@
 export default {
     data(){
         return{
-            step:1
+            step:1,
+            secim:null,
+            durum:null,
+            odenek: [[4,-2,2],[4,`+2`,6],[4],[7,`+2`,9],[7,-2,5],[7]]
         }
     },
     methods:{
         nextStep(){
-            if (this.step!==6){
+            if (this.step!==6 && this.step!==8){
                 this.step++;
             }
         },
@@ -78,10 +85,7 @@ export default {
           let kucukBoru=this.$refs.kucukBoru;
           var vm = this;
           kucukBoru.style.cursor="grabbing";
-          const collection = document.getElementsByClassName("droppable");
-          for (let i = 0; i < collection.length; i++) {
-              collection[i].style.visibility = "visible";
-          }
+
           let shiftX = e.clientX - kucukBoru.getBoundingClientRect().left;
           let shiftY = e.clientY - kucukBoru.getBoundingClientRect().top;
           
@@ -122,31 +126,25 @@ export default {
           }            
 
           document.addEventListener('mousemove', onMouseMove);
-          // kucukBoru.addEventListener('mouseup', onMouseUp());
 
           kucukBoru.onmouseup = function() {
               document.removeEventListener('mousemove', onMouseMove);
               kucukBoru.style.cursor="grab";                
 
               if (vm.currentDroppable){
-                //   var rect = vm.currentDroppable.getBoundingClientRect();
-                  vm.currentDroppable.style.background = '';
-                //   vm.currentDroppable.className = '';
-                //   vm.currentDroppable.innerHTML=``;
-                  vm.currentDroppable.parentNode.insertBefore(kucukBoru,vm.currentDroppable);
-                  vm.currentDroppable.remove();
-                  kucukBoru.style.left = '0px';
+                vm.currentDroppable.style.background = '';
+                vm.currentDroppable.parentNode.insertBefore(kucukBoru,vm.currentDroppable);
+                vm.secim=vm.currentDroppable.id.slice(1);
+                vm.currentDroppable.remove();
+                kucukBoru.style.left = '0px';
                 kucukBoru.style.top = '0px';
-                  kucukBoru.style.position=`relative`;
-                //   kucukBoru.style.left = `${rect.left  + window.scrollX}px`;
-                //   kucukBoru.style.top = `${rect.top + window.scrollY}px`;    
-                //  kucukBoru.offset(vm.currentDroppable.offset());   
-                //   const collection = document.getElementsByClassName("droppable");
-                //   for (let i = 0; i < collection.length; i++) {
-                //       collection[i].style.visibility = "hidden";
-                //   }
+                kucukBoru.style.position=`relative` ; 
+                const collection = document.getElementsByClassName("droppable");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.visibility = "hidden";
+                }
+                vm.step++;
               }
-              // kucukBoru.removeEventListener('mouseup', onMouseUp());
               kucukBoru.onmouseup = null;
           }
       function enterDroppable(elem) {
@@ -156,6 +154,69 @@ export default {
           elem.style.background = '';
       }          
 
+        },
+        hareket(){
+          if (!this.secim || !(this.step===8)){return}
+          this.asama=`tophareketi`;
+          let futbolTopu=this.$refs.futbolTopu;
+          futbolTopu.style.zIndex = 4;
+          let fakeBall=futbolTopu.cloneNode(true);
+          fakeBall.id=`fakeBall`;
+          fakeBall.style.visibility = "hidden";
+
+          let zar= Math.floor(Math.random() * 100);
+          futbolTopu.after(fakeBall);
+          futbolTopu.style.position="absolute";
+          if (this.secim===`2`){
+            if(zar>75){
+              futbolTopu.classList.add(`asagiHareketli1P`);
+              this.durum=1;
+              setTimeout(sagBEtiket, 2100);
+              setTimeout(sagKEtiket, 3650);
+            }else if(zar>50){
+              futbolTopu.classList.add(`asagiHareketli2P`);
+              this.durum=2;
+              setTimeout(sagBEtiket, 2100);
+              setTimeout(solKEtiket, 3650);
+            }else{
+              futbolTopu.classList.add(`asagiHareketli6P`);
+              this.durum=6;
+              setTimeout(solBEtiket, 2100);
+            }
+          }
+          if (this.secim===`1`){
+            if(zar>75){
+              futbolTopu.classList.add(`asagiHareketli4P`);
+              this.durum=4;
+              setTimeout(solBEtiket, 2100);
+              setTimeout(solKEtiket, 3650);
+            }else if(zar>50){
+              futbolTopu.classList.add(`asagiHareketli5P`);
+              this.durum=5;
+              setTimeout(solBEtiket, 2100);
+              setTimeout(sagKEtiket, 3650);
+            }else{
+              futbolTopu.classList.add(`asagiHareketli3P`);
+              this.durum=3;
+              setTimeout(sagBEtiket, 2100);
+            }
+          }
+      futbolTopu.onanimationend = () => {
+          this.step++;
+      };
+
+      function solBEtiket(){
+      document.getElementById(`solBuyukEtiket`).classList.add(`yaklasilmis`);
+      }
+      function sagBEtiket(){
+      document.getElementById(`sagBuyukEtiket`).classList.add(`yaklasilmis`);
+      }
+      function solKEtiket(){
+      document.getElementById(`solKucukEtiket`).classList.add(`yaklasilmis`);
+      }
+      function sagKEtiket(){
+      document.getElementById(`sagKucukEtiket`).classList.add(`yaklasilmis`);
+      }            
       }
     }
 }
@@ -167,8 +228,7 @@ export default {
     margin:15px; 
     min-height: 440px;
     justify-content: space-between;
-    padding: 20px;
-    
+    padding: 20px;    
 }
 
 .tutorial-enter-from{
@@ -225,6 +285,76 @@ export default {
 .beliren{
     transition: all 0.5s ease-in;
 }
+
+@keyframes PTtoDown0 {
+    0%  { transform:  translate(0px,5px) rotate(0deg);}
+  100% { transform:  translate(0px,62px) rotate(0deg);}
+}
+@keyframes PTtoDown1 {
+  0%  { transform:  translate(0px,5px) rotate(0deg);}
+  14% { transform:  translate(0px,62px) rotate(0deg);}
+  42% { transform:  translate(120px,62px) rotate(360deg);}
+  49% { transform:  translate(145px,78px) rotate(432deg) ;}
+  56% { transform:  translate(152.5px,110px) rotate(454.5deg); }
+  70% { transform:  translate(152.5px,155px) rotate(454.5deg);}
+  84% { transform:  translate(212.5px,155px) rotate(634.5deg);}
+  96% { transform:  translate(230px,200px) rotate(732deg); }
+  100% {transform:  translate(230px,220px) rotate(732deg); }
+}
+
+@keyframes PTtoDown2 {
+  0%  { transform:  translate(0px,5px) rotate(0deg);}
+  14% { transform:  translate(0px,62px) rotate(0deg);}
+  42% { transform:  translate(120px,62px) rotate(360deg);}
+  49% { transform:  translate(145px,78px) rotate(432deg) ;}
+  56% { transform:  translate(152.5px,110px) rotate(454.5deg); }
+  70% { transform:  translate(152.5px,155px) rotate(454.5deg);}
+  84% { transform:  translate(92.5px,155px) rotate(274.5deg);}
+  96% { transform:  translate(75px,200px) rotate(327deg); }
+  100% {transform:  translate(75px,220px) rotate(327deg); }
+}
+
+@keyframes PTtoDown3 {
+  0%   { transform: translate(0px,5px) rotate(0deg) ; }
+  20% { transform: translate(0px,62px) rotate(0deg) ;}
+  60% { transform: translate(120px,62px) rotate(360deg) ; }
+  70% { transform: translate(145px,78px) rotate(432deg) ; }
+  80% { transform: translate(152.5px,110px) rotate(454.5deg) ;}
+  100% { transform: translate(152.5px,155px) rotate(454.5deg) ; }
+}
+
+@keyframes PTtoDown4 {
+  0%  { transform:  translate(0px,5px) rotate(360deg);}
+  14% { transform:  translate(0px,62px) rotate(360deg);}
+  42% { transform:  translate(-120px,62px) rotate(0deg);}
+  49% { transform:  translate(-145px,78px) rotate(-75deg) ;}
+  56% { transform:  translate(-152.5px,110px) rotate(-82.5deg); }
+  70% { transform:  translate(-152.5px,155px) rotate(-82.5deg);}
+  84% { transform:  translate(-212.5px,155px) rotate(-262.5deg);}
+  96% { transform:  translate(-230px,200px) rotate(-315deg); }
+  100% {transform:  translate(-230px,220px) rotate(-315deg); }
+}
+
+@keyframes PTtoDown5 {
+  0%  { transform:  translate(0px,5px) rotate(360deg);}
+  14% { transform:  translate(0px,62px) rotate(360deg);}
+  42% { transform:  translate(-120px,62px) rotate(0deg);}
+  49% { transform:  translate(-145px,78px) rotate(-75deg) ;}
+  56% { transform:  translate(-152.5px,110px) rotate(-82.5deg); }
+  70% { transform:  translate(-152.5px,155px) rotate(-82.5deg);}
+  84% { transform:  translate(-92.5px,155px) rotate(97.5deg);}
+  96% { transform:  translate(-75px,200px) rotate(150deg); }
+  100% {transform:  translate(-75px,220px) rotate(150deg); }
+}
+
+@keyframes PTtoDown6 {
+   0% { transform:  translate(0px,5px) rotate(360deg); }
+  20% { transform: translate(0px,62px) rotate(360deg);}
+  60% { transform: translate(-120px,62px) rotate(0deg); }
+  70% { transform: translate(-145px,78px) rotate(-75deg); }
+  80% { transform: translate(-152.5px,110px) rotate(-82.5deg);}
+  100% { transform: translate(-152.5px,155px) rotate(-82.5deg); }
+}
 </style>
 
 <style scoped>
@@ -234,5 +364,9 @@ export default {
     }    
 .droppable{
     flex-shrink: 0;
+}
+
+#inputlar{
+    gap: 109px;
 }
 </style>
