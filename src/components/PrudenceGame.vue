@@ -1,5 +1,5 @@
 <template>
-    <div id="oyunKutusu" v-if="!oyunSonu">
+    <div class="oyunKutusu" v-if="!oyunSonu">
         <ScoreTable 
             :totalRevenue="totalRevenue" 
             :totalLoss="totalLoss" 
@@ -33,18 +33,17 @@
             </div>
               <img src="../assets/kucukboru.svg" class="draggable" oncontextmenu="return false" />
           </div>
-          <button id="nextRound" v-if="asama===`roundsonu`" @click="siradakiTur()">              
+          <button class="stepButton" id="nextRound" v-if="asama===`roundsonu`" @click="siradakiTur()">              
               {{this.currentRound===this.totalRounds-1? `Oyunu Bitir` : `Sıradaki Tur >>` }}
           </button>
         </div>
     </div>
-    <div v-if="oyunSonu">
-      Oyunu tamamladınız. Toplam kazancınız: {{totalRevenue-totalLoss}}
+    <div v-if="oyunSonu" class="oyunKutusu">
+      <p>Oyunu tamamladınız. Toplam kazancınız: {{totalRevenue-totalLoss}}</p>      
     </div>
 </template>
 
 <script>
-
 import ScoreTable from './ScoreTable.vue'
 export default {
     components: { ScoreTable},
@@ -78,7 +77,7 @@ export default {
           
           kucukBoru.style.position = 'absolute';
           kucukBoru.style.zIndex = 3;
-          document.body.append(kucukBoru);
+          document.getElementById(`app`).append(kucukBoru);
 
           moveAt(e.pageX, e.pageY);
 
@@ -274,12 +273,12 @@ export default {
 </script>
 
 <style>
-#oyunKutusu{
+.oyunKutusu{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display:flex;
     flex-direction: column;   
     margin:15px; 
-    min-height: 363.1px;
+    min-height: 385px;
 }
 #oyunAsagi{
     display: flex;
@@ -324,12 +323,11 @@ export default {
   color:#F8F8F8;
 }
 
-
 #inputlar{
     display:flex;
     width:100%;
     justify-content: center;
-    gap: 110px;
+    gap: 121px;
 }
 
 .draggable{
@@ -339,7 +337,7 @@ export default {
 .droppable{
     padding-top:12px;
     padding-bottom: 12px;
-    width: 194px;
+    width: 189px;
     text-align:center;
     font-size: 3em;
     font-weight: bold;
@@ -350,10 +348,10 @@ export default {
     cursor: pointer;
 }
 
-#nextRound{
+.stepButton{
   padding: 5px;
   font-size: 1.5em;
-  margin-top: 50px;
+  margin: 50px auto 20px auto;
 }
 
 .asagiHareketli1P {
