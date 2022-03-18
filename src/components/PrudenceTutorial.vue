@@ -11,24 +11,38 @@
             </p> 
             <p :key=6 v-if="step>5">Küçük boruya tıklayın ve onu seçtiğiniz yere sürükleyin.</p>
             <p :key=7 v-if="step>7">Şimdi, topa tıklayın.</p>
-            <!-- Top her bir kavşak noktasına geldiğinde yüzde elli ihtimalle sağa, yüzde elli ihtimalle sola gidecek. -->
-            <p :key=8 v-if="step>8">Topun izlediği yol üzerindeki sayılar kazanacağınız ya da kaybedeceğiniz puanı göstermektedir.</p>
-            <p :key=9 v-if="step>9">Bu örnek turda {{odenek[durum-1].length===1? odenek[durum-1][0] :`${odenek[durum-1][0]}${odenek[durum-1][1]}=${odenek[durum-1][2]}`}} 
+            <p :key=8 v-if="step>8">Top bunun gibi yol ayrımlarında <b>yüzde elli ihtimalle</b> sağa, <b>yüzde elli ihtimalle</b> sola gidecek.</p>
+            <p :key=9 v-if="step>10">Topun izlediği yol üzerindeki sayılar kazanacağınız ya da kaybedeceğiniz puanı göstermektedir.</p>
+            <p :key=10 v-if="step>11">Bu örnek turda {{odenek[durum-1].length===1? odenek[durum-1][0] :`${odenek[durum-1][0]}${odenek[durum-1][1]}=${odenek[durum-1][2]}`}} 
             puan kazandınız. Her tur puanınız böyle belirlenecek.</p>
-            <div :key=10 v-if="step>10" class="centered">Hazırsanız başlayalım mı?</div> 
+            <div :key=11 v-if="step>12" class="centered">Hazırsanız başlayalım mı?</div> 
+            <div :key=12 class="centered" v-if="step>13">
+                <button @click="$emit('end', true)" class="stepButton">              
+                    Hazırım!
+                </button> 
+            </div>
+ 
         </transition-group>
-            <button class="stepButton" @click="$emit('end', true)" v-if="step>11">              
-                Hazırım!
-            </button>         
+       
 
     </div>    
 
     <div class="sutun2" id="sut2" >
-        <img id="futbolTopu" ref="futbolTopu" src="../assets/soccer_ball.svg" 
+            <!-- // ]" -->
+        <div id="futbolTopu" ref="futbolTopu" 
             oncontextmenu="return false" @click="hareket()" class="beliren"
-            :class="[{kirmiziKenarli:step===7},{odakli:step>6},{odaksiz:step<=6} ]"/>
+            :class="[{kirmiziKenarli:step===7},{odakli:step>6},{odaksiz:step<=6} ]">
+            <div :class="[{gorunur:step===9},{gorunmez:step!==9}]" class="beliren kirmiziOklar">
+                <div >◄</div>
+                <div >►</div>
+            </div>
+            <img src="../assets/soccer_ball.svg" style="align-self:flex-end"/>
+
+        </div>
+
+
         <div id="buyukEtiketler" class="beliren"
-        :class="[{kirmiziKenarli:step===9},{odakli:step>8},{odaksiz:step<=8} ]">
+        :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10} ]">
             <div id="solBuyukEtiket" class="buyukEtiket etiket">
                 +7
             </div>
@@ -47,7 +61,7 @@
         <div id="kucukBoru" ref="kucukBoru" 
         oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false">
         <div id="kucukEtiketler" class="beliren"
-        :class="[{kirmiziKenarli:step===9},{odakli:step>8},{odaksiz:step<=8} ]">
+        :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10}]">
             <div id="solKucukEtiket" class="kucukEtiket etiket">
                 +2
             </div>
@@ -60,7 +74,6 @@
             />
         </div>
     </div>
-<div>{{step}}-{{secim}}</div>
 </div>
 </template>
 <script>
@@ -76,8 +89,11 @@ export default {
     },
     methods:{
         nextStep(){
-            if (this.step!==6 && this.step!==8){
+            if (this.step!==6 && this.step!==8 && this.step!==9 &&this.step!==10){
                 this.step++;
+            }
+            if (this.step===9){
+                this.hareket2();
             }
         },
         boruTasi(e){
@@ -154,70 +170,82 @@ export default {
           elem.style.background = '';
       }          
 
-        },
+    },
         hareket(){
-          if (!this.secim || !(this.step===8)){return}
-          this.asama=`tophareketi`;
-          let futbolTopu=this.$refs.futbolTopu;
-          futbolTopu.style.zIndex = 4;
-          let fakeBall=futbolTopu.cloneNode(true);
-          fakeBall.id=`fakeBall`;
-          fakeBall.style.visibility = "hidden";
+            if (!this.secim || !(this.step===8)){return}
+            let futbolTopu=this.$refs.futbolTopu;
+            futbolTopu.style.zIndex = 4;
+            let fakeBall=futbolTopu.cloneNode(true);
+            fakeBall.id=`fakeBall`;
+            fakeBall.style.visibility = "hidden";
 
-          let zar= Math.floor(Math.random() * 100);
-          futbolTopu.after(fakeBall);
-          futbolTopu.style.position="absolute";
-          if (this.secim===`2`){
-            if(zar>75){
-              futbolTopu.classList.add(`asagiHareketli1P`);
-              this.durum=1;
-              setTimeout(sagBEtiket, 2100);
-              setTimeout(sagKEtiket, 3650);
-            }else if(zar>50){
-              futbolTopu.classList.add(`asagiHareketli2P`);
-              this.durum=2;
-              setTimeout(sagBEtiket, 2100);
-              setTimeout(solKEtiket, 3650);
-            }else{
-              futbolTopu.classList.add(`asagiHareketli6P`);
-              this.durum=6;
-              setTimeout(solBEtiket, 2100);
-            }
-          }
-          if (this.secim===`1`){
-            if(zar>75){
-              futbolTopu.classList.add(`asagiHareketli4P`);
-              this.durum=4;
-              setTimeout(solBEtiket, 2100);
-              setTimeout(solKEtiket, 3650);
-            }else if(zar>50){
-              futbolTopu.classList.add(`asagiHareketli5P`);
-              this.durum=5;
-              setTimeout(solBEtiket, 2100);
-              setTimeout(sagKEtiket, 3650);
-            }else{
-              futbolTopu.classList.add(`asagiHareketli3P`);
-              this.durum=3;
-              setTimeout(sagBEtiket, 2100);
-            }
-          }
-      futbolTopu.onanimationend = () => {
-          this.step++;
-      };
+            futbolTopu.after(fakeBall);
+            futbolTopu.style.position="absolute"; 
+            
+            futbolTopu.classList.add(`asagiHareketli0PT`);
 
-      function solBEtiket(){
-      document.getElementById(`solBuyukEtiket`).classList.add(`yaklasilmis`);
-      }
-      function sagBEtiket(){
-      document.getElementById(`sagBuyukEtiket`).classList.add(`yaklasilmis`);
-      }
-      function solKEtiket(){
-      document.getElementById(`solKucukEtiket`).classList.add(`yaklasilmis`);
-      }
-      function sagKEtiket(){
-      document.getElementById(`sagKucukEtiket`).classList.add(`yaklasilmis`);
-      }            
-      }
+            futbolTopu.onanimationend = () => {
+                this.step++;
+            };    
+        },
+        hareket2(){
+            this.step++;
+            let futbolTopu=this.$refs.futbolTopu;
+            let zar= Math.floor(Math.random() * 100);
+            futbolTopu.classList.remove(`asagiHareketli0PT`);
+
+            if (this.secim===`2`){
+            if(zar>75){
+                futbolTopu.classList.add(`asagiHareketli1PT`);
+                this.durum=1;
+                setTimeout(sagBEtiket, 1100);
+                setTimeout(sagKEtiket, 2650);
+            }else if(zar>50){
+                futbolTopu.classList.add(`asagiHareketli2PT`);
+                this.durum=2;
+                setTimeout(sagBEtiket, 1100);
+                setTimeout(solKEtiket, 2650);
+            }else{
+                futbolTopu.classList.add(`asagiHareketli6PT`);
+                this.durum=6;
+                setTimeout(solBEtiket, 1100);
+            }
+            }
+            if (this.secim===`1`){
+            if(zar>75){
+                futbolTopu.classList.add(`asagiHareketli4PT`);
+                this.durum=4;
+                setTimeout(solBEtiket, 1100);
+                setTimeout(solKEtiket, 2650);
+            }else if(zar>50){
+                futbolTopu.classList.add(`asagiHareketli5PT`);
+                this.durum=5;
+                setTimeout(solBEtiket, 1100);
+                setTimeout(sagKEtiket, 2650);
+            }else{
+                futbolTopu.classList.add(`asagiHareketli3PT`);
+                this.durum=3;
+                setTimeout(sagBEtiket, 1100);
+            }
+            }
+
+            futbolTopu.onanimationend = () => {
+                this.step++;
+            };    
+
+            function solBEtiket(){
+                document.getElementById(`solBuyukEtiket`).classList.add(`yaklasilmis`);
+            }
+            function sagBEtiket(){
+                document.getElementById(`sagBuyukEtiket`).classList.add(`yaklasilmis`);
+            }
+            function solKEtiket(){
+                document.getElementById(`solKucukEtiket`).classList.add(`yaklasilmis`);
+            }
+            function sagKEtiket(){
+                document.getElementById(`sagKucukEtiket`).classList.add(`yaklasilmis`);
+            }  
+        }
     }
 }
 </script>
@@ -251,7 +279,7 @@ export default {
 }
 
 .centered{
-    text-align:center;    
+    text-align:center;  
 }
 
 .sutun1,.sutun2{
@@ -285,74 +313,126 @@ export default {
 .beliren{
     transition: all 0.5s ease-in;
 }
+.kirmiziOklar{
+    color:red;
+    font-size:50px;
+    position: absolute;
+    display: flex;
+    left:-45px;
+    top:-7px;
+    gap:30px;
+    justify-content: space-between;
+}
+
+.gorunur{
+    display:flex;
+}
+.gorunmez{
+    display:none;
+}
+.asagiHareketli0PT {
+    position: absolute;
+    animation: PTtoDown0 1000ms linear 1;
+    animation-fill-mode: forwards;
+}
+
+.asagiHareketli1PT {
+    position: absolute;
+    animation: PTtoDown1 4000ms linear 1;
+    animation-fill-mode: forwards;
+}
+
+.asagiHareketli2PT {
+    position: absolute;
+    animation: PTtoDown2 4000ms linear 1;
+    animation-fill-mode: forwards;
+}
+
+.asagiHareketli3PT {
+    position: absolute;
+    animation: PTtoDown3 3000ms linear 1;
+    animation-fill-mode: forwards;
+}
+
+.asagiHareketli4PT {
+    position: absolute;
+    animation: PTtoDown4 4000ms linear 1;
+    animation-fill-mode: forwards;
+}
+
+.asagiHareketli5PT {
+    position: absolute;
+    animation: PTtoDown5 4000ms linear 1;
+    animation-fill-mode: forwards;
+}
+
+.asagiHareketli6PT {
+    position: absolute;
+    animation: PTtoDown6 3000ms linear 1;
+    animation-fill-mode: forwards;
+}
 
 @keyframes PTtoDown0 {
     0%  { transform:  translate(0px,5px) rotate(0deg);}
   100% { transform:  translate(0px,62px) rotate(0deg);}
 }
 @keyframes PTtoDown1 {
-  0%  { transform:  translate(0px,5px) rotate(0deg);}
-  14% { transform:  translate(0px,62px) rotate(0deg);}
-  42% { transform:  translate(120px,62px) rotate(360deg);}
-  49% { transform:  translate(145px,78px) rotate(432deg) ;}
-  56% { transform:  translate(152.5px,110px) rotate(454.5deg); }
-  70% { transform:  translate(152.5px,155px) rotate(454.5deg);}
-  84% { transform:  translate(212.5px,155px) rotate(634.5deg);}
-  96% { transform:  translate(230px,200px) rotate(732deg); }
+  0% { transform:  translate(0px,62px) rotate(0deg);}
+  33% { transform:  translate(120px,62px) rotate(360deg);}
+  42% { transform:  translate(145px,78px) rotate(432deg) ;}
+  50% { transform:  translate(152.5px,110px) rotate(454.5deg); }
+  67% { transform:  translate(152.5px,155px) rotate(454.5deg);}
+  83% { transform:  translate(212.5px,155px) rotate(634.5deg);}
+  98% { transform:  translate(230px,200px) rotate(732deg); }
   100% {transform:  translate(230px,220px) rotate(732deg); }
 }
 
 @keyframes PTtoDown2 {
-  0%  { transform:  translate(0px,5px) rotate(0deg);}
-  14% { transform:  translate(0px,62px) rotate(0deg);}
-  42% { transform:  translate(120px,62px) rotate(360deg);}
-  49% { transform:  translate(145px,78px) rotate(432deg) ;}
-  56% { transform:  translate(152.5px,110px) rotate(454.5deg); }
-  70% { transform:  translate(152.5px,155px) rotate(454.5deg);}
-  84% { transform:  translate(92.5px,155px) rotate(274.5deg);}
-  96% { transform:  translate(75px,200px) rotate(327deg); }
+  0% { transform:  translate(0px,62px) rotate(0deg);}
+  33% { transform:  translate(120px,62px) rotate(360deg);}
+  42% { transform:  translate(145px,78px) rotate(432deg) ;}
+  50% { transform:  translate(152.5px,110px) rotate(454.5deg); }
+  67% { transform:  translate(152.5px,155px) rotate(454.5deg);}
+  83% { transform:  translate(92.5px,155px) rotate(274.5deg);}
+  98% { transform:  translate(75px,200px) rotate(327deg); }
   100% {transform:  translate(75px,220px) rotate(327deg); }
 }
 
 @keyframes PTtoDown3 {
-  0%   { transform: translate(0px,5px) rotate(0deg) ; }
-  20% { transform: translate(0px,62px) rotate(0deg) ;}
-  60% { transform: translate(120px,62px) rotate(360deg) ; }
-  70% { transform: translate(145px,78px) rotate(432deg) ; }
-  80% { transform: translate(152.5px,110px) rotate(454.5deg) ;}
+  0% { transform: translate(0px,62px) rotate(0deg) ;}
+  50% { transform: translate(120px,62px) rotate(360deg) ; }
+  62% { transform: translate(145px,78px) rotate(432deg) ; }
+  75% { transform: translate(152.5px,110px) rotate(454.5deg) ;}
   100% { transform: translate(152.5px,155px) rotate(454.5deg) ; }
 }
 
 @keyframes PTtoDown4 {
-  0%  { transform:  translate(0px,5px) rotate(360deg);}
-  14% { transform:  translate(0px,62px) rotate(360deg);}
-  42% { transform:  translate(-120px,62px) rotate(0deg);}
-  49% { transform:  translate(-145px,78px) rotate(-75deg) ;}
-  56% { transform:  translate(-152.5px,110px) rotate(-82.5deg); }
-  70% { transform:  translate(-152.5px,155px) rotate(-82.5deg);}
-  84% { transform:  translate(-212.5px,155px) rotate(-262.5deg);}
-  96% { transform:  translate(-230px,200px) rotate(-315deg); }
+  0% { transform:  translate(0px,62px) rotate(360deg);}
+  33% { transform:  translate(-120px,62px) rotate(0deg);}
+  42% { transform:  translate(-145px,78px) rotate(-75deg) ;}
+  50% { transform:  translate(-152.5px,110px) rotate(-82.5deg); }
+  67% { transform:  translate(-152.5px,155px) rotate(-82.5deg);}
+  83% { transform:  translate(-212.5px,155px) rotate(-262.5deg);}
+  98% { transform:  translate(-230px,200px) rotate(-315deg); }
   100% {transform:  translate(-230px,220px) rotate(-315deg); }
 }
 
 @keyframes PTtoDown5 {
-  0%  { transform:  translate(0px,5px) rotate(360deg);}
-  14% { transform:  translate(0px,62px) rotate(360deg);}
-  42% { transform:  translate(-120px,62px) rotate(0deg);}
-  49% { transform:  translate(-145px,78px) rotate(-75deg) ;}
-  56% { transform:  translate(-152.5px,110px) rotate(-82.5deg); }
-  70% { transform:  translate(-152.5px,155px) rotate(-82.5deg);}
-  84% { transform:  translate(-92.5px,155px) rotate(97.5deg);}
-  96% { transform:  translate(-75px,200px) rotate(150deg); }
+  0% { transform:  translate(0px,62px) rotate(360deg);}
+  33% { transform:  translate(-120px,62px) rotate(0deg);}
+  42% { transform:  translate(-145px,78px) rotate(-75deg) ;}
+  50% { transform:  translate(-152.5px,110px) rotate(-82.5deg); }
+  67% { transform:  translate(-152.5px,155px) rotate(-82.5deg);}
+  83% { transform:  translate(-92.5px,155px) rotate(97.5deg);}
+  98% { transform:  translate(-75px,200px) rotate(150deg); }
   100% {transform:  translate(-75px,220px) rotate(150deg); }
 }
 
 @keyframes PTtoDown6 {
-   0% { transform:  translate(0px,5px) rotate(360deg); }
-  20% { transform: translate(0px,62px) rotate(360deg);}
-  60% { transform: translate(-120px,62px) rotate(0deg); }
-  70% { transform: translate(-145px,78px) rotate(-75deg); }
-  80% { transform: translate(-152.5px,110px) rotate(-82.5deg);}
+  0% { transform: translate(0px,62px) rotate(360deg);}
+  50% { transform: translate(-120px,62px) rotate(0deg); }
+  62% { transform: translate(-145px,78px) rotate(-75deg); }
+  75% { transform: translate(-152.5px,110px) rotate(-82.5deg);}
   100% { transform: translate(-152.5px,155px) rotate(-82.5deg); }
 }
 </style>
@@ -368,5 +448,15 @@ export default {
 
 #inputlar{
     gap: 109px;
+}
+
+#futbolTopu,#fakeBall{
+    display:flex;
+    align-items:flex-end;
+    position: relative;
+}
+
+stepButton{
+    display: block;  
 }
 </style>
