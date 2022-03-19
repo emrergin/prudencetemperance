@@ -20,3 +20,8 @@ Some introductory readings for the concepts.
 - Pipes: https://www.kenney.nl/assets/puzzle-pack-2
 - Some edits using Inkscape: https://inkscape.org/
 - Custom click and drag code. Heavily modified for the actual implementation. https://javascript.info/mouse-drag-and-drop
+
+## What I learned
+- `findIndex` returns -1 if no match is found.
+- `closest` is not about closeness in terms of pixel location, it checks only the parents.
+- For sequential animations, default browser behaviour of removing filling animations should be evaded.

@@ -1,17 +1,19 @@
 <template>
   <PrudenceTutorial v-if="currentPhase===`pruTut`" @end="currentPhase=`pruGam`" />
   <PrudenceGame v-if="currentPhase===`pruGam`"  />
+  <TemperanceGame v-if="currentPhase===`temGam`"  />
 </template>
 
 <script>
 import PrudenceGame from './components/PrudenceGame.vue';
 import PrudenceTutorial from './components/PrudenceTutorial.vue';
+import TemperanceGame from './components/TemperanceGame.vue';
 export default {
   name: 'App',
-  components:{PrudenceGame,PrudenceTutorial},
+  components:{PrudenceGame,PrudenceTutorial,TemperanceGame},
   data(){
         return{
-            currentPhase:`pruTut`
+            currentPhase:`temGam`
         }
   }
 }

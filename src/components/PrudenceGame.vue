@@ -301,7 +301,7 @@ export default {
   padding: 2px;
 }
 
-#kucukBoru{
+#kucukBoru,#kucukBoru1,#kucukBoru2{
   position: relative;
 }
 #kucukEtiketler{
