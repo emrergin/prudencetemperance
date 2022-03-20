@@ -1,6 +1,6 @@
 <template>
   <PrudenceTutorial v-if="currentPhase===`pruTut`" @end="currentPhase=`pruGam`" />
-  <PrudenceGame v-if="currentPhase===`pruGam`"  />
+  <PrudenceGame v-if="currentPhase===`pruGam`" @end="currentPhase=`temGam`" />
   <TemperanceGame v-if="currentPhase===`temGam`"  />
 </template>
 

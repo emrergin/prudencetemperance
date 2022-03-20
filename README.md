@@ -1,10 +1,10 @@
 # Prudence and Temperance Testing
 
-Web based experimentation for the concepts of Prudence and Temperance. Also will include treatments for Risk Aversion.
+Web based experimentation for the concepts of *Prudence* and *Temperance*. Also will include treatments for *Risk Aversion*.
 
 Joint project with [Mehmet Yiğit Gürdal](https://econ.boun.edu.tr/mehmet-yigit-gurdal-0)
 
-The front end will use Vue3 while the backend will use MongoDB and Node.js.
+The front end will use **Vue3** while the backend will use **MongoDB** and **Node.js**.
 
 ## Details
 
@@ -20,8 +20,9 @@ Some introductory readings for the concepts.
 - Pipes: https://www.kenney.nl/assets/puzzle-pack-2
 - Some edits using Inkscape: https://inkscape.org/
 - Custom click and drag code. Heavily modified for the actual implementation. https://javascript.info/mouse-drag-and-drop
+- Selecting a list of points easily from a given image: https://www.mobilefish.com/services/record_mouse_coordinates/record_mouse_coordinates.php
 
 ## What I learned
-- `findIndex` returns -1 if no match is found.
-- `closest` is not about closeness in terms of pixel location, it checks only the parents.
-- For sequential animations, default browser behaviour of removing filling animations should be evaded.
+- `findIndex()` returns -1 if no match is found.
+- `closest()` is not about closeness in terms of pixel location, it checks only the parents.
+- For sequential animations, default browser behaviour of removing filling animations should be evaded by `persist()`.

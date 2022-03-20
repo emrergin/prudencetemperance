@@ -29,7 +29,7 @@
                 <div class="droppable2" id="i3" 
                 :class="{gorulmez:!secimler[1]||secimler[3]}"> D</div>
             </div>
-            <div id="kucukBorular">
+            <div id="kucukBorular" v-if="asama!==`roundsonu`">
                 <div id="kucukBoru1" class="temperanceBoru"
                 oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false">
                 <div id="kucukEtiketler">
@@ -53,13 +53,22 @@
                     </div>
                 </div>
                 <img src="../assets/kucukboru2.svg" class="draggable" oncontextmenu="return false" />
-                </div>                
+                </div>                             
+            </div>
+            <div v-if="asama===`roundsonu`">
+                <button class="stepButton" id="nextRound"  @click="siradakiTur()">              
+                    {{this.currentRound===this.totalRounds-1? `Oyunu Bitir` : `Sıradaki Tur >>` }}
+                </button>
             </div>
 
         </div>
     </div>
+    <div v-if="oyunSonu" class="oyunKutusu">
+        <p>Oyunu tamamladınız. Toplam kazancınız: {{totalRevenue-totalLoss}}</p>      
+    </div>
     <div>
         <p>{{secimler}}</p>
+        <p>{{zarlar}}</p>
     </div>
 </template>
 
@@ -77,7 +86,8 @@ export default {
             currentDroppable:null,
             secimler:[null,null,null,null],
             asama: `baslangic`,
-            oyunSonu:false
+            oyunSonu:false,
+            zarlar:[]
         }
     },
     methods:{
@@ -157,7 +167,7 @@ export default {
         },
         hareket(){  
             if (this.secimler.filter(a=>a).length!==2){return}
-            // let vm=this;
+            let vm=this;
             this.asama=`tophareketi`;
             let futbolTopu=this.$refs.futbolTopu;
             futbolTopu.style.zIndex = 4;
@@ -166,6 +176,11 @@ export default {
             fakeBall.style.visibility = "hidden";            
             futbolTopu.after(fakeBall);
             futbolTopu.style.position="absolute";
+
+            // let geciciKayip=0;
+            // let geciciKazanc=0;
+
+            Asagi();
 
             function Asagi(){
                 futbolTopu.animate([
@@ -176,45 +191,132 @@ export default {
                         fill: `forwards`,
                         composite: `accumulate`
                     }).persist();
-                setTimeout(Sol1, 1000);
+                let zar= Math.floor(Math.random() * 2)+1;
+                zar===1? setTimeout(Sol1, 1000) : setTimeout(Sag1, 1000);
+                zar===1? setTimeout(solBEtiket, 2100) : setTimeout(sagBEtiket, 2100); 
+                vm.zarlar.push(zar);
             }
 
             function Sol1(){
                 futbolTopu.animate([
                     { transform:  `translate(0px,0px) rotate(360deg)`,offset: 0},
-                    { transform:  `translate(-120px,0px) rotate(0deg)`,offset: 0.4},
-                    { transform:  `translate(-145px,12px) rotate(-75deg)`,offset: 0.6},
-                    { transform:  `translate(-152.5px,48px) rotate(-82.5deg)`,offset: 0.8},
+                    { transform:  `translate(-120px,0px) rotate(0deg)`,offset: 0.5},
+                    { transform:  `translate(-145px,12px) rotate(-75deg)`,offset: 0.625},
+                    { transform:  `translate(-152.5px,48px) rotate(-82.5deg)`,offset: 0.75},
                     { transform:  `translate(-152.5px,93px) rotate(-82.5deg)`,offset: 1}
                     ],{
                         duration: 3000,
                         fill: `forwards`,
                         composite: `accumulate`
                     }).persist();
+                setTimeout(animasyonDevamEt,3000);
             }
-
-            Asagi();
-
-
-
-
-
-
-
-            // let zar= Math.floor(Math.random() * 100);
-
-
-        // futbolTopu.onanimationend = () => {
-        // this.asama=`roundsonu`;
-        // this.kazancGuncelle(durum);
-        // };
-          
+            function Sag1(){
+                futbolTopu.animate([
+                    { transform:  `translate(0px,0px) rotate(0deg)`,offset: 0},
+                    { transform:  `translate(120px,0px) rotate(360deg)`,offset: 0.5},
+                    { transform:  `translate(145px,12px) rotate(432deg)`,offset: 0.625},
+                    { transform:  `translate(152.5px,48px) rotate(454.5deg)`,offset: 0.75},
+                    { transform:  `translate(152.5px,93px) rotate(454.5deg)`,offset: 1}
+                    ],{
+                        duration: 3000,
+                        fill: `forwards`,
+                        composite: `accumulate`
+                    }).persist();
+                setTimeout(animasyonDevamEt,3000);
+            } 
+            function Sol2(){
+                futbolTopu.animate([
+                    { transform:  `translate(0px,0px) rotate(0deg)`,offset: 0},
+                    { transform:  `translate(-40px,0px) rotate(-120deg)`,offset: 0.125},
+                    { transform:  `translate(-70px,15px) rotate(-210deg)`,offset: 0.25},
+                    { transform:  `translate(-75px,35px) rotate(-225deg)`,offset: 0.375},
+                    { transform:  `translate(-70px,63px) rotate(-210deg)`,offset: 0.5},
+                    { transform:  `translate(-40px,76px) rotate(-120deg)`,offset:0.625},
+                    { transform:  `translate(0px,90px) rotate(0deg)`,offset: 0.75},
+                    { transform:  `translate(0px,166px) rotate(0deg)`,offset: 1}
+                    ],{
+                        duration: 4000,
+                        fill: `forwards`,
+                        composite: `accumulate`
+                    }).persist();
+                setTimeout(animasyonDevamEt,4000);
+            }
+            function Sag2(){
+                futbolTopu.animate([
+                    { transform:  `translate(0px,0px) rotate(0deg)`,offset: 0},
+                    { transform:  `translate(40px,0px) rotate(120deg)`,offset: 0.125},
+                    { transform:  `translate(70px,15px) rotate(210deg)`,offset: 0.25},
+                    { transform:  `translate(75px,35px) rotate(225deg)`,offset: 0.375},
+                    { transform:  `translate(70px,63px) rotate(210deg)`,offset: 0.5},
+                    { transform:  `translate(40px,76px) rotate(120deg)`,offset:0.625},
+                    { transform:  `translate(0px,90px) rotate(0deg)`,offset: 0.75},
+                    { transform:  `translate(0px,166px) rotate(0deg)`,offset: 1}
+                    ],{
+                        duration: 4000,
+                        fill: `forwards`,
+                        composite: `accumulate`
+                    }).persist();
+                setTimeout(animasyonDevamEt,4000);
+            }
+            function animasyonDevamEt(){
+                if (vm.hareketBittiMi()){
+                    vm.asama=`roundsonu`;  
+                    const collection = document.getElementsByClassName("yaklasilmis");
+                    for (let etiket of collection) {
+                        +etiket.textContent>0? vm.totalRevenue+=+etiket.textContent : vm.totalLoss+=-etiket.textContent;
+                    }            
+                }else{
+                    let zar= Math.floor(Math.random() * 2)+1;
+                    let ilgiliKucukBoru=vm.zarlar.length===1? vm.secimler[vm.zarlar[0]-1] : 3-(+vm.secimler[vm.zarlar[0]-1]);
+                    zar===1? Sol2() : Sag2();                    
+                    vm.zarlar.push(zar);
+                    setTimeout(()=>{kucukEtiketler(ilgiliKucukBoru,zar)}, 750);              
+                }
+            }
+            function solBEtiket(){
+                document.getElementById(`solBuyukEtiket`).classList.add(`yaklasilmis`);
+            }
+            function sagBEtiket(){
+                document.getElementById(`sagBuyukEtiket`).classList.add(`yaklasilmis`);
+            }
+            function kucukEtiketler(id,yon){
+                let idtext= yon===1? `solKucukEtiket` : `sagKucukEtiket`;
+                idtext+=id;
+                document.getElementById(idtext).classList.add(`yaklasilmis`);                
+            }       
         },
         hareketBittiMi(){
             let rect = this.$refs.futbolTopu.getBoundingClientRect();
             let elemBelow = document.elementFromPoint((rect.left+rect.right)/2,rect.top-5);
             return !elemBelow.closest(`.temperanceBoru,#buyukBoru`);
-        }
+        },
+        siradakiTur(){
+            
+            this.secimler=[null,null,null,null];
+            this.zarlar=[];
+
+            const kucukBorular = document.querySelectorAll(".temperanceBoru");
+            kucukBorular.forEach(kucukBoru=>kucukBoru.remove());
+     
+            this.asama=`baslangic`;
+
+            if (this.currentRound>=this.totalRounds-1){          
+                this.oyunSonu=true;
+                return;
+            }
+
+            this.$refs.futbolTopu.getAnimations().forEach((anim) => {
+                anim.cancel();
+            });
+            const etiketler = document.querySelectorAll(".etiket");
+            etiketler.forEach(etiket=>etiket.classList.remove(`yaklasilmis`));
+
+            document.getElementById(`fakeBall`).remove();
+            this.$refs.futbolTopu.style.position="static";
+
+            this.currentRound++;
+        } 
     }
 }
 </script>
@@ -256,4 +358,10 @@ export default {
     visibility: hidden;
 }
 
+</style>
+
+<style scoped>
+.oyunKutusu{
+    min-height: 700px;
+}
 </style>

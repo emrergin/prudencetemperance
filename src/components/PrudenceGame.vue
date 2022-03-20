@@ -149,7 +149,7 @@ export default {
           fakeBall.id=`fakeBall`;
           fakeBall.style.visibility = "hidden";
 
-          let zar= Math.floor(Math.random() * 100);
+          let zar= Math.floor(Math.random() * 100)+1;
           futbolTopu.after(fakeBall);
           futbolTopu.style.position="absolute";
           if (this.currentDroppable.id.slice(1)===`2`){
