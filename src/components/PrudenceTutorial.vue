@@ -87,6 +87,7 @@ export default {
             odenek: [[4,-2,2],[4,`+2`,6],[4],[7,`+2`,9],[7,-2,5],[7]]
         }
     },
+    emits: ['end'],
     methods:{
         nextStep(){
             if (this.step!==6 && this.step!==8 && this.step!==9 &&this.step!==10){
@@ -456,7 +457,7 @@ export default {
     position: relative;
 }
 
-stepButton{
+.stepButton{
     display: block;  
 }
 </style>

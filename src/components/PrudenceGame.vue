@@ -39,7 +39,10 @@
         </div>
     </div>
     <div v-if="oyunSonu" class="oyunKutusu">
-      <p>Oyunu tamamladınız. Toplam kazancınız: {{totalRevenue-totalLoss}}</p>      
+      <p>Oyunu tamamladınız. Toplam kazancınız: {{totalRevenue-totalLoss}}</p>  
+      <button @click="$emit('end', true)" class="stepButton">              
+        Diğer Oyuna Geç!
+    </button>     
     </div>
 </template>
 
@@ -47,6 +50,7 @@
 import ScoreTable from './ScoreTable.vue'
 export default {
     components: { ScoreTable},
+    emits: ['end'],
     data(){
         return{
             payOffs:[[9,6,2,-2],[9,6,1,-1],[9,6,4,-4],[14,9,3,-3],[7,4,2,-2]],

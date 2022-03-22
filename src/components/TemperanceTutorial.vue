@@ -1,109 +1,140 @@
 <template>
-    <div class="oyunKutusu" v-if="!oyunSonu">
-        <ScoreTable 
-            :totalRevenue="totalRevenue" 
-            :totalLoss="totalLoss" 
-            :totalRounds="totalRounds"
-            :currentRound="currentRound"
-        />
-        <div id="oyunAsagi">
-            <img id="futbolTopu" ref="futbolTopu" src="../assets/soccer_ball.svg" oncontextmenu="return false" @click="hareket()"/>
-            <div id="buyukEtiketler">
-                <div id="solBuyukEtiket" class="buyukEtiket etiket">
-                    {{convertNumbertoString(payOffs[currentRound][0])}}
-                </div>
-                <div id="sagBuyukEtiket" class="buyukEtiket etiket">
-                    {{convertNumbertoString(payOffs[currentRound][1])}}
-                </div>
+<div class="tutorialKutusu"   @click="nextStep">
+    <div class="sutun1">
+        <transition-group tag="div" name="tutorial" class="tutorialText">
+            <p :key=1 v-if="step>0">
+            Bu oyunda, 
+            <span :style="{visibility: step>1? `visible` : `hidden`}"> küçük boruları</span>
+            <span :style="{visibility: step>2? `visible` : `hidden`}"> nerelere yerleştireceğinizi</span>
+            <span :style="{visibility: step>3? `visible` : `hidden`}">  seçeceksiniz.</span>  
+            </p> 
+            <p :key=2 v-if="step>4">Küçük borulardan birine tıklayın ve onu seçtiğiniz yere sürükleyin.</p>
+            <p :key=3 v-if="step>5">Şimdi diğer boruyu yerleştirin. Bunu ilk borunun altına da koyabilirsiniz.</p>
+            <p :key=4 v-if="step>6">Şimdi, topa tıklayın.</p>
+            
+            <p :key=8 v-if="step>7">Top bunun gibi yol ayrımlarında <b>yüzde elli ihtimalle</b> sağa, <b>yüzde elli ihtimalle</b> sola gidecek.</p>
+  
+            <p :key=9 v-if="step>10">Topun izlediği yol üzerindeki sayılar kazanacağınız ya da kaybedeceğiniz puanı göstermektedir.</p>
+
+            <p :key=10 v-if="step>11">Bu örnek turda {{ciktiHesapla()}} puan kazandınız. Her tur puanınız böyle belirlenecek.</p>
+            
+            <div :key=11 v-if="step>12" class="centered">Hazırsanız başlayalım mı?</div> 
+            <div :key=12 class="centered" v-if="step>13">
+                <button @click="$emit('end', true)" class="stepButton">              
+                    Hazırım!
+                </button> 
+            </div> 
+        </transition-group>
+       
+
+    </div>    
+
+    <div class="sutun2" id="sut2" >
+        <div id="futbolTopu" ref="futbolTopu" 
+            oncontextmenu="return false" @click="hareket()" class="beliren"
+            :class="[{kirmiziKenarli:step===7},{odakli:step>6},{odaksiz:step<=6} ]">
+            <div :class="[{gorunur:step===8},{gorunmez:step!==8}]" class="beliren kirmiziOklar">
+                <div >◄</div>
+                <div >►</div>
             </div>
-            <img id="buyukBoru" src="../assets/buyukboru.svg"/>
-            <div class="buyukInputlar">
-                <div class="droppable2" id="i0" 
-                :class="{gorulmez:secimler[0]}"> A</div>
-                <div class="droppable2" id="i1" 
-                :class="{gorulmez:secimler[1]}"> B</div>
-            </div>
-            <div class="buyukInputlar">
-                <div class="droppable2" id="i2" 
-                :class="{gorulmez:!secimler[0]||secimler[2]}"> C</div>
-                <div class="droppable2" id="i3" 
-                :class="{gorulmez:!secimler[1]||secimler[3]}"> D</div>
-            </div>
-            <div id="kucukBorular" v-if="asama!==`roundsonu`">
-                <div id="kucukBoru1" class="temperanceBoru"
-                oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false">
-                <div id="kucukEtiketler">
-                    <div id="solKucukEtiket1" class="kucukEtiket etiket">
-                        {{convertNumbertoString(payOffs[currentRound][2])}}
-                    </div>
-                    <div id="sagKucukEtiket1" class="kucukEtiket etiket">
-                        {{convertNumbertoString(payOffs[currentRound][3])}}
-                    </div>
-                </div>
-                <img src="../assets/kucukboru2.svg" class="draggable" oncontextmenu="return false" />
-                </div>
-                <div id="kucukBoru2" class="temperanceBoru"
-            oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false">
-                <div id="kucukEtiketler">
-                    <div id="solKucukEtiket2" class="kucukEtiket etiket">
-                        {{convertNumbertoString(payOffs[currentRound][4])}}
-                    </div>
-                    <div id="sagKucukEtiket2" class="kucukEtiket etiket">
-                        {{convertNumbertoString(payOffs[currentRound][5])}}
-                    </div>
-                </div>
-                <img src="../assets/kucukboru2.svg" class="draggable" oncontextmenu="return false" />
-                </div>                             
-            </div>
-            <div v-if="asama===`roundsonu`">
-                <button class="stepButton" id="nextRound"  @click="siradakiTur()">              
-                    {{this.currentRound===this.totalRounds-1? `Oyunu Bitir` : `Sıradaki Tur >>` }}
-                </button>
-            </div>
+            <img src="../assets/soccer_ball.svg" style="align-self:flex-end"/>
 
         </div>
+
+
+        <div id="buyukEtiketler" class="beliren"
+        :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10} ]">
+            <div id="solBuyukEtiket" class="buyukEtiket etiket">
+                +9
+            </div>
+            <div id="sagBuyukEtiket" class="buyukEtiket etiket">
+                +9
+            </div>
+        </div>
+        <img id="buyukBoru" src="../assets/buyukboru.svg" class="beliren" 
+        :class="[{odakli:step>2},{odaksiz:step<=2} ]"/>
+        <div class="buyukInputlar">
+            <div class="droppable2 beliren" id="i0"
+                :class="[{kirmiziKenarli:step===3},{odakli:step>2},{odaksiz:step<=2},{gorulmez:secimler[0]}]"> A</div>
+            <div class="droppable2 beliren" id="i1"
+                :class="[{kirmiziKenarli:step===3},{odakli:step>2},{odaksiz:step<=2},{gorulmez:secimler[1]}]"> B</div>
+        </div>
+        <div class="buyukInputlar">
+            <div class="droppable2 beliren" id="i2" 
+                :class="[{kirmiziKenarli:step===3},{odakli:step>2},{odaksiz:step<=2},{gorulmez:(!secimler[0]||secimler[2])&&step!==3} ]"> C</div>
+            <div class="droppable2 beliren" id="i3"
+                :class="[{kirmiziKenarli:step===3},{odakli:step>2},{odaksiz:step<=2},{gorulmez:(!secimler[1]||secimler[3])&&step!==3} ]"> D</div>
+        </div>
+        <div id="kucukBorular" >
+            <div id="kucukBoru1" ref="kucukBoru" 
+            oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false"
+            class="temperanceBoru">
+            <div id="kucukEtiketler" class="beliren"
+            :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10}]">
+                <div id="solKucukEtiket1" class="kucukEtiket etiket">
+                    +2
+                </div>
+                <div id="sagKucukEtiket1" class="kucukEtiket etiket">
+                    -2
+                </div>
+            </div >
+                <img src="../assets/kucukboru2.svg" class="draggable beliren" oncontextmenu="return false"            
+                :class="[{kirmiziKenarli:step===2},{odakli:step>1},{odaksiz:step<=1}]"
+                />
+            </div>
+            <div id="kucukBoru2" ref="kucukBoru" 
+            oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false"
+            class="temperanceBoru">
+            <div id="kucukEtiketler" class="beliren"
+            :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10}]">
+                <div id="solKucukEtiket2" class="kucukEtiket etiket">
+                    +3
+                </div>
+                <div id="sagKucukEtiket2" class="kucukEtiket etiket">
+                    -3
+                </div>
+            </div >
+                <img src="../assets/kucukboru2.svg" class="draggable beliren" oncontextmenu="return false"            
+                :class="[{kirmiziKenarli:step===2},{odakli:step>1},{odaksiz:step<=1}]"
+                />
+            </div>       
+        </div>
     </div>
-    <div v-if="oyunSonu" class="oyunKutusu">
-        <p>Oyunu tamamladınız. Toplam kazancınız: {{totalRevenue-totalLoss}}</p>   
-        <button @click="$emit('end', true)" class="stepButton">              
-            Diğer Oyuna Geç!
-        </button>    
-    </div>
+</div>
     <div>
         <p>{{secimler}}</p>
         <p>{{zarlar}}</p>
+        <p>{{step}}</p>
     </div>
 </template>
 
 <script>
-import ScoreTable from './ScoreTable.vue'
-export default {
-    emits: ['end'],
-    components: { ScoreTable},
+export default{
     data(){
         return{
-            payOffs:[[9,9,2,-2,3,-3],[9,9,1,-1,4,-4],[6,6,4,-4,1,-1],[14,14,3,-3,10,-10],[4,4,2,-2,1,-1]],
-            totalRevenue:0,
-            totalLoss:0,
-            currentRound:0,
-            totalRounds:5,
-            currentDroppable:null,
+            step:1,
             secimler:[null,null,null,null],
-            asama: `baslangic`,
-            oyunSonu:false,
-            zarlar:[]
+            zarlar:[],
+            currentDroppable:null,
+            // kazancMetin=``
         }
     },
+    emits: ['end'],
     methods:{
-        convertNumbertoString(number){
-            return number>0? `+`+number : `-`+Math.abs(number);
+        nextStep(){
+            if (this.step!==5 && this.step!==6 && this.step!==7 && this.step!==9  && this.step!==10){                
+                this.step++;
+            }
+            if (this.step===9){
+                this.hareket2();
+            }
         },
         boruTasi(e){
-            if (this.asama!==`baslangic`){return false;}
+            if (this.step!==5 && this.step!==6){return false;}
             var vm = this;
             let kucukBoru=e.target.closest(`.temperanceBoru`);
             let indeks=vm.secimler.findIndex(a=>a===kucukBoru.id.slice(9));
-            if (indeks!==-1 && vm.secimler[indeks+2]){
+            if (indeks!==-1){
                 return false;
             }            
             
@@ -154,10 +185,13 @@ export default {
                 kucukBoru.style.cursor="grab";                
 
                 if (vm.currentDroppable){
-                    var rect = vm.currentDroppable.getBoundingClientRect();
-                    kucukBoru.style.left = `${rect.left  + window.scrollX}px`;
-                    kucukBoru.style.top = `${rect.top + window.scrollY}px`;
+                    vm.currentDroppable.parentNode.insertBefore(kucukBoru,vm.currentDroppable);
                     vm.secimler[vm.currentDroppable.id.slice(1)]=kucukBoru.id.slice(9);
+                    vm.currentDroppable.remove();
+                    kucukBoru.style.left = '0px';
+                    kucukBoru.style.top = '0px';
+                    kucukBoru.style.position=`relative` ; 
+                    vm.step++;                    
                 }
                 kucukBoru.onmouseup = null;
             }
@@ -171,13 +205,14 @@ export default {
         },
         hareket(){  
             if (this.secimler.filter(a=>a).length!==2){return}
+            if (this.step!==7){return}
             let vm=this;
-            this.asama=`tophareketi`;
             let futbolTopu=this.$refs.futbolTopu;
             futbolTopu.style.zIndex = 4;
+            futbolTopu.classList.remove(`kirmiziKenarli`);   
             let fakeBall=futbolTopu.cloneNode(true);
             fakeBall.id=`fakeBall`;
-            fakeBall.style.visibility = "hidden";            
+            fakeBall.style.visibility = "hidden";        
             futbolTopu.after(fakeBall);
             futbolTopu.style.position="absolute";
 
@@ -192,12 +227,17 @@ export default {
                         fill: `forwards`,
                         composite: `accumulate`
                     }).persist();
-                let zar= Math.floor(Math.random() * 2)+1;
-                zar===1? setTimeout(Sol1, 1000) : setTimeout(Sag1, 1000);
-                zar===1? setTimeout(solBEtiket, 2100) : setTimeout(sagBEtiket, 2100); 
-                vm.zarlar.push(zar);
-            }
-
+                    setTimeout(()=>{vm.step++;},1000);
+            }   
+        },
+        hareket2(){
+            let vm=this;
+            this.step++;
+            let futbolTopu=this.$refs.futbolTopu;
+            let zar= Math.floor(Math.random() * 2)+1;
+            zar===1? Sol1() : Sag1();
+            zar===1? setTimeout(solBEtiket, 1100) : setTimeout(sagBEtiket, 1100); 
+            vm.zarlar.push(zar);
             function Sol1(){
                 futbolTopu.animate([
                     { transform:  `translate(0px,0px) rotate(360deg)`,offset: 0},
@@ -261,12 +301,9 @@ export default {
                 setTimeout(animasyonDevamEt,4000);
             }
             function animasyonDevamEt(){
-                if (vm.hareketBittiMi()){
-                    vm.asama=`roundsonu`;  
-                    const collection = document.getElementsByClassName("yaklasilmis");
-                    for (let etiket of collection) {
-                        +etiket.textContent>0? vm.totalRevenue+=+etiket.textContent : vm.totalLoss+=-etiket.textContent;
-                    }            
+                if (vm.hareketBittiMi()){ 
+                    vm.step++;
+                    // vm.kazancMetin=vm.ciktiHesapla();
                 }else{
                     let zar= Math.floor(Math.random() * 2)+1;
                     let ilgiliKucukBoru=vm.zarlar.length===1? vm.secimler[vm.zarlar[0]-1] : 3-(+vm.secimler[vm.zarlar[0]-1]);
@@ -285,84 +322,59 @@ export default {
                 let idtext= yon===1? `solKucukEtiket` : `sagKucukEtiket`;
                 idtext+=id;
                 document.getElementById(idtext).classList.add(`yaklasilmis`);                
-            }       
+            }    
         },
         hareketBittiMi(){
             let rect = this.$refs.futbolTopu.getBoundingClientRect();
             let elemBelow = document.elementFromPoint((rect.left+rect.right)/2,rect.top-5);
             return !elemBelow.closest(`.temperanceBoru,#buyukBoru`);
         },
-        siradakiTur(){
-            
-            this.secimler=[null,null,null,null];
-            this.zarlar=[];
-
-            const kucukBorular = document.querySelectorAll(".temperanceBoru");
-            kucukBorular.forEach(kucukBoru=>kucukBoru.remove());
-     
-            this.asama=`baslangic`;
-
-            if (this.currentRound>=this.totalRounds-1){          
-                this.oyunSonu=true;
-                return;
-            }
-
-            this.$refs.futbolTopu.getAnimations().forEach((anim) => {
-                anim.cancel();
-            });
-            const etiketler = document.querySelectorAll(".etiket");
-            etiketler.forEach(etiket=>etiket.classList.remove(`yaklasilmis`));
-
-            document.getElementById(`fakeBall`).remove();
-            this.$refs.futbolTopu.style.position="static";
-
-            this.currentRound++;
-        } 
+        ciktiHesapla(){
+            let sonucMetin=``;
+            let sonucSayi=0;
+            const collection = document.getElementsByClassName("yaklasilmis");
+            if (collection.length===1){return +collection[0].textContent;}
+            for (let etiket of collection) {
+                sonucSayi+=+etiket.textContent;
+                if (sonucMetin){
+                    +etiket.textContent>0? sonucMetin+=`+`+ +etiket.textContent :sonucMetin+=+etiket.textContent;
+                }
+                else{
+                    +etiket.textContent>0? sonucMetin+=+etiket.textContent :sonucMetin+=+etiket.textContent;
+                }                
+            }       
+            sonucMetin+=`=`+sonucSayi; 
+            return sonucMetin                
+        }
     }
 }
+
 </script>
 
-<style>
-.buyukInputlar{
-    display:flex;
-    width:100%;
-    justify-content: center;
-    gap: 105px;
-    min-height: 167.5px;
-}
 
-#kucukBorular{
-    display:flex;
-    justify-content: space-evenly;
-    gap: 64px;
-    min-height: 167.5px;
-}
-
-.temperanceBoru{
-    height:167.5px;
-}
-
-.droppable2{
-    padding-top:12px;
-    padding-bottom: 12px;
-    width: 197px;
-    height: 167.5px;
-    font-size: 3em;
-    font-weight: bold;
-    border: 2px dashed turquoise;
-    align-items: center;
-    justify-content:center;
-    display:flex;
-}
-
-.gorulmez{
-    visibility: hidden;
-}
-
-</style>
 
 <style scoped>
-.oyunKutusu{
-    min-height: 700px;
+
+.droppable2{
+    flex-shrink: 0;
 }
+
+.buyukInputlar{
+    gap: 109px;
+}
+
+#futbolTopu,#fakeBall{
+    display:flex;
+    align-items:flex-end;
+    position: relative;
+}
+
+.stepButton{
+    display: block;  
+}
+
+.kirmiziKenarli{
+    border: 10px solid red;
+}
+
 </style>
