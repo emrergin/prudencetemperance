@@ -11,9 +11,10 @@ html{
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+    display:flex;
 }
 
 body{
-    max-width: 1200px;
+    width: 1200px;
     margin: auto;
 }

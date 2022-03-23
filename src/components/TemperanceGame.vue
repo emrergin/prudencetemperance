@@ -32,7 +32,7 @@
             <div id="kucukBorular" v-if="asama!==`roundsonu`">
                 <div id="kucukBoru1" class="temperanceBoru"
                 oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false">
-                <div id="kucukEtiketler">
+                <div id="kucukEtiketler1">
                     <div id="solKucukEtiket1" class="kucukEtiket etiket">
                         {{convertNumbertoString(payOffs[currentRound][2])}}
                     </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div id="kucukBoru2" class="temperanceBoru"
             oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false">
-                <div id="kucukEtiketler">
+                <div id="kucukEtiketler2">
                     <div id="solKucukEtiket2" class="kucukEtiket etiket">
                         {{convertNumbertoString(payOffs[currentRound][4])}}
                     </div>
@@ -77,6 +77,7 @@
 
 <script>
 import ScoreTable from './ScoreTable.vue'
+import { store } from '../store.js'
 export default {
     emits: ['end'],
     components: { ScoreTable},
@@ -91,7 +92,8 @@ export default {
             secimler:[null,null,null,null],
             asama: `baslangic`,
             oyunSonu:false,
-            zarlar:[]
+            zarlar:[],
+            store
         }
     },
     methods:{
@@ -155,6 +157,7 @@ export default {
 
                 if (vm.currentDroppable){
                     var rect = vm.currentDroppable.getBoundingClientRect();
+                    vm.currentDroppable.style.background = '';
                     kucukBoru.style.left = `${rect.left  + window.scrollX}px`;
                     kucukBoru.style.top = `${rect.top + window.scrollY}px`;
                     vm.secimler[vm.currentDroppable.id.slice(1)]=kucukBoru.id.slice(9);
@@ -293,7 +296,7 @@ export default {
             return !elemBelow.closest(`.temperanceBoru,#buyukBoru`);
         },
         siradakiTur(){
-            
+            store.veriler.push([`alpha`,`Temperance`,new Date(),this.payOffs[this.currentRound],this.secimler]);
             this.secimler=[null,null,null,null];
             this.zarlar=[];
 
@@ -304,6 +307,7 @@ export default {
 
             if (this.currentRound>=this.totalRounds-1){          
                 this.oyunSonu=true;
+                store.kazanc+=this.totalRevenue-this.totalLoss;
                 return;
             }
 

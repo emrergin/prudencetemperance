@@ -48,6 +48,7 @@
 
 <script>
 import ScoreTable from './ScoreTable.vue'
+import { store } from '../store.js'
 export default {
     components: { ScoreTable},
     emits: ['end'],
@@ -60,7 +61,8 @@ export default {
             totalRounds:5,
             currentDroppable:null,
             asama: `baslangic`,
-            oyunSonu:false
+            oyunSonu:false,
+            store
         }
     },
     methods:{
@@ -243,6 +245,9 @@ export default {
         this.totalLoss+=Kayiplar;
       },
       siradakiTur(){
+        store.veriler.push([`alpha`,`Prudence`,new Date(),
+            this.payOffs[this.currentRound],
+            this.currentDroppable.id.slice(1)]);
         const kucukBoru=document.getElementById(`kucukBoru`);
         kucukBoru.style.top=`initial`;
         kucukBoru.style.left=`initial`;
@@ -251,6 +256,7 @@ export default {
 
         if (this.currentRound>=this.totalRounds-1){          
           this.oyunSonu=true;
+          store.kazanc+=this.totalRevenue-this.totalLoss;
           return;
         }
 
@@ -308,7 +314,7 @@ export default {
 #kucukBoru,#kucukBoru1,#kucukBoru2{
   position: relative;
 }
-#kucukEtiketler{
+#kucukEtiketler,#kucukEtiketler1,#kucukEtiketler2{
   position: absolute;
   left: 30px;
   gap: 85px;

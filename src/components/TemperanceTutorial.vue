@@ -66,10 +66,10 @@
                 :class="[{kirmiziKenarli:step===3},{odakli:step>2},{odaksiz:step<=2},{gorulmez:(!secimler[1]||secimler[3])&&step!==3} ]"> D</div>
         </div>
         <div id="kucukBorular" >
-            <div id="kucukBoru1" ref="kucukBoru" 
+            <div id="kucukBoru1" 
             oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false"
             class="temperanceBoru">
-            <div id="kucukEtiketler" class="beliren"
+            <div id="kucukEtiketler1" class="beliren"
             :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10}]">
                 <div id="solKucukEtiket1" class="kucukEtiket etiket">
                     +2
@@ -82,10 +82,10 @@
                 :class="[{kirmiziKenarli:step===2},{odakli:step>1},{odaksiz:step<=1}]"
                 />
             </div>
-            <div id="kucukBoru2" ref="kucukBoru" 
+            <div id="kucukBoru2" 
             oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false"
             class="temperanceBoru">
-            <div id="kucukEtiketler" class="beliren"
+            <div id="kucukEtiketler2" class="beliren"
             :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10}]">
                 <div id="solKucukEtiket2" class="kucukEtiket etiket">
                     +3
@@ -116,7 +116,6 @@ export default{
             secimler:[null,null,null,null],
             zarlar:[],
             currentDroppable:null,
-            // kazancMetin=``
         }
     },
     emits: ['end'],

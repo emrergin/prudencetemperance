@@ -17,7 +17,7 @@
                 <div id="kucukBoru1" class="riskBoru"
                 oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false"
                 :style="{visibility:(asama!==`baslangic`&& secim!==`1`)? `hidden` : `visible`}">
-                    <div id="kucukEtiketler">
+                    <div id="kucukEtiketler1">
                         <div id="solKucukEtiket1" class="kucukEtiket etiket">
                             {{convertNumbertoString(payOffs[currentRound][0])}}
                         </div>
@@ -30,7 +30,7 @@
                 <div id="kucukBoru2" class="riskBoru"
                 oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false"
                 :style="{visibility:(asama!==`baslangic`&& secim!==`2`)? `hidden` : `visible`}">
-                    <div id="kucukEtiketler">
+                    <div id="kucukEtiketler2">
                         <div id="solKucukEtiket2" class="kucukEtiket etiket">
                             {{convertNumbertoString(payOffs[currentRound][2])}}
                         </div>
@@ -49,7 +49,10 @@
         </div>
     </div>
     <div v-if="oyunSonu" class="oyunKutusu">
-        <p>Oyunu tamamladınız. Toplam kazancınız: {{totalRevenue-totalLoss}}</p>      
+        <p>Oyunu tamamladınız. Toplam kazancınız: {{totalRevenue-totalLoss}}</p> 
+        <button @click="$emit('end', true)" class="stepButton">              
+            Sonuçları gör.
+        </button>         
     </div>
     <div>
         <p>{{secim}}
@@ -60,6 +63,7 @@
 
 <script>
 import ScoreTable from './ScoreTable.vue'
+import { store } from '../store.js'
 export default {
     components: { ScoreTable},
     emits: ['end'],
@@ -73,7 +77,8 @@ export default {
             currentDroppable:null,
             asama: `baslangic`,
             oyunSonu:false,
-            secim:null
+            secim:null,
+            store
         }
     },
     methods:{
@@ -84,7 +89,6 @@ export default {
             if (this.asama!==`baslangic`){return false;}
             let kucukBoru=e.target.closest(`.riskBoru`);   
 
-            
             var vm = this;               
             
             kucukBoru.style.cursor="grabbing";
@@ -232,7 +236,8 @@ export default {
             }       
         },
         siradakiTur(){
-            
+            store.veriler.push([`alpha`,`Risk`,new Date(),
+            this.payOffs[this.currentRound],this.secim]);
             this.secim=null;
 
             const kucukBorular = document.querySelectorAll(".riskBoru");
@@ -242,6 +247,7 @@ export default {
 
             if (this.currentRound>=this.totalRounds-1){          
                 this.oyunSonu=true;
+                store.kazanc+=this.totalRevenue-this.totalLoss;
                 return;
             }
 

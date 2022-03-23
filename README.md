@@ -26,3 +26,4 @@ Some introductory readings for the concepts.
 - `findIndex()` returns -1 if no match is found.
 - `closest()` is not about closeness in terms of pixel location, it checks only the parents.
 - For sequential animations, default browser behaviour of removing filling animations should be evaded by `persist()`.
+- For nodes removed with `v-if` condition, any dynamic class assignments will not work for child elements, even if they are not children of the original parent anymore.
