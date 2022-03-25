@@ -78,7 +78,9 @@ export default {
             asama: `baslangic`,
             oyunSonu:false,
             secim:null,
-            store
+            store,
+            baslangic: new Date(),
+            bitis: null
         }
     },
     methods:{
@@ -163,6 +165,8 @@ export default {
         },
         hareket(){  
             if (!this.secim){return}
+            if (this.asama!==`baslangic`){return}
+            this.bitis=new Date();
             let vm=this;
             this.asama=`tophareketi`;
             let futbolTopu=this.$refs.futbolTopu;
@@ -236,13 +240,14 @@ export default {
             }       
         },
         siradakiTur(){
-            store.veriler.push([`alpha`,`Risk`,new Date(),
+            store.veriler.push([`Risk`,this.bitis-this.baslangic,
             this.payOffs[this.currentRound],this.secim]);
             this.secim=null;
 
             const kucukBorular = document.querySelectorAll(".riskBoru");
             kucukBorular.forEach(kucukBoru=>kucukBoru.remove());
      
+            this.baslangic=new Date();
             this.asama=`baslangic`;
 
             if (this.currentRound>=this.totalRounds-1){          

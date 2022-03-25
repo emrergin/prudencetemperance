@@ -4,11 +4,11 @@
         <transition-group tag="div" name="tutorial" class="tutorialText">
             <p :key=1 v-if="step>0">
             Bu oyunda, 
-            <span :style="{visibility: step>1? `visible` : `hidden`}"> küçük borulardan hangisini</span>
-            <span :style="{visibility: step>2? `visible` : `hidden`}"> şuraya yerleştireceğinizi</span>
-            <span :style="{visibility: step>3? `visible` : `hidden`}">  seçeceksiniz.</span>  
+            <span :style="{visibility: step>1? `visible` : `hidden`}"> alttaki borulardan hangisini</span>
+            <span :style="{visibility: step>2? `visible` : `hidden`}"> işaretli yere </span>
+            <span :style="{visibility: step>3? `visible` : `hidden`}"> yerleştireceğinizi seçeceksiniz.</span>  
             </p> 
-            <p :key=2 v-if="step>4">Seçtiğiniz küçük boruyu verilen yere sürükleyin.</p>
+            <p :key=2 v-if="step>4">Seçtiğiniz boruyu verilen yere sürükleyin.</p>
             <p :key=4 v-if="step>5">Şimdi, topa tıklayın.</p>
             
             <p :key=8 v-if="step>6">Top bunun gibi yol ayrımlarında <b>yüzde elli ihtimalle</b> sağa, <b>yüzde elli ihtimalle</b> sola gidecek.</p>

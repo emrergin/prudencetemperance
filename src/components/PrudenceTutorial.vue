@@ -4,19 +4,19 @@
         <transition-group tag="div" name="tutorial" class="tutorialText">
             <p :key=5 v-if="step>0">
             Bu oyunda, 
-            <span :style="{visibility: step>1? `visible` : `hidden`}"> küçük boruyu</span>
-            <span :style="{visibility: step>2? `visible` : `hidden`}"> büyük borunun</span>
+            <span :style="{visibility: step>1? `visible` : `hidden`}"> alttaki boruyu</span>
+            <span :style="{visibility: step>2? `visible` : `hidden`}"> üstteki borunun</span>
             <span :style="{visibility: step>3? `visible` : `hidden`}"> hangi ucuna</span>  
             <span :style="{visibility: step>4? `visible` : `hidden`}"> takacağınızı seçeceksiniz.</span>  
             </p> 
-            <p :key=6 v-if="step>5">Küçük boruya tıklayın ve onu seçtiğiniz yere sürükleyin.</p>
-            <p :key=7 v-if="step>7">Şimdi, topa tıklayın.</p>
-            <p :key=8 v-if="step>8">Top bunun gibi yol ayrımlarında <b>yüzde elli ihtimalle</b> sağa, <b>yüzde elli ihtimalle</b> sola gidecek.</p>
-            <p :key=9 v-if="step>10">Topun izlediği yol üzerindeki sayılar kazanacağınız ya da kaybedeceğiniz puanı göstermektedir.</p>
-            <p :key=10 v-if="step>11">Bu örnek turda {{odenek[durum-1].length===1? odenek[durum-1][0] :`${odenek[durum-1][0]}${odenek[durum-1][1]}=${odenek[durum-1][2]}`}} 
+            <p :key=6 v-if="step>5">Alttaki boruya tıklayın ve onu seçtiğiniz yere sürükleyin.</p>
+            <p :key=7 v-if="step>6">Şimdi, topa tıklayın.</p>
+            <p :key=8 v-if="step>7">Top bunun gibi yol ayrımlarında <b>yüzde elli ihtimalle</b> sağa, <b>yüzde elli ihtimalle</b> sola gidecek.</p>
+            <p :key=9 v-if="step>9">Topun izlediği yol üzerindeki sayılar kazanacağınız ya da kaybedeceğiniz puanı göstermektedir.</p>
+            <p :key=10 v-if="step>10">Bu örnek turda {{odenek[durum-1].length===1? odenek[durum-1][0] :`${odenek[durum-1][0]}${odenek[durum-1][1]}=${odenek[durum-1][2]}`}} 
             puan kazandınız. Her tur puanınız böyle belirlenecek.</p>
-            <div :key=11 v-if="step>12" class="centered">Hazırsanız başlayalım mı?</div> 
-            <div :key=12 class="centered" v-if="step>13">
+            <div :key=11 v-if="step>11" class="centered">Hazırsanız başlayalım mı?</div> 
+            <div :key=12 class="centered" v-if="step>12">
                 <button @click="$emit('end', true)" class="stepButton">              
                     Hazırım!
                 </button> 
@@ -30,19 +30,20 @@
     <div class="sutun2" id="sut2" >
             <!-- // ]" -->
         <div id="futbolTopu" ref="futbolTopu" 
-            oncontextmenu="return false" @click="hareket()" class="beliren"
-            :class="[{kirmiziKenarli:step===7},{odakli:step>6},{odaksiz:step<=6} ]">
-            <div :class="[{gorunur:step===9},{gorunmez:step!==9}]" class="beliren kirmiziOklar">
+            oncontextmenu="return false" @click="hareket()" 
+            >
+            <div :class="[{gorunur:step===8},{gorunmez:step!==8}]" class="beliren kirmiziOklar">
                 <div >◄</div>
                 <div >►</div>
             </div>
-            <img src="../assets/soccer_ball.svg" style="align-self:flex-end"/>
+            <img src="../assets/soccer_ball.svg" style="align-self:flex-end" id="topResim"
+            :class="[{kirmiziKenarli:step===7},{odakli:step>6},{odaksiz:step<=6} ]" class="beliren"/>
 
         </div>
 
 
         <div id="buyukEtiketler" class="beliren"
-        :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10} ]">
+        :class="[{kirmiziKenarli:step===10},{odakli:step>9},{odaksiz:step<=9} ]">
             <div id="solBuyukEtiket" class="buyukEtiket etiket">
                 +7
             </div>
@@ -61,7 +62,7 @@
         <div id="kucukBoru" ref="kucukBoru" 
         oncontextmenu="return false" @mousedown.left="boruTasi($event)" ondragstart="return false">
         <div id="kucukEtiketler" class="beliren"
-        :class="[{kirmiziKenarli:step===11},{odakli:step>10},{odaksiz:step<=10}]">
+        :class="[{kirmiziKenarli:step===10},{odakli:step>9},{odaksiz:step<=9}]">
             <div id="solKucukEtiket" class="kucukEtiket etiket">
                 +2
             </div>
@@ -75,6 +76,8 @@
         </div>
     </div>
 </div>
+<div>
+<p>{{step}}</p></div>
 </template>
 <script>
 
@@ -90,10 +93,10 @@ export default {
     emits: ['end'],
     methods:{
         nextStep(){
-            if (this.step!==6 && this.step!==8 && this.step!==9 &&this.step!==10){
+            if (this.step!==6 && this.step!==7  && this.step!==8 && this.step!==9){
                 this.step++;
             }
-            if (this.step===9){
+            if (this.step===8){
                 this.hareket2();
             }
         },
@@ -173,9 +176,10 @@ export default {
 
     },
         hareket(){
-            if (!this.secim || !(this.step===8)){return}
+            if (!this.secim || !(this.step===7)){return}
             let futbolTopu=this.$refs.futbolTopu;
             futbolTopu.style.zIndex = 4;
+            document.getElementById(`topResim`).classList.remove(`kirmiziKenarli`);
             let fakeBall=futbolTopu.cloneNode(true);
             fakeBall.id=`fakeBall`;
             fakeBall.style.visibility = "hidden";
@@ -257,7 +261,7 @@ export default {
     margin:15px; 
     min-height: 440px;
     justify-content: space-between;
-    padding: 20px;    
+    padding: 20px;  
 }
 
 .tutorial-enter-from{
@@ -460,4 +464,5 @@ export default {
 .stepButton{
     display: block;  
 }
+
 </style>

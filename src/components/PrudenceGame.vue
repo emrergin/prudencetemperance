@@ -62,7 +62,9 @@ export default {
             currentDroppable:null,
             asama: `baslangic`,
             oyunSonu:false,
-            store
+            store,
+            baslangic: new Date(),
+            bitis: null
         }
     },
     methods:{
@@ -106,19 +108,17 @@ export default {
               
               if (vm.currentDroppable != droppableBelow) {
                   
-                  if (vm.currentDroppable) { // null when we were not over a droppable before this event
+                  if (vm.currentDroppable) { 
                   leaveDroppable(vm.currentDroppable);
               }
               vm.currentDroppable = droppableBelow;
-              if (vm.currentDroppable) { // null if we're not coming over a droppable now
-                  // (maybe just left the droppable)
+              if (vm.currentDroppable) {
                   enterDroppable(vm.currentDroppable);
               }
               }
           }            
 
           document.addEventListener('mousemove', onMouseMove);
-          // kucukBoru.addEventListener('mouseup', onMouseUp());
 
           kucukBoru.onmouseup = function() {
               document.removeEventListener('mousemove', onMouseMove);
@@ -134,7 +134,6 @@ export default {
                       collection[i].style.visibility = "hidden";
                   }
               }
-              // kucukBoru.removeEventListener('mouseup', onMouseUp());
               kucukBoru.onmouseup = null;
           }
       function enterDroppable(elem) {
@@ -145,9 +144,11 @@ export default {
       }          
 
       },
-      hareket(){
+      hareket(){          
           let durum=0;
           if (!this.currentDroppable){return}
+          if (this.asama!==`baslangic`){return}
+          this.bitis=new Date();
           this.asama=`tophareketi`;
           let futbolTopu=this.$refs.futbolTopu;
           futbolTopu.style.zIndex = 4;
@@ -245,7 +246,7 @@ export default {
         this.totalLoss+=Kayiplar;
       },
       siradakiTur(){
-        store.veriler.push([`alpha`,`Prudence`,new Date(),
+        store.veriler.push([`Prudence`,this.bitis-this.baslangic,
             this.payOffs[this.currentRound],
             this.currentDroppable.id.slice(1)]);
         const kucukBoru=document.getElementById(`kucukBoru`);
@@ -273,7 +274,8 @@ export default {
         for (let i = 0; i < collection.length; i++) {
           collection[i].style.visibility = "visible";
         }
-
+        
+        this.baslangic=new Date();
         this.asama=`baslangic`;
 
         this.currentRound++;

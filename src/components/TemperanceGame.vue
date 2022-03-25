@@ -93,7 +93,9 @@ export default {
             asama: `baslangic`,
             oyunSonu:false,
             zarlar:[],
-            store
+            store,
+            baslangic: new Date(),
+            bitis: null
         }
     },
     methods:{
@@ -114,6 +116,16 @@ export default {
 
             let shiftX = e.clientX - kucukBoru.getBoundingClientRect().left;
             let shiftY = e.clientY - kucukBoru.getBoundingClientRect().top;
+
+            if (!document.getElementById(`fakeBoru`)){
+                var fakeBoru=kucukBoru.cloneNode(true);
+                fakeBoru.id=`fakeBoru`;
+                fakeBoru.style.visibility = "hidden";  
+                kucukBoru.after(fakeBoru);
+            }
+            else{
+                document.getElementById(`fakeBoru`).remove();
+            }
             
             kucukBoru.style.position = 'absolute';
             kucukBoru.style.zIndex = 3;
@@ -174,7 +186,9 @@ export default {
         },
         hareket(){  
             if (this.secimler.filter(a=>a).length!==2){return}
+            if (this.asama!=="baslangic"){return}
             let vm=this;
+            this.bitis=new Date();
             this.asama=`tophareketi`;
             let futbolTopu=this.$refs.futbolTopu;
             futbolTopu.style.zIndex = 4;
@@ -275,7 +289,7 @@ export default {
                     let ilgiliKucukBoru=vm.zarlar.length===1? vm.secimler[vm.zarlar[0]-1] : 3-(+vm.secimler[vm.zarlar[0]-1]);
                     zar===1? Sol2() : Sag2();                    
                     vm.zarlar.push(zar);
-                    setTimeout(()=>{kucukEtiketler(ilgiliKucukBoru,zar)}, 750);              
+                    setTimeout(()=>{kucukEtiketler(ilgiliKucukBoru,zar)}, 700);              
                 }
             }
             function solBEtiket(){
@@ -296,13 +310,14 @@ export default {
             return !elemBelow.closest(`.temperanceBoru,#buyukBoru`);
         },
         siradakiTur(){
-            store.veriler.push([`alpha`,`Temperance`,new Date(),this.payOffs[this.currentRound],this.secimler]);
+            store.veriler.push([`Temperance`,this.bitis-this.baslangic,this.payOffs[this.currentRound],this.secimler]);
             this.secimler=[null,null,null,null];
             this.zarlar=[];
 
             const kucukBorular = document.querySelectorAll(".temperanceBoru");
             kucukBorular.forEach(kucukBoru=>kucukBoru.remove());
      
+            this.baslangic=new Date();
             this.asama=`baslangic`;
 
             if (this.currentRound>=this.totalRounds-1){          

@@ -4,11 +4,11 @@
         <transition-group tag="div" name="tutorial" class="tutorialText">
             <p :key=1 v-if="step>0">
             Bu oyunda, 
-            <span :style="{visibility: step>1? `visible` : `hidden`}"> küçük boruları</span>
+            <span :style="{visibility: step>1? `visible` : `hidden`}"> alttaki boruları</span>
             <span :style="{visibility: step>2? `visible` : `hidden`}"> nerelere yerleştireceğinizi</span>
             <span :style="{visibility: step>3? `visible` : `hidden`}">  seçeceksiniz.</span>  
             </p> 
-            <p :key=2 v-if="step>4">Küçük borulardan birine tıklayın ve onu seçtiğiniz yere sürükleyin.</p>
+            <p :key=2 v-if="step>4">Alttaki borulardan birine tıklayın ve onu seçtiğiniz yere sürükleyin.</p>
             <p :key=3 v-if="step>5">Şimdi diğer boruyu yerleştirin. Bunu ilk borunun altına da koyabilirsiniz.</p>
             <p :key=4 v-if="step>6">Şimdi, topa tıklayın.</p>
             
@@ -142,6 +142,13 @@ export default{
 
             let shiftX = e.clientX - kucukBoru.getBoundingClientRect().left;
             let shiftY = e.clientY - kucukBoru.getBoundingClientRect().top;
+
+            if (!document.getElementById(`fakeBoru`)){
+                var fakeBoru=kucukBoru.cloneNode(true);
+                fakeBoru.id=`fakeBoru`;
+                fakeBoru.style.visibility = "hidden";  
+                kucukBoru.after(fakeBoru);
+            }
             
             kucukBoru.style.position = 'absolute';
             kucukBoru.style.zIndex = 3;
