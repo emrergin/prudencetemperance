@@ -1,10 +1,9 @@
-import { reactive } from 'vue'
+import { reactive } from "vue";
 
-let KisiVerileri=[];
-let toplamKazanc=0;
-
+let KisiVerileri = [];
+let toplamKazanc = 0;
 
 export const store = reactive({
-   veriler: KisiVerileri,
-   kazanc: toplamKazanc
-})
+  veriler: KisiVerileri,
+  kazanc: toplamKazanc,
+});

@@ -1,32 +1,48 @@
 <template>
-<ul class="plainList" id="oyunVerileri">
-    <li><span>Toplam Kazanç </span><span class="veriKare" id="topKazanc">{{totalRevenue}}</span></li>
-    <li><span>Toplam Kayıp </span><span class="veriKare" id="topKayip">{{totalLoss}}</span></li>
-    <li><span>Net Kazanç </span><span class="veriKare" id="netKazanc">{{totalRevenue-totalLoss}}</span></li>
-    <li><span>Oyun </span><span class="veriKare" id="oyunRound">{{currentRound+1+`/`+totalRounds}}</span></li>
-</ul>
+  <ul class="plainList" id="oyunVerileri">
+    <li>
+      <span>Toplam Kazanç </span
+      ><span class="veriKare" id="topKazanc">{{ totalRevenue }}</span>
+    </li>
+    <li>
+      <span>Toplam Kayıp </span
+      ><span class="veriKare" id="topKayip">{{ totalLoss }}</span>
+    </li>
+    <li>
+      <span>Net Kazanç </span
+      ><span class="veriKare" id="netKazanc">{{
+        totalRevenue - totalLoss
+      }}</span>
+    </li>
+    <li>
+      <span>Oyun </span
+      ><span class="veriKare" id="oyunRound">{{
+        currentRound + 1 + `/` + totalRounds
+      }}</span>
+    </li>
+  </ul>
 </template>
 <script>
 export default {
-    props: [`totalRevenue`,`totalLoss`,`currentRound`,`totalRounds`]
-}
+  props: [`totalRevenue`, `totalLoss`, `currentRound`, `totalRounds`],
+};
 </script>
 <style>
-.plainList{
-    list-style-type:none;
-    padding-left: 0px;
+.plainList {
+  list-style-type: none;
+  padding-left: 0px;
 }
 
-#oyunVerileri{
-    background-color:#D0D0D0;
-    padding:10px;
-    display: flex;
-    gap: 10px;
-    margin-top:0px;
+#oyunVerileri {
+  background-color: #d0d0d0;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  margin-top: 0px;
 }
 
-.veriKare{
-    padding: 5px 10px;
-    background-color: #f7f7f7;
+.veriKare {
+  padding: 5px 10px;
+  background-color: #f7f7f7;
 }
 </style>
