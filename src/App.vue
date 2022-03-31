@@ -22,7 +22,7 @@
 <script>
 import PrudenceGame from './components/PrudenceGamev2.vue';
 import PrudenceTutorial from './components/PrudenceTutorial.vue';
-import TemperanceGame from './components/TemperanceGame.vue';
+import TemperanceGame from './components/TemperanceGamev2.vue';
 import TemperanceTutorial from './components/TemperanceTutorial.vue';
 import RiskGame from './components/RiskGame.vue';
 import RiskTutorial from './components/RiskTutorial.vue';

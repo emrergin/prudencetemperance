@@ -59,6 +59,8 @@
   import hareket from '../composables/hareket';
   import siradakiTur from '../composables/siradakiTur';
 
+  defineEmits(["end"])
+
   const payOffs=[[9,6,2,-2],[9,6,1,-1],[9,6,4,-4],[14,9,3,-3],[7,4,2,-2]];
   const totalRounds=1;
 
