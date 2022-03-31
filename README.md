@@ -1,12 +1,15 @@
 # Prudence and Temperance Testing
 
-Web based experimentation for the concepts of *Prudence* and *Temperance*. Also will include treatments for *Risk Aversion*.
+Web based experimentation for the concepts of *Prudence* and *Temperance*. Also will include a treatment for *Risk Aversion*.
 
-Joint project with [Mehmet Yiğit Gürdal](https://econ.boun.edu.tr/mehmet-yigit-gurdal-0)
+Joint project with [Mehmet Yiğit Gürdal](https://econ.boun.edu.tr/mehmet-yigit-gurdal-0) who also designed the experiments.
 
-The front end will use **Vue3** while the backend will use **MongoDB** and **Node.js**.
+The front end is using **Vue3** while the backend uses **MongoDB** and **Node.js**.
+
+We thank [Gürol Afşar](https://tr.linkedin.com/in/g%C3%BCrol-af%C5%9Far-14981286) for the idea of using pipes for the design, which made things more intuitive.
 
 ## Details
+
 
 Some introductory readings for the concepts.
 
@@ -27,3 +30,4 @@ Some introductory readings for the concepts.
 - `closest()` is not about closeness in terms of pixel location, it checks only the parents.
 - For sequential animations, default browser behaviour of removing filling animations should be evaded by `persist()`.
 - For nodes removed with `v-if` condition, any dynamic class assignments will not work for child elements, even if they are not children of the original parent anymore.
+- Accurately modifying data with event listeners is best done with passing the relevant data as an object property.

@@ -1,5 +1,4 @@
 <template>
-  <!-- <PrudenceTutorial v-if="currentPhase===`pruTut`" @end="currentPhase=`pruGam`" /> -->
  <div v-if="mode===`demo`">
   <PrudenceGame v-if="currentPhase===`pruGam`" @end="currentPhase=`temGam`"/>
   <TemperanceGame v-if="currentPhase===`temGam`"  @end="currentPhase=`rskGam`" />
@@ -21,7 +20,7 @@
 </template>
 
 <script>
-import PrudenceGame from './components/PrudenceGame.vue';
+import PrudenceGame from './components/PrudenceGamev2.vue';
 import PrudenceTutorial from './components/PrudenceTutorial.vue';
 import TemperanceGame from './components/TemperanceGame.vue';
 import TemperanceTutorial from './components/TemperanceTutorial.vue';
@@ -33,10 +32,10 @@ export default {
   name: 'App',
   components:{PrudenceGame,PrudenceTutorial,TemperanceGame,TemperanceTutorial, RiskGame,RiskTutorial,SonucEkrani},
   data(){
-        return{
-            currentPhase:`pruTut`,
-            mode: `demod`
-        }
+    return{
+        currentPhase:`pruGam`,
+        mode: `demo`
+    }
   }
 }
 </script>
@@ -52,14 +51,12 @@ export default {
 }
 
 footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
   text-align: right;
   font-weight: 800;
   padding: 20px;
   background-color:turquoise;
+  margin-top:auto;
 
 }
 </style>

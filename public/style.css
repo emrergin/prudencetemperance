@@ -12,6 +12,7 @@ html{
     -o-user-select: none;
     user-select: none;
     display:flex;
+    flex-direction: column;
 }
 
 body{
