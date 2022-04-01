@@ -64,8 +64,8 @@ export default {
   },
   data() {
     return {
-      currentPhase: `rskGam`,
-      mode: `demo`,
+      currentPhase: `pruTut`,
+      mode: `demod`,
     };
   },
 };
@@ -79,6 +79,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin: 0px;
+  min-height: calc(100vh - 6px);
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.75); /* note 0 offset values */
+  clip-path: inset(0px -20px 0px -20px);
 }
 
 footer {

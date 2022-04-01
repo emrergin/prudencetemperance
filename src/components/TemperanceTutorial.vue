@@ -562,10 +562,6 @@ export default {
 </script>
 
 <style scoped>
-.droppable2 {
-  flex-shrink: 0;
-}
-
 .buyukInputlar {
   gap: 109px;
 }

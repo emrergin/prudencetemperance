@@ -52,7 +52,6 @@
     </div>
 
     <div class="sutun2" id="sut2">
-      <!-- // ]" -->
       <div
         id="futbolTopu"
         ref="futbolTopu"
@@ -392,11 +391,12 @@ export default {
 }
 
 .sutun2 {
-  width: 33%;
   justify-content: flex-start;
   align-items: center;
   scale: 0.8;
 }
+.droppable.kirmiziKenarli,
+.droppable2.kirmiziKenarli,
 .kirmiziKenarli {
   border: 10px solid red;
 }
@@ -628,9 +628,6 @@ export default {
 .centered {
   margin-top: 30px;
   margin-bottom: -40px;
-}
-.droppable {
-  flex-shrink: 0;
 }
 
 #inputlar {

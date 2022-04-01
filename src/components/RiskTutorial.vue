@@ -389,10 +389,6 @@ export default {
 </script>
 
 <style scoped>
-.droppable2 {
-  flex-shrink: 0;
-}
-
 #futbolTopu,
 #fakeBall {
   display: flex;
