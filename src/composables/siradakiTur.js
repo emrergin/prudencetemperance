@@ -6,20 +6,27 @@ function siradakiTur(
   asama,
   payOffs,
   currentRound,
-  secim,
+  secimler,
   boruClass,
   oyunSonu,
   totalRounds,
   totalRevenue,
   totalLoss
 ) {
+  if (Array.isArray(secimler.value)) {
+    secimler.value = secimler.value.map((a) => (a === null ? `_` : a));
+  }
   store.veriler.push([
     treatment,
     bitis.value - baslangic.value,
     payOffs[currentRound.value],
-    secim.value.id.slice(1),
+    secimler.value,
   ]);
-  secim.value = null;
+  if (!Array.isArray(secimler.value)) {
+    secimler.value = null;
+  } else {
+    secimler.value = [null, null, null, null];
+  }
 
   const kucukBorular = document.querySelectorAll(`.${boruClass}`);
   kucukBorular.forEach((kucukBoru) => kucukBoru.remove());

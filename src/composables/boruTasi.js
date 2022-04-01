@@ -1,15 +1,32 @@
-function boruTasi(e, dropClass, asama, boruClass, secim) {
+function boruTasi(e, dropClass, asama, boruClass, currentDroppable, secimler) {
   if (asama !== `baslangic`) {
     return false;
   }
   let kucukBoru = e.target.closest(`.${boruClass}`);
   kucukBoru.style.cursor = "grabbing";
-  const collection = document.getElementsByClassName(dropClass);
-  for (let i = 0; i < collection.length; i++) {
-    collection[i].style.visibility = "visible";
+
+  if (!Array.isArray(secimler.value)) {
+    secimler.value = null;
+  } else {
+    let indeks = secimler.value.findIndex((a) => a === kucukBoru.id.slice(9));
+    if (indeks !== -1 && secimler.value[indeks + 2]) {
+      return false;
+    } else {
+      secimler.value[indeks] = null;
+    }
   }
+
   let shiftX = e.clientX - kucukBoru.getBoundingClientRect().left;
   let shiftY = e.clientY - kucukBoru.getBoundingClientRect().top;
+
+  if (!document.getElementById(`fakeBoru`)) {
+    var fakeBoru = kucukBoru.cloneNode(true);
+    fakeBoru.id = `fakeBoru`;
+    fakeBoru.style.visibility = "hidden";
+    kucukBoru.after(fakeBoru);
+  } else {
+    document.getElementById(`fakeBoru`).remove();
+  }
 
   kucukBoru.style.position = "absolute";
   kucukBoru.style.zIndex = 3;
@@ -33,14 +50,14 @@ function boruTasi(e, dropClass, asama, boruClass, secim) {
 
     let droppableBelow = elemBelow.closest(`.${dropClass}`);
 
-    if (secim.value != droppableBelow) {
-      if (secim.value) {
-        leaveDroppable(secim.value);
+    if (currentDroppable.value != droppableBelow) {
+      if (currentDroppable.value) {
+        leaveDroppable(currentDroppable.value);
       }
-      secim.value = droppableBelow;
+      currentDroppable.value = droppableBelow;
 
-      if (secim.value) {
-        enterDroppable(secim.value);
+      if (currentDroppable.value) {
+        enterDroppable(currentDroppable.value);
       }
     }
   }
@@ -52,14 +69,17 @@ function boruTasi(e, dropClass, asama, boruClass, secim) {
     document.removeEventListener("mousemove", onMouseMove);
     kucukBoru.style.cursor = "grab";
 
-    if (secim.value) {
-      var rect = secim.value.getBoundingClientRect();
-      secim.value.style.background = "";
+    if (currentDroppable.value) {
+      var rect = currentDroppable.value.getBoundingClientRect();
+      currentDroppable.value.style.background = "";
       kucukBoru.style.left = `${rect.left + window.scrollX}px`;
       kucukBoru.style.top = `${rect.top + window.scrollY}px`;
-      const collection = document.getElementsByClassName(dropClass);
-      for (let i = 0; i < collection.length; i++) {
-        collection[i].style.visibility = "hidden";
+
+      if (!Array.isArray(secimler.value)) {
+        secimler.value = currentDroppable.value.id.slice(1);
+      } else {
+        secimler.value[currentDroppable.value.id.slice(1)] =
+          kucukBoru.id.slice(9);
       }
     }
 
@@ -72,7 +92,6 @@ function boruTasi(e, dropClass, asama, boruClass, secim) {
   function leaveDroppable(elem) {
     elem.style.background = "";
   }
-  return secim.value;
 }
 
 export default boruTasi;

@@ -24,8 +24,20 @@
       </div>
       <img id="buyukBoru" src="../assets/buyukboru.svg" />
       <div id="inputlar">
-        <div class="droppable" id="i1">A</div>
-        <div class="droppable" id="i2">B</div>
+        <div
+          class="droppable"
+          id="i1"
+          :style="{ visibility: !secim ? `visible` : `hidden` }"
+        >
+          A
+        </div>
+        <div
+          class="droppable"
+          id="i2"
+          :style="{ visibility: !secim ? `visible` : `hidden` }"
+        >
+          B
+        </div>
       </div>
       <div v-if="asama !== `roundsonu`">
         <div
@@ -71,7 +83,21 @@
     </button>
   </div>
   <div>
-    <p>{{ store }}</p>
+    <p>Toplam kazancınız: {{ store.kazanc }}</p>
+    <table>
+      <tr>
+        <th>Deney</th>
+        <th>Karar Süresi (ms)</th>
+        <th>Değerler</th>
+        <th>Seçim</th>
+      </tr>
+      <tr v-for="veriSatiri in store.veriler" :key="veriSatiri[3]">
+        <td>{{ veriSatiri[0] }}</td>
+        <td>{{ veriSatiri[1] }}</td>
+        <td>{{ veriSatiri[2] }}</td>
+        <td>{{ veriSatiri[3] }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -82,7 +108,7 @@ import { ref } from "vue";
 import boruTasi from "../composables/boruTasi";
 import hareket from "../composables/hareket";
 import siradakiTur from "../composables/siradakiTur";
-import defineEmits from "@vue/runtime-dom";
+import { defineEmits as defineEmits } from "@vue/runtime-dom";
 
 defineEmits(["end"]);
 
@@ -93,8 +119,9 @@ const payOffs = [
   [14, 9, 3, -3],
   [7, 4, 2, -2],
 ];
-const totalRounds = 1;
+const totalRounds = 5;
 
+const currentDroppable = ref(null);
 const secim = ref(null);
 const asama = ref(`baslangic`);
 const baslangic = ref(new Date());
@@ -106,7 +133,7 @@ const currentRound = ref(0);
 const oyunSonu = ref(false);
 
 function boruTasiE(e) {
-  secim.value = boruTasi(e, `droppable`, asama.value, `kucukBoru`, secim);
+  boruTasi(e, `droppable`, asama.value, `kucukBoru`, currentDroppable, secim);
 }
 
 function hareketE(e) {

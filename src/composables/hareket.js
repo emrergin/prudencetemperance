@@ -1,6 +1,12 @@
-function hareket(e, asama, bitis, secim, totalRevenue, totalLoss) {
-  if (!secim.value) {
-    return;
+function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss) {
+  if (!Array.isArray(secimler.value)) {
+    if (!secimler.value) {
+      return;
+    }
+  } else {
+    if (secimler.value.filter((a) => a).length !== 2) {
+      return;
+    }
   }
   if (asama.value !== "baslangic") {
     return;
@@ -118,6 +124,78 @@ function hareket(e, asama, bitis, secim, totalRevenue, totalLoss) {
     setTimeout(siradakiAnimasyon, 2000);
   }
 
+  function Sol2T() {
+    futbolTopu
+      .animate(
+        [
+          { transform: `translate(0px,0px) rotate(0deg)`, offset: 0 },
+          {
+            transform: `translate(-40px,0px) rotate(-120deg)`,
+            offset: 0.125,
+          },
+          {
+            transform: `translate(-70px,15px) rotate(-210deg)`,
+            offset: 0.25,
+          },
+          {
+            transform: `translate(-75px,35px) rotate(-225deg)`,
+            offset: 0.375,
+          },
+          {
+            transform: `translate(-70px,63px) rotate(-210deg)`,
+            offset: 0.5,
+          },
+          {
+            transform: `translate(-40px,76px) rotate(-120deg)`,
+            offset: 0.625,
+          },
+          { transform: `translate(0px,90px) rotate(0deg)`, offset: 0.75 },
+          { transform: `translate(0px,166px) rotate(0deg)`, offset: 1 },
+        ],
+        {
+          duration: 4000,
+          fill: `forwards`,
+          composite: `accumulate`,
+        }
+      )
+      .persist();
+    setTimeout(siradakiAnimasyon, 4000);
+  }
+  function Sag2T() {
+    futbolTopu
+      .animate(
+        [
+          { transform: `translate(0px,0px) rotate(0deg)`, offset: 0 },
+          {
+            transform: `translate(40px,0px) rotate(120deg)`,
+            offset: 0.125,
+          },
+          {
+            transform: `translate(70px,15px) rotate(210deg)`,
+            offset: 0.25,
+          },
+          {
+            transform: `translate(75px,35px) rotate(225deg)`,
+            offset: 0.375,
+          },
+          { transform: `translate(70px,63px) rotate(210deg)`, offset: 0.5 },
+          {
+            transform: `translate(40px,76px) rotate(120deg)`,
+            offset: 0.625,
+          },
+          { transform: `translate(0px,90px) rotate(0deg)`, offset: 0.75 },
+          { transform: `translate(0px,166px) rotate(0deg)`, offset: 1 },
+        ],
+        {
+          duration: 4000,
+          fill: `forwards`,
+          composite: `accumulate`,
+        }
+      )
+      .persist();
+    setTimeout(siradakiAnimasyon, 4000);
+  }
+
   function siradakiAnimasyon() {
     let rect = futbolTopu.getBoundingClientRect();
     let elemBelow = document.elementFromPoint(
@@ -133,6 +211,14 @@ function hareket(e, asama, bitis, secim, totalRevenue, totalLoss) {
         : etiketBoya(elemBelow.closest(`.kucukBoru`), `sag`, 700);
       return false;
     }
+    if (elemBelow.closest(`.temperanceBoru`)) {
+      zar === 1 ? Sol2T() : Sag2T();
+      zar === 1
+        ? etiketBoya(elemBelow.closest(`.temperanceBoru`), `sol`, 700)
+        : etiketBoya(elemBelow.closest(`.temperanceBoru`), `sag`, 700);
+
+      return false;
+    }
     if (elemBelow.closest(`#buyukBoru`)) {
       zar === 1 ? Sol1() : Sag1();
       let etiketler = document.getElementById(`buyukEtiketler`);
@@ -142,6 +228,7 @@ function hareket(e, asama, bitis, secim, totalRevenue, totalLoss) {
 
       return false;
     }
+
     asama.value = `roundsonu`;
     const collection = document.getElementsByClassName("yaklasilmis");
     for (let etiket of collection) {

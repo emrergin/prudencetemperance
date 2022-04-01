@@ -109,7 +109,21 @@
     </button>
   </div>
   <div>
-    <p>{{ secimler }}</p>
+    <p>Toplam kazancınız: {{ store.kazanc }}</p>
+    <table>
+      <tr>
+        <th>Deney</th>
+        <th>Karar Süresi (ms)</th>
+        <th>Değerler</th>
+        <th>Seçim</th>
+      </tr>
+      <tr v-for="veriSatiri in store.veriler" :key="veriSatiri[3]">
+        <td>{{ veriSatiri[0] }}</td>
+        <td>{{ veriSatiri[1] }}</td>
+        <td>{{ veriSatiri[2] }}</td>
+        <td>{{ veriSatiri[3] }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -120,6 +134,9 @@ import { ref } from "vue";
 import boruTasi from "../composables/boruTasi";
 import hareket from "../composables/hareket";
 import siradakiTur from "../composables/siradakiTur";
+import { defineEmits as defineEmits } from "@vue/runtime-dom";
+
+defineEmits(["end"]);
 
 const payOffs = [
   [9, 9, 2, -2, 3, -3],
@@ -128,39 +145,45 @@ const payOffs = [
   [14, 14, 3, -3, 10, -10],
   [4, 4, 2, -2, 1, -1],
 ];
-const totalRounds = 1;
+const totalRounds = 5;
 
-const secim = ref(null);
-// zarlar:[],
+const currentDroppable = ref(null);
+const secimler = ref([null, null, null, null]);
 const asama = ref(`baslangic`);
 const baslangic = ref(new Date());
 const bitis = ref(null);
 const totalRevenue = ref(0);
 const totalLoss = ref(0);
-const secimler = ref([null, null, null, null]);
 
 const currentRound = ref(0);
 const oyunSonu = ref(false);
 
 function boruTasiE(e) {
-  secim.value = boruTasi(e, `droppable2`, asama.value, `temperanceBoru`, secim);
+  boruTasi(
+    e,
+    `droppable2`,
+    asama.value,
+    `temperanceBoru`,
+    currentDroppable,
+    secimler
+  );
 }
 
 function hareketE(e) {
-  hareket(e, asama, bitis, secim, totalRevenue, totalLoss);
+  hareket(e, asama, bitis, secimler, totalRevenue, totalLoss);
 }
 
 function siradakiTurE() {
   siradakiTur(
-    `Prudence`,
+    `Temperance`,
     store,
     bitis,
     baslangic,
     asama,
     payOffs,
     currentRound,
-    secim,
-    `kucukBoru`,
+    secimler,
+    `temperanceBoru`,
     oyunSonu,
     totalRounds,
     totalRevenue.value,

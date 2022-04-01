@@ -190,7 +190,6 @@ export default {
 
         kucukBoru.hidden = true;
         let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-
         kucukBoru.hidden = false;
 
         if (!elemBelow) return;
