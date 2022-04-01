@@ -169,7 +169,7 @@ function convertNumbertoString(number) {
   display: flex;
   flex-direction: column;
   margin: 15px;
-  min-height: 385px;
+  min-height: 433px;
 }
 #oyunAsagi {
   display: flex;

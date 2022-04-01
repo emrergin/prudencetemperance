@@ -76,7 +76,11 @@ function boruTasi(e, dropClass, asama, boruClass, currentDroppable, secimler) {
       kucukBoru.style.top = `${rect.top + window.scrollY}px`;
 
       if (!Array.isArray(secimler.value)) {
-        secimler.value = currentDroppable.value.id.slice(1);
+        if (boruClass === `riskBoru`) {
+          secimler.value = kucukBoru.id.slice(9);
+        } else {
+          secimler.value = currentDroppable.value.id.slice(1);
+        }
       } else {
         secimler.value[currentDroppable.value.id.slice(1)] =
           kucukBoru.id.slice(9);

@@ -40,6 +40,23 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss) {
     setTimeout(siradakiAnimasyon, 1000);
   }
 
+  function AsagiR() {
+    futbolTopu
+      .animate(
+        [
+          { transform: `translate(0px,0px)` },
+          { transform: `translate(0px,94px)` },
+        ],
+        {
+          duration: 1000,
+          fill: `forwards`,
+          composite: `accumulate`,
+        }
+      )
+      .persist();
+    setTimeout(siradakiAnimasyon, 1000);
+  }
+
   function Sol1() {
     futbolTopu
       .animate(
@@ -204,19 +221,23 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss) {
     );
     let zar = Math.floor(Math.random() * 2) + 1;
 
-    if (elemBelow.closest(`.kucukBoru`)) {
+    if (elemBelow.closest(`.kucukBoru,.riskBoru`)) {
       zar === 1 ? Sol2PR() : Sag2PR();
       zar === 1
-        ? etiketBoya(elemBelow.closest(`.kucukBoru`), `sol`, 700)
-        : etiketBoya(elemBelow.closest(`.kucukBoru`), `sag`, 700);
+        ? etiketBoya(elemBelow.closest(`.kucukBoru,.riskBoru`), `sol`, 600)
+        : etiketBoya(elemBelow.closest(`.kucukBoru,.riskBoru`), `sag`, 600);
       return false;
     }
     if (elemBelow.closest(`.temperanceBoru`)) {
       zar === 1 ? Sol2T() : Sag2T();
       zar === 1
-        ? etiketBoya(elemBelow.closest(`.temperanceBoru`), `sol`, 700)
-        : etiketBoya(elemBelow.closest(`.temperanceBoru`), `sag`, 700);
+        ? etiketBoya(elemBelow.closest(`.temperanceBoru`), `sol`, 600)
+        : etiketBoya(elemBelow.closest(`.temperanceBoru`), `sag`, 600);
 
+      return false;
+    }
+    if (elemBelow.closest(`#girisBoru`)) {
+      AsagiR();
       return false;
     }
     if (elemBelow.closest(`#buyukBoru`)) {

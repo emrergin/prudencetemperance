@@ -47,8 +47,8 @@ import PrudenceTutorial from "./components/PrudenceTutorial.vue";
 import PrudenceGame from "./components/PrudenceGamev2.vue";
 import TemperanceTutorial from "./components/TemperanceTutorial.vue";
 import TemperanceGame from "./components/TemperanceGamev2.vue";
+import RiskGame from "./components/RiskGamev2.vue";
 import RiskTutorial from "./components/RiskTutorial.vue";
-import RiskGame from "./components/RiskGame.vue";
 import SonucEkrani from "./components/SonucEkrani.vue";
 
 export default {
@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-      currentPhase: `temGam`,
+      currentPhase: `rskGam`,
       mode: `demo`,
     };
   },
