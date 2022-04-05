@@ -156,9 +156,6 @@
       </div>
     </div>
   </div>
-  <div>
-    <p>{{ step }}</p>
-  </div>
 </template>
 <script>
 export default {
@@ -350,7 +347,7 @@ export default {
 .tutorialKutusu {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
-  margin: 15px;
+  margin: 0px;
   min-height: 440px;
   justify-content: space-between;
   padding: 20px;

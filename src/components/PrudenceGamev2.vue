@@ -69,9 +69,7 @@
         @click="siradakiTurE()"
       >
         {{
-          this.currentRound === this.totalRounds - 1
-            ? `Oyunu Bitir`
-            : `Sıradaki Tur >>`
+          currentRound === totalRounds - 1 ? `Oyunu Bitir` : `Sıradaki Tur >>`
         }}
       </button>
     </div>
@@ -84,6 +82,8 @@
   </div>
   <div>
     <p>Toplam kazancınız: {{ store.kazanc }}</p>
+    <p>İsim: {{ store.isim }}</p>
+    <p>{{ oyunSonu }}- {{ currentRound }}</p>
     <table>
       <tr>
         <th>Deney</th>
@@ -104,22 +104,16 @@
 <script setup>
 import ScoreTable from "./ScoreTable.vue";
 import { store } from "../store.js";
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 import boruTasi from "../composables/boruTasi";
 import hareket from "../composables/hareket";
 import siradakiTur from "../composables/siradakiTur";
 import { defineEmits as defineEmits } from "@vue/runtime-dom";
 
 defineEmits(["end"]);
-
-const payOffs = [
-  [9, 6, 2, -2],
-  [9, 6, 1, -1],
-  [9, 6, 4, -4],
-  [14, 9, 3, -3],
-  [7, 4, 2, -2],
-];
-const totalRounds = 5;
+const props = defineProps(["payOffs"]);
+// eslint-disable-next-line
+const totalRounds = props.payOffs.length;
 
 const currentDroppable = ref(null);
 const secim = ref(null);
@@ -137,7 +131,7 @@ function boruTasiE(e) {
 }
 
 function hareketE(e) {
-  hareket(e, asama, bitis, secim, totalRevenue, totalLoss);
+  hareket(e, asama, bitis, secim, totalRevenue, totalLoss, store);
 }
 
 function siradakiTurE() {
@@ -147,14 +141,12 @@ function siradakiTurE() {
     bitis,
     baslangic,
     asama,
-    payOffs,
+    props.payOffs,
     currentRound,
     secim,
     `kucukBoru`,
     oyunSonu,
-    totalRounds,
-    totalRevenue.value,
-    totalLoss.value
+    totalRounds
   );
 }
 
@@ -168,7 +160,7 @@ function convertNumbertoString(number) {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
-  margin: 15px;
+  margin: 0px;
   min-height: 433px;
 }
 #oyunAsagi {

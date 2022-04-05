@@ -77,9 +77,7 @@
       <div v-if="asama === `roundsonu`">
         <button class="stepButton" id="nextRound" @click="siradakiTurE()">
           {{
-            this.currentRound === this.totalRounds - 1
-              ? `Oyunu Bitir`
-              : `Sıradaki Tur >>`
+            currentRound === totalRounds - 1 ? `Oyunu Bitir` : `Sıradaki Tur >>`
           }}
         </button>
       </div>
@@ -93,7 +91,8 @@
   </div>
   <div>
     <div>
-      <p>Toplam kazancınız: {{ store.kazanc }}. {{ secim }}</p>
+      <p>Toplam kazancınız: {{ store.kazanc }}</p>
+      <p>İsim: {{ store.isim }}</p>
       <table>
         <tr>
           <th>Deney</th>
@@ -115,22 +114,16 @@
 <script setup>
 import ScoreTable from "./ScoreTable.vue";
 import { store } from "../store.js";
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 import boruTasi from "../composables/boruTasi";
 import hareket from "../composables/hareket";
 import siradakiTur from "../composables/siradakiTur";
 import { defineEmits as defineEmits } from "@vue/runtime-dom";
 
 defineEmits(["end"]);
-
-const payOffs = [
-  [10, 8, 15, 3],
-  [5, 3, 7, 1],
-  [9, 12, 10, 10],
-  [2, 4, 1, 5],
-  [7, 1, 4, 4],
-];
-const totalRounds = 5;
+const props = defineProps(["payOffs"]);
+// eslint-disable-next-line
+const totalRounds = props.payOffs.length;
 
 const currentDroppable = ref(null);
 const secim = ref(null);
@@ -148,7 +141,7 @@ function boruTasiE(e) {
 }
 
 function hareketE(e) {
-  hareket(e, asama, bitis, secim, totalRevenue, totalLoss);
+  hareket(e, asama, bitis, secim, totalRevenue, totalLoss, store);
 }
 
 function siradakiTurE() {
@@ -158,14 +151,12 @@ function siradakiTurE() {
     bitis,
     baslangic,
     asama,
-    payOffs,
+    props.payOffs,
     currentRound,
     secim,
     `riskBoru`,
     oyunSonu,
-    totalRounds,
-    totalRevenue.value,
-    totalLoss.value
+    totalRounds
   );
 }
 

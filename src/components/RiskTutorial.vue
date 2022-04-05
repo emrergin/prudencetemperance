@@ -156,10 +156,6 @@
       </div>
     </div>
   </div>
-  <div>
-    <p>{{ secim }}</p>
-    <p>{{ step }}</p>
-  </div>
 </template>
 
 <script>

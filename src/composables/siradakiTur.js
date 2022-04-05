@@ -9,9 +9,7 @@ function siradakiTur(
   secimler,
   boruClass,
   oyunSonu,
-  totalRounds,
-  totalRevenue,
-  totalLoss
+  totalRounds
 ) {
   if (Array.isArray(secimler.value)) {
     secimler.value = secimler.value.map((a) => (a === null ? `_` : a));
@@ -36,7 +34,6 @@ function siradakiTur(
 
   if (currentRound.value >= totalRounds - 1) {
     oyunSonu.value = true;
-    store.kazanc += totalRevenue - totalLoss;
     return;
   }
   let futbolTopu = document.getElementById("futbolTopu");

@@ -206,11 +206,6 @@
       </div>
     </div>
   </div>
-  <div>
-    <p>{{ secimler }}</p>
-    <p>{{ zarlar }}</p>
-    <p>{{ step }}</p>
-  </div>
 </template>
 
 <script>

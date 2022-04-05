@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       store,
-      isim: null,
+      isim: store.isim,
       asama: `gonderilmedi`,
     };
   },

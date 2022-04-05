@@ -1,4 +1,4 @@
-function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss) {
+function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
   if (!Array.isArray(secimler.value)) {
     if (!secimler.value) {
       return;
@@ -253,9 +253,13 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss) {
     asama.value = `roundsonu`;
     const collection = document.getElementsByClassName("yaklasilmis");
     for (let etiket of collection) {
-      +etiket.textContent > 0
-        ? (totalRevenue.value += +etiket.textContent)
-        : (totalLoss.value += -etiket.textContent);
+      if (+etiket.textContent > 0) {
+        totalRevenue.value += +etiket.textContent;
+        store.kazanc += +etiket.textContent;
+      } else {
+        totalLoss.value += -etiket.textContent;
+        store.kazanc += +etiket.textContent;
+      }
     }
   }
 
