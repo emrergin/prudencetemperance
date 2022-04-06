@@ -17,7 +17,7 @@ Some introductory readings for the concepts.
 - http://www.restud.com/wp-content/uploads/2013/08/MS-17166-Manuscript.pdf
 
 ## Usage
-- `npm run install` to install necessary packages.
+- `npm install` to install necessary packages.
 - `npm run serve` to have a file that is served by a local server.
 - `npm run build` to build a file that works without a server.
 - Backend code is not included, so you need to build an API for yourself.
@@ -37,3 +37,4 @@ Some introductory readings for the concepts.
 - For sequential animations, default browser behaviour of removing filling animations should be evaded by `persist()`.
 - For nodes removed with `v-if` condition, any dynamic class assignments will not work for child elements, even if they are not children of the original parent anymore.
 - Accurately modifying data with event listeners is best done with passing the relevant data as an object property.
+- For multiple components referencing the same functions, Composition API is a better fit.
