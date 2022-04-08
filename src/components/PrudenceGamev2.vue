@@ -80,7 +80,7 @@
       Diğer Oyuna Geç!
     </button>
   </div>
-  <div>
+  <!-- <div>
     <p>Toplam kazancınız: {{ store.kazanc }}</p>
     <p>İsim: {{ store.isim }}</p>
     <p>{{ oyunSonu }}- {{ currentRound }}</p>
@@ -98,19 +98,20 @@
         <td>{{ veriSatiri[3] }}</td>
       </tr>
     </table>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
 import ScoreTable from "./ScoreTable.vue";
 import { store } from "../store.js";
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
 import boruTasi from "../composables/boruTasi";
 import hareket from "../composables/hareket";
 import siradakiTur from "../composables/siradakiTur";
 import { defineEmits as defineEmits } from "@vue/runtime-dom";
 
 defineEmits(["end"]);
+// eslint-disable-next-line
 const props = defineProps(["payOffs"]);
 // eslint-disable-next-line
 const totalRounds = props.payOffs.length;

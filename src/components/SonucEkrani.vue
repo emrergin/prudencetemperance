@@ -1,65 +1,41 @@
 <template>
-  <div v-if="asama === `gonderilmedi`">
-    <p>Lütfen isminizi giriniz.</p>
-    <input v-model="isim" />
-    <Transition name="tutorial">
-      <button @click="veriGonder()" v-if="isim">Veriyi Gönder</button>
-    </Transition>
-
-    <div>
-      <p>Toplam kazancınız: {{ store.kazanc }}</p>
-      <table>
-        <tr>
-          <th>Deney</th>
-          <th>Karar Süresi (ms)</th>
-          <th>Değerler</th>
-          <th>Seçim</th>
-        </tr>
-        <tr v-for="veriSatiri in store.veriler" :key="veriSatiri[3]">
-          <td>{{ veriSatiri[0] }}</td>
-          <td>{{ veriSatiri[1] }}</td>
-          <td>{{ veriSatiri[2] }}</td>
-          <td>{{ veriSatiri[3] }}</td>
-        </tr>
-      </table>
-    </div>
+<div v-if="!bitis">
+  <button @click="bitis=true;
+   $emit('end', true);" v-if="isim"
+  >Deneyi Bitir</button>
+</div>
+<div v-else>
+  <div>
+    <h2>Deney bitti. Katılımınız için teşekkürler.</h2>
+    <h3>Verileriniz</h3>
+    <p> Kullanıcı ID: {{store._id}}</p>
+    <p> İsminiz: {{store.isim}}</p>
+    <p>Toplam kazancınız: {{ store.kazanc }}</p>
+    <table>
+      <tr>
+        <th>Deney</th>
+        <th>Karar Süresi (ms)</th>
+        <th>Değerler</th>
+        <th>Seçim</th>
+      </tr>
+      <tr v-for="veriSatiri in store.veriler" :key="veriSatiri[3]">
+        <td>{{ veriSatiri[0] }}</td>
+        <td>{{ veriSatiri[1] }}</td>
+        <td>{{ veriSatiri[2] }}</td>
+        <td>{{ veriSatiri[3] }}</td>
+      </tr>
+    </table>
   </div>
-  <div v-else>
-    <h2>Veriniz gönderildi. Katılımınız için teşekkürler.</h2>
-  </div>
+</div>
 </template>
-<script>
+<script setup>
 import { store } from "../store.js";
-export default {
-  data() {
-    return {
-      store,
-      isim: store.isim,
-      asama: `gonderilmedi`,
-    };
-  },
-  methods: {
-    veriGonder() {
-      const someData = {
-        title: "kisi verileri",
-        kisiVerisi: store.veriler,
-        odeme: store.kazanc,
-        isim: this.isim,
-      };
-      const putMethod = {
-        method: "PUT", // Method itself
-        headers: {
-          "Content-type": "application/json  ; charset=UTF-8", // Indicates the content
-        },
-        body: JSON.stringify(someData),
-      };
-      // console.log(JSON.stringify(someData))
-      fetch(`https://prudencetemperance.herokuapp.com/api/kisiveri`, putMethod)
-        .then(() => (this.asama = `ok`))
-        .catch((err) => console.log(err)); // Do something with the error
-    },
-  },
-};
+import { defineEmits as defineEmits } from "@vue/runtime-dom";
+import { ref } from "vue";
+
+defineEmits(["end"]);
+
+const bitis = ref(false);
 </script>
 
 <style scoped>

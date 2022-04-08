@@ -1,3 +1,5 @@
+import veriGuncelle from "./veriGuncelle";
+
 function siradakiTur(
   treatment,
   store,
@@ -20,6 +22,7 @@ function siradakiTur(
     payOffs[currentRound.value],
     secimler.value,
   ]);
+  veriGuncelle();
   if (!Array.isArray(secimler.value)) {
     secimler.value = null;
   } else {

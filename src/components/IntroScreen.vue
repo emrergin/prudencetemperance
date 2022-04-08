@@ -1,6 +1,6 @@
 <template>
-  <p>Lütfen isminizi giriniz.</p>
-  <input v-model="isim" />
+  <p v-if="!store.isim">Lütfen isminizi ve soyisminizi giriniz.</p>
+  <input v-model="store.isim" />
 
   <ul class="girisMetni">
     <li>
@@ -34,28 +34,37 @@
     </li>
   </ul>
   <button
-    v-if="isim"
-    @click="
-      store.isim = isim;
-      $emit('end', true);
-    "
+    v-if="store.isim"
+    @click="logData();
+    $emit('end', true);"
     class="stepButton"
   >
     Deneye başla!
   </button>
 </template>
 
-<script>
-import { store } from "../store.js";
-export default {
-  data() {
-    return {
-      isim: null,
-      store,
+<script setup>
+  import { store } from "../store.js";
+  import { defineEmits as defineEmits } from "@vue/runtime-dom";
+
+  defineEmits(["end"]);
+  function logData() {      
+    const someData = {
+      title: "kisi verileri",
+      kisiVerisi: store.veriler,
+      odeme:store.kazanc,
+      isim: store.isim,
+      _id: store._id
     };
-  },
-  emits: ["end"],
-};
+    const postMethod = {
+      method: `POST`,
+      body: JSON.stringify(someData),
+      headers: {
+        "Content-type": "application/json  ; charset=UTF-8", // Indicates the content
+      },
+    };
+    fetch(`https://prudencetemperance.herokuapp.com/api/kisiveri`, postMethod);   
+  }
 </script>
 
 <style>

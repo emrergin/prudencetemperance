@@ -43,8 +43,9 @@
       @end="currentPhase = `rskGam`"
     />
     <RiskGame v-if="currentPhase === `rskGam`" @end="currentPhase = `son`" />
-    <SonucEkrani v-if="currentPhase === `son`" />
+    <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true"/>
   </div>
+  <p>{{ uuid }}</p>
 
   <footer>
     <a href="https://github.com/emrergin" target="_blank">Emre Ergin</a>
@@ -61,6 +62,8 @@ import TemperanceGame from "./components/TemperanceGamev2.vue";
 import RiskGame from "./components/RiskGamev2.vue";
 import RiskTutorial from "./components/RiskTutorial.vue";
 import SonucEkrani from "./components/SonucEkrani.vue";
+import { store } from "./store.js";
+
 
 export default {
   name: "App",
@@ -78,6 +81,8 @@ export default {
     return {
       currentPhase: `intro`,
       mode: `demo`,
+      store,
+      deneyBitisi: false,
       pruPayOffs: [
         [9, 6, 2, -2],
         [9, 6, 1, -1],
@@ -109,8 +114,10 @@ export default {
   },
   methods: {
     preventNav(event) {
-      event.preventDefault();
-      event.returnValue = "";
+      if (store.isim && !this.deneyBitisi){
+        event.preventDefault();
+        event.returnValue = "";
+      }
     },
   },
 };
@@ -120,7 +127,6 @@ export default {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin: 0px;
