@@ -1,31 +1,32 @@
 <template>
 <div v-if="!bitis">
   <button @click="bitis=true;
-   $emit('end', true);" v-if="isim"
-  >Deneyi Bitir</button>
+   $emit('end', true);"
+   class="stepButton"
+  >
+    Deneyi Bitir
+  </button>
 </div>
 <div v-else>
-  <div>
-    <h2>Deney bitti. Katılımınız için teşekkürler.</h2>
-    <h3>Verileriniz</h3>
-    <p> Kullanıcı ID: {{store._id}}</p>
-    <p> İsminiz: {{store.isim}}</p>
-    <p>Toplam kazancınız: {{ store.kazanc }}</p>
-    <table>
-      <tr>
-        <th>Deney</th>
-        <th>Karar Süresi (ms)</th>
-        <th>Değerler</th>
-        <th>Seçim</th>
-      </tr>
-      <tr v-for="veriSatiri in store.veriler" :key="veriSatiri[3]">
-        <td>{{ veriSatiri[0] }}</td>
-        <td>{{ veriSatiri[1] }}</td>
-        <td>{{ veriSatiri[2] }}</td>
-        <td>{{ veriSatiri[3] }}</td>
-      </tr>
-    </table>
-  </div>
+  <h2>Deney bitti. Katılımınız için teşekkürler.</h2>
+  <h3>Verileriniz</h3>
+  <p> Kullanıcı ID: {{store._id}}</p>
+  <p> İsminiz: {{store.isim}}</p>
+  <p>Toplam kazancınız: {{ store.kazanc }}</p>
+  <table>
+    <tr>
+      <th>Deney</th>
+      <th>Karar Süresi (ms)</th>
+      <th>Değerler</th>
+      <th>Seçim</th>
+    </tr>
+    <tr v-for="veriSatiri in store.veriler" :key="veriSatiri[3]">
+      <td>{{ veriSatiri[0] }}</td>
+      <td>{{ veriSatiri[1] }}</td>
+      <td>{{ veriSatiri[2] }}</td>
+      <td>{{ veriSatiri[3] }}</td>
+    </tr>
+  </table>
 </div>
 </template>
 <script setup>

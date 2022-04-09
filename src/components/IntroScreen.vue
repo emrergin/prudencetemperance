@@ -1,5 +1,5 @@
 <template>
-  <p v-if="!store.isim">Lütfen isminizi ve soyisminizi giriniz.</p>
+  <p>Lütfen isminizi ve soyisminizi giriniz.</p>
   <input v-model="store.isim" />
 
   <ul class="girisMetni">

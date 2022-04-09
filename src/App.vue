@@ -22,11 +22,16 @@
     <SonucEkrani v-if="currentPhase === `son`" />
   </div>
   <div v-else>
+    <IntroScreen
+      v-if="currentPhase === `intro`"
+      @end="currentPhase = `pruTut`"
+    />
     <PrudenceTutorial
       v-if="currentPhase === `pruTut`"
       @end="currentPhase = `pruGam`"
     />
     <PrudenceGame
+    :payOffs="pruPayOffs"
       v-if="currentPhase === `pruGam`"
       @end="currentPhase = `temTut`"
     />
@@ -35,6 +40,7 @@
       @end="currentPhase = `temGam`"
     />
     <TemperanceGame
+    :payOffs="temPayOffs"
       v-if="currentPhase === `temGam`"
       @end="currentPhase = `rskTut`"
     />
@@ -42,10 +48,12 @@
       v-if="currentPhase === `rskTut`"
       @end="currentPhase = `rskGam`"
     />
-    <RiskGame v-if="currentPhase === `rskGam`" @end="currentPhase = `son`" />
+    <RiskGame 
+    :payOffs="rskPayOffs"
+    v-if="currentPhase === `rskGam`"
+     @end="currentPhase = `son`" />
     <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true"/>
   </div>
-  <p>{{ uuid }}</p>
 
   <footer>
     <a href="https://github.com/emrergin" target="_blank">Emre Ergin</a>
@@ -80,7 +88,7 @@ export default {
   data() {
     return {
       currentPhase: `intro`,
-      mode: `demo`,
+      mode: `demod`,
       store,
       deneyBitisi: false,
       pruPayOffs: [

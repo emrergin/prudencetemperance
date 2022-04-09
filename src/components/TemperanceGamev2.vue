@@ -24,10 +24,10 @@
       </div>
       <img id="buyukBoru" src="../assets/buyukboru.svg" />
       <div class="buyukInputlar">
-        <div class="droppable2" id="i0" :class="{ gorulmez: secimler[0] }">
+        <div class="droppable2" id="i0" :class="{ gorulmez: secimler[0] || asama!== `baslangic`}">
           A
         </div>
-        <div class="droppable2" id="i1" :class="{ gorulmez: secimler[1] }">
+        <div class="droppable2" id="i1" :class="{ gorulmez: secimler[1] || asama!== `baslangic`}">
           B
         </div>
       </div>
@@ -35,14 +35,14 @@
         <div
           class="droppable2"
           id="i2"
-          :class="{ gorulmez: !secimler[0] || secimler[2] }"
+          :class="{ gorulmez: !secimler[0] || secimler[2] || asama!== `baslangic`}"
         >
           C
         </div>
         <div
           class="droppable2"
           id="i3"
-          :class="{ gorulmez: !secimler[1] || secimler[3] }"
+          :class="{ gorulmez: !secimler[1] || secimler[3]  || asama!== `baslangic` }"
         >
           D
         </div>
