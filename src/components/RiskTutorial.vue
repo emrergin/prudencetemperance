@@ -38,7 +38,7 @@
           Hazırsanız başlayalım mı?
         </div>
         <div :key="12" class="centered" v-if="step > 12">
-          <button @click="$emit('end', true)" class="stepButton">
+          <button @click="$emit('end', true);" class="stepButton">
             Hazırım!
           </button>
         </div>
@@ -91,7 +91,8 @@
 
       <div
         id="kucukBorular"
-        :class="[{ gorunur: step < 6 }, { gorunmez: step >= 6 }]"
+        class="gorunur"
+        :class="[{ gorulmez: step >= 6 }]"
       >
         <div
           id="kucukBoru1"
@@ -168,6 +169,9 @@ export default {
     };
   },
   emits: ["end"],
+  unmounted(){
+    document.querySelectorAll('.riskBoru').forEach(e => e.remove());
+  },
   methods: {
     nextStep() {
       if (
@@ -274,7 +278,6 @@ export default {
         return;
       }
       let vm = this;
-      this.asama = `tophareketi`;
       let futbolTopu = this.$refs.futbolTopu;
       futbolTopu.style.zIndex = 4;
       futbolTopu.classList.remove(`kirmiziKenarli`);

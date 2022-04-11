@@ -16,6 +16,7 @@ function veriGuncelle() {
       body: JSON.stringify(someData),
     };
     fetch(`https://prudencetemperance.herokuapp.com/api/kisiveri`, putMethod)
+    // fetch(`http://localhost:3000/api/kisiveri`, putMethod)
       .catch((err) => console.log(err));
 }
 

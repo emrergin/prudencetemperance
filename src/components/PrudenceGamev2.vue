@@ -234,6 +234,7 @@ function convertNumbertoString(number) {
 
 #futbolTopu {
   cursor: pointer;
+  z-index: 4;
 }
 
 .stepButton {

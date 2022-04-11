@@ -32,8 +32,7 @@ function siradakiTur(
   const kucukBorular = document.querySelectorAll(`.${boruClass}`);
   kucukBorular.forEach((kucukBoru) => kucukBoru.remove());
 
-  baslangic.value = new Date();
-  asama.value = `baslangic`;
+
 
   if (currentRound.value >= totalRounds - 1) {
     oyunSonu.value = true;
@@ -49,6 +48,8 @@ function siradakiTur(
   document.getElementById(`fakeBall`).remove();
   futbolTopu.style.position = "static";
 
+  baslangic.value = new Date();
+  asama.value = `baslangic`;
   currentRound.value++;
 }
 

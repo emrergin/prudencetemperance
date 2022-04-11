@@ -87,7 +87,7 @@ export default {
   },
   data() {
     return {
-      currentPhase: `intro`,
+      currentPhase: `rskTut`,
       mode: `demod`,
       store,
       deneyBitisi: false,
