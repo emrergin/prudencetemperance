@@ -42,6 +42,8 @@ function siradakiTur(
   futbolTopu.getAnimations().forEach((anim) => {
     anim.cancel();
   });
+
+
   const etiketler = document.querySelectorAll(".etiket");
   etiketler.forEach((etiket) => etiket.classList.remove(`yaklasilmis`));
 

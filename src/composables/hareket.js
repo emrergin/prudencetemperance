@@ -14,7 +14,6 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
   bitis.value = new Date();
   asama.value = `tophareketi`;
   let futbolTopu = e.target;
-  futbolTopu.style.zIndex = 4;
   let fakeBall = futbolTopu.cloneNode(true);
   fakeBall.id = `fakeBall`;
   fakeBall.style.visibility = "hidden";

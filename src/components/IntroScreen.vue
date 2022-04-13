@@ -36,6 +36,7 @@
   <button
     v-if="store.isim"
     @click="logData();
+    tamEkran();
     $emit('end', true);"
     class="stepButton"
   >
@@ -64,6 +65,14 @@
       },
     };
     fetch(`https://prudencetemperance.herokuapp.com/api/kisiveri`, postMethod);   
+  }
+  function tamEkran(){
+    var requestMethod = document.body.requestFullScreen 
+      || document.body.webkitRequestFullScreen 
+      || document.body.mozRequestFullScreen 
+      || document.body.msRequestFullscreen;
+    requestMethod.call(document.body);
+    return false;
   }
 </script>
 

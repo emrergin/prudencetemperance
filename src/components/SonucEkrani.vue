@@ -1,7 +1,8 @@
 <template>
 <div v-if="!bitis">
   <button @click="bitis=true;
-   $emit('end', true);"
+   $emit('end', true);
+   tamEkrandanCik()"
    class="stepButton"
   >
     Deneyi Bitir
@@ -37,6 +38,19 @@ import { ref } from "vue";
 defineEmits(["end"]);
 
 const bitis = ref(false);
+
+function tamEkrandanCik(){
+  var requestMethod = document.cancelFullScreen
+  ||document.webkitCancelFullScreen
+  ||document.mozCancelFullScreen
+  ||document.exitFullscreen
+  ||document.webkitExitFullscreen;
+  if (requestMethod) { // cancel full screen.
+    requestMethod.call(document);
+  }
+  return false;
+}
+
 </script>
 
 <style scoped>

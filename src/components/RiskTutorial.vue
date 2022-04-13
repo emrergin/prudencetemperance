@@ -169,7 +169,7 @@ export default {
     };
   },
   emits: ["end"],
-  unmounted(){
+  beforeUnmount(){
     document.querySelectorAll('.riskBoru').forEach(e => e.remove());
   },
   methods: {
@@ -277,6 +277,8 @@ export default {
       if (this.step !== 6) {
         return;
       }
+      document.querySelector('#app> .riskBoru').remove();
+
       let vm = this;
       let futbolTopu = this.$refs.futbolTopu;
       futbolTopu.style.zIndex = 4;
@@ -405,5 +407,9 @@ export default {
 
 .gorunmez {
   display: none !important;
+}
+
+#kucukBorular{
+  min-width:458px;
 }
 </style>

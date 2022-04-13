@@ -2,7 +2,7 @@
   <div v-if="mode === `demo`">
     <IntroScreen
       v-if="currentPhase === `intro`"
-      @end="currentPhase = `pruGam`"
+      @end="currentPhase = `temGam`"
     />
     <PrudenceGame
       :payOffs="pruPayOffs"

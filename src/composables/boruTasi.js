@@ -24,8 +24,6 @@ function boruTasi(e, dropClass, asama, boruClass, currentDroppable, secimler) {
     fakeBoru.id = `fakeBoru`;
     fakeBoru.style.visibility = "hidden";
     kucukBoru.after(fakeBoru);
-  } else {
-    document.getElementById(`fakeBoru`).remove();
   }
 
   kucukBoru.style.position = "absolute";
