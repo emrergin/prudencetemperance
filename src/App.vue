@@ -87,7 +87,7 @@ export default {
   },
   data() {
     return {
-      currentPhase: `rskTut`,
+      currentPhase: `temGam`,
       mode: `demod`,
       store,
       deneyBitisi: false,
