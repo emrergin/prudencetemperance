@@ -277,7 +277,9 @@ export default {
       if (this.step !== 6) {
         return;
       }
-      document.querySelector('#app> .riskBoru').remove();
+      if (document.querySelector('#app> .riskBoru')){
+        document.querySelector('#app> .riskBoru').remove();
+      }
 
       let vm = this;
       let futbolTopu = this.$refs.futbolTopu;

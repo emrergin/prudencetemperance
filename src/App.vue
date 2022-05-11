@@ -55,7 +55,7 @@
     <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true"/>
   </div>
 
-  <footer>
+  <footer v-if="currentPhase === `son` || currentPhase === `intro`">
     <a href="https://github.com/emrergin" target="_blank">Emre Ergin</a>
     tarafından yapılmıştır.
   </footer>
@@ -87,7 +87,7 @@ export default {
   },
   data() {
     return {
-      currentPhase: `temGam`,
+      currentPhase: `intro`,
       mode: `demod`,
       store,
       deneyBitisi: false,
