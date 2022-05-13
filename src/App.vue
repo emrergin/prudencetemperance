@@ -32,6 +32,7 @@
     />
     <PrudenceGame
     :payOffs="pruPayOffs"
+    :lastTreatment="treatments[`pruGam`]===`son`"
       v-if="currentPhase === `pruGam`"
       @end="currentPhase = treatments[`pruGam`]"
     />
@@ -41,6 +42,7 @@
     />
     <TemperanceGame
     :payOffs="temPayOffs"
+    :lastTreatment="treatments[`temGam`]===`son`"
       v-if="currentPhase === `temGam`"
       @end="currentPhase = treatments[`temGam`]"
     />
@@ -50,12 +52,13 @@
     />
     <RiskGame 
     :payOffs="rskPayOffs"
+    :lastTreatment="treatments[`rskGam`]===`son`"
     v-if="currentPhase === `rskGam`"
      @end="currentPhase = treatments[`rskGam`]" />
     <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true"/>
   </div>
 
-  <footer v-if="currentPhase === `son` || currentPhase === `intro`">
+  <footer v-if="deneyBitisi === true || currentPhase === `intro`">
     <a href="https://github.com/emrergin" target="_blank">Emre Ergin</a>
     tarafından yapılmıştır.
   </footer>
@@ -132,12 +135,10 @@ export default {
   },
   beforeMount() {
     window.addEventListener("beforeunload", this.preventNav);
+    this.treatments=this.nextTreatment[Math.floor(Math.random()*this.nextTreatment.length)];
   },
   beforeUnmount() {
     window.removeEventListener("beforeunload", this.preventNav);
-  },
-  onMounted() {
-    this.treatments=this.nextTreatment[Math.floor(Math.random()*this.nextTreatment.length)];
   },
   methods: {
     preventNav(event) {
@@ -161,6 +162,7 @@ export default {
 
   display: flex;
   flex-direction: column;
+  justify-content:center;
   padding: 0px;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="tutorialKutusu" @click="nextStep">
+  <div class="tutorialKutusu">
     <div class="sutun1">
       <transition-group tag="div" name="tutorial" class="tutorialText">
         <p :key="1" v-if="step > 0">
@@ -169,8 +169,12 @@ export default {
     };
   },
   emits: ["end"],
+  mounted: function () {
+    window.addEventListener('click', this.nextStep);
+  },
   beforeUnmount(){
     document.querySelectorAll('.riskBoru').forEach(e => e.remove());
+    window.removeEventListener('click', this.nextStep);
   },
   methods: {
     nextStep() {

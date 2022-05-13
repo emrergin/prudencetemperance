@@ -1,5 +1,5 @@
 <template>
-  <div class="tutorialKutusu" @click="nextStep">
+  <div class="tutorialKutusu">
     <div class="sutun1">
       <transition-group tag="div" name="tutorial" class="tutorialText">
         <p :key="5" v-if="step > 0">
@@ -168,6 +168,12 @@ export default {
     };
   },
   emits: ["end"],
+  mounted: function () {
+    window.addEventListener('click', this.nextStep);
+  },
+  beforeUnmount(){
+    window.removeEventListener('click', this.nextStep);
+  },
   methods: {
     nextStep() {
       if (

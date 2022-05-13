@@ -103,27 +103,10 @@
   <div v-if="oyunSonu" class="oyunKutusu">
     <p>Oyunu tamamladınız. Toplam kazancınız: {{ totalRevenue - totalLoss }}</p>
     <button @click="$emit('end', true)" class="stepButton">
-      Diğer Oyuna Geç!
+      <span v-if="lastTreatment">Verileri Gör</span>
+      <span v-else>Diğer Oyuna Geç!</span>
     </button>
   </div>
-  <!-- <div>
-    <p>Toplam kazancınız: {{ store.kazanc }}</p>
-    <p>İsim: {{ store.isim }}</p>
-    <table>
-      <tr>
-        <th>Deney</th>
-        <th>Karar Süresi (ms)</th>
-        <th>Değerler</th>
-        <th>Seçim</th>
-      </tr>
-      <tr v-for="veriSatiri in store.veriler" :key="veriSatiri[3]">
-        <td>{{ veriSatiri[0] }}</td>
-        <td>{{ veriSatiri[1] }}</td>
-        <td>{{ veriSatiri[2] }}</td>
-        <td>{{ veriSatiri[3] }}</td>
-      </tr>
-    </table>
-  </div> -->
 </template>
 
 <script setup>
@@ -137,7 +120,13 @@ import { defineEmits as defineEmits } from "@vue/runtime-dom";
 
 defineEmits(["end"]);
 // eslint-disable-next-line
-const props = defineProps(["payOffs"]);
+const props = defineProps({
+  payOffs: undefined,
+  lastTreatment:{
+    type:Boolean,
+    default:false
+    }
+  });
 // eslint-disable-next-line
 const totalRounds = props.payOffs.length;
 
@@ -184,8 +173,10 @@ function siradakiTurE() {
 }
 
 function convertNumbertoString(number) {
+  if (number===0) {return `${number}`}
   return number > 0 ? `+` + number : `-` + Math.abs(number);
 }
+
 </script>
 
 <style>

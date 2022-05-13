@@ -1,5 +1,5 @@
 <template>
-  <div class="tutorialKutusu" @click="nextStep">
+  <div class="tutorialKutusu">
     <div class="sutun1">
       <transition-group tag="div" name="tutorial" class="tutorialText">
         <p :key="1" v-if="step > 0">
@@ -18,8 +18,7 @@
           Alttaki borulardan birine tıklayın ve onu seçtiğiniz yere sürükleyin.
         </p>
         <p :key="3" v-if="step > 5">
-          Şimdi diğer boruyu <span v-if="secimler[1]">A veya D</span> 
-          <span v-if="secimler[0]">C veya B</span>'ye yerleştirin.
+          Şimdi diğer boruyu {{remainingPlaces}}'ye yerleştirin.
         </p>
         <p :key="4" v-if="step > 6">Şimdi, topa tıklayın.</p>
 
@@ -216,9 +215,16 @@ export default {
       secimler: [null, null, null, null],
       zarlar: [],
       currentDroppable: null,
+      remainingPlaces: ``
     };
   },
   emits: ["end"],
+  mounted: function () {
+    window.addEventListener('click', this.nextStep);
+  },
+  beforeUnmount(){
+    window.removeEventListener('click', this.nextStep);
+  },
   methods: {
     nextStep() {
       if (
@@ -233,6 +239,14 @@ export default {
       if (this.step === 9) {
         this.hareket2();
       }
+      if (this.step===6){
+        if (this.secimler[1]){
+          this.remainingPlaces="A'ya veya D";
+        }
+        else{
+          this.remainingPlaces="C'ye veya B";
+        } 
+      } 
     },
     boruTasi(e) {
       if (this.step !== 5 && this.step !== 6) {
@@ -551,7 +565,7 @@ export default {
       }
       sonucMetin += `=` + sonucSayi;
       return sonucMetin;
-    },
+    }
   },
 };
 </script>
