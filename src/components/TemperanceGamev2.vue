@@ -13,6 +13,7 @@
         src="../assets/soccer_ball.svg"
         oncontextmenu="return false"
         @click="hareketE($event)"
+        :class="{ clickReminder: (secimler.filter((a) => a).length === 2 && currentRound===0  && asama===`baslangic`) }"
       />
       <div id="buyukEtiketler">
         <div id="solBuyukEtiket" class="buyukEtiket etiket soletiket">
@@ -103,7 +104,7 @@
   <div v-if="oyunSonu" class="oyunKutusu">
     <p>Oyunu tamamladınız. Toplam kazancınız: {{ totalRevenue - totalLoss }}</p>
     <button @click="$emit('end', true)" class="stepButton">
-      <span v-if="lastTreatment">Verileri Gör</span>
+      <span v-if="lastTreatment">Deneyi Bitir</span>
       <span v-else>Diğer Oyuna Geç!</span>
     </button>
   </div>

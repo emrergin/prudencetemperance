@@ -13,7 +13,10 @@
         src="../assets/soccer_ball.svg"
         oncontextmenu="return false"
         @click="hareketE($event)"
+        :class="{ clickReminder: (secim && currentRound===0 && asama===`baslangic`) }"
       />
+              <!-- :style=" (secim && currentRound===0 && asama===`baslangic`) ? 
+        'filter: drop-shadow(0 0 0.5rem turquoise); outline: 2px solid turquoise;' : '' " -->
       <img id="girisBoru" src="../assets/kucukboru3.svg" />
       <div id="inputlar">
         <div
@@ -86,7 +89,7 @@
   <div v-if="oyunSonu" class="oyunKutusu">
     <p>Oyunu tamamladınız. Toplam kazancınız: {{ totalRevenue - totalLoss }}</p>
     <button @click="$emit('end', true)" class="stepButton">
-      <span v-if="lastTreatment">Verileri Gör</span>
+      <span v-if="lastTreatment">Deneyi Bitir</span>
       <span v-else>Diğer Oyuna Geç!</span>
     </button>
   </div>
@@ -149,7 +152,7 @@ function siradakiTurE() {
 }
 
 function convertNumbertoString(number) {
-  if (number===0) {return `${number}`}
+  if (number===0) {return ` `+number}
   return number > 0 ? `+` + number : `-` + Math.abs(number);
 }
 </script>
@@ -159,3 +162,13 @@ function convertNumbertoString(number) {
   align-items: center;
 }
 </style>
+
+<style>
+.clickReminder{
+  filter:drop-shadow(0 0 0.5rem turquoise); 
+  border: 2px solid turquoise;
+  border-radius:50%;
+  margin:-2px;
+}
+</style>
+

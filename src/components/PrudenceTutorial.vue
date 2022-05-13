@@ -354,9 +354,10 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   margin: 0px;
-  min-height: 440px;
-  justify-content: space-between;
+  min-height: 568px;
+  justify-content: space-around;
   padding: 20px;
+  padding-top:8ch;
 }
 
 .tutorial-enter-from {
@@ -382,20 +383,19 @@ export default {
   text-align: center;
 }
 
-.sutun1,
-.sutun2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .sutun1 {
-  width: 66%;
+  padding-left:10ch;
+  padding-right:10ch;
+  inline-size:60ch;
+  max-width: 66%;
 }
 
 .sutun2 {
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  display: flex;
   scale: 0.8;
 }
 .droppable.kirmiziKenarli,

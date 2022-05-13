@@ -5,7 +5,7 @@
    tamEkrandanCik()"
    class="stepButton"
   >
-    Deneyi Bitir
+    Verileri Gör
   </button>
 </div>
 <div v-else>

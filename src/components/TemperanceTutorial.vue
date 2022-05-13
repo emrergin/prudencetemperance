@@ -589,4 +589,8 @@ export default {
 .kirmiziKenarli {
   border: 10px solid red;
 }
+
+.tutorialKutusu {
+  min-height: 610px;
+}
 </style>
