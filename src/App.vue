@@ -24,7 +24,7 @@
   <div v-else>
     <IntroScreen
       v-if="currentPhase === `intro`"
-      @end="currentPhase = `pruTut`"
+      @end="currentPhase = treatments[`intro`]"
     />
     <PrudenceTutorial
       v-if="currentPhase === `pruTut`"
@@ -33,7 +33,7 @@
     <PrudenceGame
     :payOffs="pruPayOffs"
       v-if="currentPhase === `pruGam`"
-      @end="currentPhase = `temTut`"
+      @end="currentPhase = treatments[`pruGam`]"
     />
     <TemperanceTutorial
       v-if="currentPhase === `temTut`"
@@ -42,7 +42,7 @@
     <TemperanceGame
     :payOffs="temPayOffs"
       v-if="currentPhase === `temGam`"
-      @end="currentPhase = `rskTut`"
+      @end="currentPhase = treatments[`temGam`]"
     />
     <RiskTutorial
       v-if="currentPhase === `rskTut`"
@@ -51,7 +51,7 @@
     <RiskGame 
     :payOffs="rskPayOffs"
     v-if="currentPhase === `rskGam`"
-     @end="currentPhase = `son`" />
+     @end="currentPhase = treatments[`rskGam`]" />
     <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true"/>
   </div>
 
@@ -88,9 +88,10 @@ export default {
   data() {
     return {
       currentPhase: `intro`,
-      mode: `demod`,
+      mode: `notDemo`,
       store,
       deneyBitisi: false,
+      treatments: null,
       pruPayOffs: [
         [9, 6, 2, -2],
         [9, 6, 1, -1],
@@ -99,19 +100,34 @@ export default {
         [7, 4, 2, -2],
       ],
       rskPayOffs: [
-        [10, 8, 15, 3],
-        [5, 3, 7, 1],
-        [9, 12, 10, 10],
-        [2, 4, 1, 5],
-        [7, 1, 4, 4],
+        [1, 3, 0, 10],
+        [2, 4, 0, 10],
+        [3, 5, 0, 10],
+        [4, 6, 0, 10],
+        [5, 7, 0, 10],
       ],
       temPayOffs: [
-        [9, 9, 2, -2, 3, -3],
-        [9, 9, 1, -1, 4, -4],
-        [6, 6, 4, -4, 1, -1],
-        [14, 14, 3, -3, 10, -10],
-        [4, 4, 2, -2, 1, -1],
+        [9, 9, 3, -3, 3, -3],
+        [9, 9, 3, -3, 1, -1],
+        [9, 9, 5, -5, 3, -3],
+        [3, 3, 1, -1, 1, -1],
+        [7, 7, 3, -3, 3, -3],
       ],
+      nextTreatment:[
+          {
+            intro: `rskTut`,
+            rskGam: `pruTut`,
+            pruGam: `temTut`,
+            temGam: `son`
+          }
+          ,
+          {
+            intro: `rskTut`,
+            rskGam: `temTut`,
+            temGam: `pruTut`,
+            pruGam: `son`
+          }
+      ]
     };
   },
   beforeMount() {
@@ -119,6 +135,9 @@ export default {
   },
   beforeUnmount() {
     window.removeEventListener("beforeunload", this.preventNav);
+  },
+  onMounted() {
+    this.treatments=this.nextTreatment[Math.floor(Math.random()*this.nextTreatment.length)];
   },
   methods: {
     preventNav(event) {

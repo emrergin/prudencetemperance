@@ -18,8 +18,8 @@
           Alttaki borulardan birine tıklayın ve onu seçtiğiniz yere sürükleyin.
         </p>
         <p :key="3" v-if="step > 5">
-          Şimdi diğer boruyu yerleştirin. Bunu ilk borunun altına da
-          koyabilirsiniz.
+          Şimdi diğer boruyu <span v-if="secimler[1]">A veya D</span> 
+          <span v-if="secimler[0]">C veya B</span>'ye yerleştirin.
         </p>
         <p :key="4" v-if="step > 6">Şimdi, topa tıklayın.</p>
 
