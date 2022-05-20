@@ -70,7 +70,11 @@
         </div>
         <img src="../assets/soccer_ball.svg" style="align-self: flex-end" />
       </div>
-    <div id="buyukBoru">
+    <div id="buyukBoru"
+        src="../assets/buyukboru.svg"
+        class="beliren"
+        :class="[{ odakli: step > 2 }, { odaksiz: step <= 2 }]"
+    >
       <div
         id="buyukEtiketler"
         class="beliren"
@@ -83,10 +87,7 @@
         <div id="solBuyukEtiket" class="buyukEtiket etiket">+9</div>
         <div id="sagBuyukEtiket" class="buyukEtiket etiket">+9</div>
       </div>
-      <img
-        src="../assets/buyukboru.svg"
-        class="beliren"
-        :class="[{ odakli: step > 2 }, { odaksiz: step <= 2 }]"
+      <img src="../assets/buyukboru.svg"
       />
     </div>
       <div class="buyukInputlar">
@@ -239,14 +240,6 @@ export default {
       if (this.step === 9) {
         this.hareket2();
       }
-      if (this.step===6){
-        if (this.secimler[1]){
-          this.remainingPlaces="A'ya veya D";
-        }
-        else{
-          this.remainingPlaces="C'ye veya B";
-        } 
-      } 
     },
     boruTasi(e) {
       if (this.step !== 5 && this.step !== 6) {
@@ -324,6 +317,15 @@ export default {
           kucukBoru.style.top = "0px";
           kucukBoru.style.position = `relative`;
           vm.step++;
+
+          if (vm.remainingPlaces===``){
+            if (vm.secimler[1]){
+              vm.remainingPlaces="A'ya veya D";
+            }
+            else{
+              vm.remainingPlaces="C'ye veya B";
+            } 
+          } 
         }
         kucukBoru.onmouseup = null;
       };

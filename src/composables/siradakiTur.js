@@ -38,17 +38,17 @@ function siradakiTur(
     oyunSonu.value = true;
     return;
   }
+
+  const etiketler = document.querySelectorAll(".etiket");
+  etiketler.forEach((etiket) => etiket.classList.remove(`yaklasilmis`));
+
   let futbolTopu = document.getElementById("futbolTopu");
   futbolTopu.getAnimations().forEach((anim) => {
     anim.cancel();
   });
 
-
-  const etiketler = document.querySelectorAll(".etiket");
-  etiketler.forEach((etiket) => etiket.classList.remove(`yaklasilmis`));
-
-  document.getElementById(`fakeBall`).remove();
-  futbolTopu.style.position = "static";
+  document.getElementById(`fakeBall`).remove();    
+  futbolTopu.style.position = "static"; 
 
   baslangic.value = new Date();
   asama.value = `baslangic`;

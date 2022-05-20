@@ -78,7 +78,7 @@
         />
       </div>
       <div id="buyukBoru"
-      class="beliren"
+        class="beliren"
           :class="[
             { kirmiziKenarli: step === 3 },
             { odakli: step > 2 },
@@ -87,6 +87,7 @@
         >
         <div
           id="buyukEtiketler"
+          class="beliren"
           :class="[
             { kirmiziKenarli: step === 10 },
             { odakli: step > 9 },
@@ -139,6 +140,7 @@
       >
         <div
           id="kucukEtiketler"
+          class="beliren"
           :class="[
             { kirmiziKenarli: step === 10 },
             { odakli: step > 9 },
@@ -385,7 +387,7 @@ export default {
 .sutun1 {
   padding-left:10ch;
   padding-right:10ch;
-  inline-size:60ch;
+  inline-size:70ch;
   max-width: 66%;
 }
 
