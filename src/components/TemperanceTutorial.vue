@@ -591,6 +591,6 @@ export default {
 }
 
 .tutorialKutusu {
-  min-height: 610px;
+  min-height: 618px;
 }
 </style>

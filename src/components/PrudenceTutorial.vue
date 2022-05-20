@@ -358,6 +358,7 @@ export default {
   justify-content: space-around;
   padding: 20px;
   padding-top:8ch;
+  position: relative;
 }
 
 .tutorial-enter-from {
