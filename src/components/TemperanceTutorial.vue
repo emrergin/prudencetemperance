@@ -70,7 +70,7 @@
         </div>
         <img src="../assets/soccer_ball.svg" style="align-self: flex-end" />
       </div>
-
+    <div id="buyukBoru">
       <div
         id="buyukEtiketler"
         class="beliren"
@@ -84,11 +84,11 @@
         <div id="sagBuyukEtiket" class="buyukEtiket etiket">+9</div>
       </div>
       <img
-        id="buyukBoru"
         src="../assets/buyukboru.svg"
         class="beliren"
         :class="[{ odakli: step > 2 }, { odaksiz: step <= 2 }]"
       />
+    </div>
       <div class="buyukInputlar">
         <div
           class="droppable2 beliren"

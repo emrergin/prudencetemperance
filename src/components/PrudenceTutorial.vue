@@ -77,29 +77,29 @@
           class="beliren"
         />
       </div>
-
-      <div
-        id="buyukEtiketler"
-        class="beliren"
-        :class="[
-          { kirmiziKenarli: step === 10 },
-          { odakli: step > 9 },
-          { odaksiz: step <= 9 },
-        ]"
-      >
-        <div id="solBuyukEtiket" class="buyukEtiket etiket">+7</div>
-        <div id="sagBuyukEtiket" class="buyukEtiket etiket">+4</div>
+      <div id="buyukBoru"
+      class="beliren"
+          :class="[
+            { kirmiziKenarli: step === 3 },
+            { odakli: step > 2 },
+            { odaksiz: step <= 2 },
+          ]"
+        >
+        <div
+          id="buyukEtiketler"
+          :class="[
+            { kirmiziKenarli: step === 10 },
+            { odakli: step > 9 },
+            { odaksiz: step <= 9 },
+          ]"
+        >
+          <div id="solBuyukEtiket" class="buyukEtiket etiket">+7</div>
+          <div id="sagBuyukEtiket" class="buyukEtiket etiket">+4</div>
+        </div>
+        <img        
+          src="../assets/buyukboru.svg"
+        />
       </div>
-      <img
-        id="buyukBoru"
-        src="../assets/buyukboru.svg"
-        class="beliren"
-        :class="[
-          { kirmiziKenarli: step === 3 },
-          { odakli: step > 2 },
-          { odaksiz: step <= 2 },
-        ]"
-      />
       <div id="inputlar">
         <div
           class="droppable beliren"
@@ -130,10 +130,15 @@
         oncontextmenu="return false"
         @mousedown.left="boruTasi($event)"
         ondragstart="return false"
+        class="draggable beliren"
+        :class="[
+          { kirmiziKenarli: step === 2 },
+          { odakli: step > 1 },
+          { odaksiz: step <= 1 },
+        ]"        
       >
         <div
           id="kucukEtiketler"
-          class="beliren"
           :class="[
             { kirmiziKenarli: step === 10 },
             { odakli: step > 9 },
@@ -145,13 +150,6 @@
         </div>
         <img
           src="../assets/kucukboru.svg"
-          class="draggable beliren"
-          oncontextmenu="return false"
-          :class="[
-            { kirmiziKenarli: step === 2 },
-            { odakli: step > 1 },
-            { odaksiz: step <= 1 },
-          ]"
         />
       </div>
     </div>
@@ -358,7 +356,6 @@ export default {
   justify-content: space-around;
   padding: 20px;
   padding-top:8ch;
-  position: relative;
 }
 
 .tutorial-enter-from {
@@ -435,46 +432,61 @@ export default {
 }
 .asagiHareketli0PT {
   position: absolute;
-  animation: PTtoDown0 1000ms linear 1;
+  -webkit-animation:PTtoDown0 1000ms linear 1;
+  animation: PTtoDown0 1000ms linear 1;  
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli1PT {
   position: absolute;
-  animation: PTtoDown1 4000ms linear 1;
+  -webkit-animation: PTtoDown1 4000ms linear 1;
+  animation: PTtoDown1 4000ms linear 1;  
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli2PT {
   position: absolute;
-  animation: PTtoDown2 4000ms linear 1;
+  -webkit-animation: PTtoDown2 4000ms linear 1;
+  animation: PTtoDown2 4000ms linear 1;  
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli3PT {
   position: absolute;
-  animation: PTtoDown3 3000ms linear 1;
+  -webkit-animation: PTtoDown3 3000ms linear 1;
+  animation: PTtoDown3 3000ms linear 1;  
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli4PT {
   position: absolute;
-  animation: PTtoDown4 4000ms linear 1;
+  -webkit-animation: PTtoDown4 4000ms linear 1;
+  animation: PTtoDown4 4000ms linear 1;  
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli5PT {
   position: absolute;
-  animation: PTtoDown5 4000ms linear 1;
+  -webkit-animation: PTtoDown5 4000ms linear 1;
+  animation: PTtoDown5 4000ms linear 1;  
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli6PT {
   position: absolute;
-  animation: PTtoDown6 3000ms linear 1;
+  -webkit-animation: PTtoDown6 3000ms linear 1;
+  animation: PTtoDown6 3000ms linear 1;  
   animation-fill-mode: forwards;
 }
 
+@-webkit-keyframes PTtoDown0 {
+  0% {
+    transform: translate(0px, 5px) rotate(0deg);
+  }
+  100% {
+    transform: translate(0px, 62px) rotate(0deg);
+  }
+}
 @keyframes PTtoDown0 {
   0% {
     transform: translate(0px, 5px) rotate(0deg);
@@ -509,7 +521,149 @@ export default {
     transform: translate(230px, 220px) rotate(732deg);
   }
 }
+@-webkit-keyframes PTtoDown1 {
+  0% {
+    transform: translate(0px, 62px) rotate(0deg);
+  }
+  33% {
+    transform: translate(120px, 62px) rotate(360deg);
+  }
+  42% {
+    transform: translate(145px, 78px) rotate(432deg);
+  }
+  50% {
+    transform: translate(152.5px, 110px) rotate(454.5deg);
+  }
+  67% {
+    transform: translate(152.5px, 155px) rotate(454.5deg);
+  }
+  83% {
+    transform: translate(212.5px, 155px) rotate(634.5deg);
+  }
+  98% {
+    transform: translate(230px, 200px) rotate(732deg);
+  }
+  100% {
+    transform: translate(230px, 220px) rotate(732deg);
+  }
+}
 
+@-webkit-keyframes PTtoDown2 {
+  0% {
+    transform: translate(0px, 62px) rotate(0deg);
+  }
+  33% {
+    transform: translate(120px, 62px) rotate(360deg);
+  }
+  42% {
+    transform: translate(145px, 78px) rotate(432deg);
+  }
+  50% {
+    transform: translate(152.5px, 110px) rotate(454.5deg);
+  }
+  67% {
+    transform: translate(152.5px, 155px) rotate(454.5deg);
+  }
+  83% {
+    transform: translate(92.5px, 155px) rotate(274.5deg);
+  }
+  98% {
+    transform: translate(75px, 200px) rotate(327deg);
+  }
+  100% {
+    transform: translate(75px, 220px) rotate(327deg);
+  }
+}
+
+@-webkit-keyframes PTtoDown3 {
+  0% {
+    transform: translate(0px, 62px) rotate(0deg);
+  }
+  50% {
+    transform: translate(120px, 62px) rotate(360deg);
+  }
+  62% {
+    transform: translate(145px, 78px) rotate(432deg);
+  }
+  75% {
+    transform: translate(152.5px, 110px) rotate(454.5deg);
+  }
+  100% {
+    transform: translate(152.5px, 155px) rotate(454.5deg);
+  }
+}
+
+@-webkit-keyframes PTtoDown4 {
+  0% {
+    transform: translate(0px, 62px) rotate(360deg);
+  }
+  33% {
+    transform: translate(-120px, 62px) rotate(0deg);
+  }
+  42% {
+    transform: translate(-145px, 78px) rotate(-75deg);
+  }
+  50% {
+    transform: translate(-152.5px, 110px) rotate(-82.5deg);
+  }
+  67% {
+    transform: translate(-152.5px, 155px) rotate(-82.5deg);
+  }
+  83% {
+    transform: translate(-212.5px, 155px) rotate(-262.5deg);
+  }
+  98% {
+    transform: translate(-230px, 200px) rotate(-315deg);
+  }
+  100% {
+    transform: translate(-230px, 220px) rotate(-315deg);
+  }
+}
+
+@-webkit-keyframes PTtoDown5 {
+  0% {
+    transform: translate(0px, 62px) rotate(360deg);
+  }
+  33% {
+    transform: translate(-120px, 62px) rotate(0deg);
+  }
+  42% {
+    transform: translate(-145px, 78px) rotate(-75deg);
+  }
+  50% {
+    transform: translate(-152.5px, 110px) rotate(-82.5deg);
+  }
+  67% {
+    transform: translate(-152.5px, 155px) rotate(-82.5deg);
+  }
+  83% {
+    transform: translate(-92.5px, 155px) rotate(97.5deg);
+  }
+  98% {
+    transform: translate(-75px, 200px) rotate(150deg);
+  }
+  100% {
+    transform: translate(-75px, 220px) rotate(150deg);
+  }
+}
+
+@-webkit-keyframes PTtoDown6 {
+  0% {
+    transform: translate(0px, 62px) rotate(360deg);
+  }
+  50% {
+    transform: translate(-120px, 62px) rotate(0deg);
+  }
+  62% {
+    transform: translate(-145px, 78px) rotate(-75deg);
+  }
+  75% {
+    transform: translate(-152.5px, 110px) rotate(-82.5deg);
+  }
+  100% {
+    transform: translate(-152.5px, 155px) rotate(-82.5deg);
+  }
+}
 @keyframes PTtoDown2 {
   0% {
     transform: translate(0px, 62px) rotate(0deg);

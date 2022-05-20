@@ -90,7 +90,7 @@ export default {
   },
   data() {
     return {
-      currentPhase: `intro`,
+      currentPhase: `pruTut`,
       mode: `notDemo`,
       store,
       deneyBitisi: false,

@@ -15,15 +15,17 @@
         @click="hareketE($event)"
         :class="{ clickReminder: (secimler.filter((a) => a).length === 2 && currentRound===0  && asama===`baslangic`) }"
       />
-      <div id="buyukEtiketler">
-        <div id="solBuyukEtiket" class="buyukEtiket etiket soletiket">
-          {{ convertNumbertoString(payOffs[currentRound][0]) }}
+      <div id="buyukBoru">
+        <div id="buyukEtiketler">
+          <div id="solBuyukEtiket" class="buyukEtiket etiket soletiket">
+            {{ convertNumbertoString(payOffs[currentRound][0]) }}
+          </div>
+          <div id="sagBuyukEtiket" class="buyukEtiket etiket sagetiket">
+            {{ convertNumbertoString(payOffs[currentRound][1]) }}
+          </div>
         </div>
-        <div id="sagBuyukEtiket" class="buyukEtiket etiket sagetiket">
-          {{ convertNumbertoString(payOffs[currentRound][1]) }}
-        </div>
+        <img src="../assets/buyukboru.svg" />
       </div>
-      <img id="buyukBoru" src="../assets/buyukboru.svg" />
       <div class="buyukInputlar">
         <div class="droppable2" id="i0" :class="{ gorulmez: secimler[0] || asama!== `baslangic`}">
           A

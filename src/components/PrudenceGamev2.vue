@@ -15,15 +15,17 @@
         @click="hareketE($event)"
         :class="{ clickReminder: (secim && currentRound===0 && asama===`baslangic`) }"
       />
-      <div id="buyukEtiketler">
-        <div id="solBuyukEtiket" class="buyukEtiket etiket soletiket">
-          {{ convertNumbertoString(payOffs[currentRound][0]) }}
+      <div id="buyukBoru">
+        <div id="buyukEtiketler">
+          <div id="solBuyukEtiket" class="buyukEtiket etiket soletiket">
+            {{ convertNumbertoString(payOffs[currentRound][0]) }}
+          </div>
+          <div id="sagBuyukEtiket" class="buyukEtiket etiket sagetiket">
+            {{ convertNumbertoString(payOffs[currentRound][1]) }}
+          </div>
         </div>
-        <div id="sagBuyukEtiket" class="buyukEtiket etiket sagetiket">
-          {{ convertNumbertoString(payOffs[currentRound][1]) }}
-        </div>
+        <img src="../assets/buyukboru.svg" />
       </div>
-      <img id="buyukBoru" src="../assets/buyukboru.svg" />
       <div id="inputlar">
         <div
           class="droppable"
@@ -167,7 +169,9 @@ function convertNumbertoString(number) {
   position: absolute;
   display: flex;
   gap: 200px;
-  top: 28px;
+  justify-content: space-evenly;
+  width:100%;
+  /* top: 28px; */
 }
 
 .buyukEtiket {
@@ -175,12 +179,17 @@ function convertNumbertoString(number) {
   border-radius: 8px;
   padding: 2px;
 }
-
 #kucukBoru,
 #kucukBoru1,
-#kucukBoru2 {
+#kucukBoru2,
+#buyukBoru {
   position: relative;
 }
+
+img{
+  display: block;
+}
+
 #kucukEtiketler,
 #kucukEtiketler1,
 #kucukEtiketler2 {
@@ -232,6 +241,6 @@ function convertNumbertoString(number) {
 .stepButton {
   padding: 5px;
   font-size: 1.5em;
-  margin: 50px auto 20px auto;
+  margin: 60px auto 20px auto;
 }
 </style>

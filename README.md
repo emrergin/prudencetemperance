@@ -39,6 +39,7 @@ Some introductory readings for the concepts.
 - For multiple components referencing the same functions, Composition API is a better fit.
 - There is no universally consistent way to send data if the user just prefers to exit.
     - https://volument.com/blog/sendbeacon-is-broken
+- An image is rendered inline by default, thus have extra space below it to account for descenders.
     
 
 ## Thanks
