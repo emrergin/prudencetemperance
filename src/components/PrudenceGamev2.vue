@@ -235,6 +235,9 @@ img{
 
 #futbolTopu {
   cursor: pointer;
+}
+
+#fakeBall{
   z-index: 4;
 }
 

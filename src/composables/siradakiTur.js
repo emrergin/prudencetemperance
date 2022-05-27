@@ -42,13 +42,9 @@ function siradakiTur(
   const etiketler = document.querySelectorAll(".etiket");
   etiketler.forEach((etiket) => etiket.classList.remove(`yaklasilmis`));
 
-  let futbolTopu = document.getElementById("futbolTopu");
-  futbolTopu.getAnimations().forEach((anim) => {
-    anim.cancel();
-  });
-
   document.getElementById(`fakeBall`).remove();    
-  futbolTopu.style.position = "static"; 
+  document.getElementById("futbolTopu").style.visibility = "visible";
+  
 
   baslangic.value = new Date();
   asama.value = `baslangic`;

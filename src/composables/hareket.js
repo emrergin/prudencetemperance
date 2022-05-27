@@ -16,14 +16,15 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
   let futbolTopu = e.target;
   let fakeBall = futbolTopu.cloneNode(true);
   fakeBall.id = `fakeBall`;
-  fakeBall.style.visibility = "hidden";
+  fakeBall.classList.remove(`clickReminder`);
+  futbolTopu.style.visibility = "hidden";
   futbolTopu.after(fakeBall);
-  futbolTopu.style.position = "absolute";
+  fakeBall.style.position = "absolute";
 
   Asagi();
 
   function Asagi() {
-    futbolTopu
+    fakeBall
       .animate(
         [
           { transform: `translate(0px,5px)` },
@@ -40,7 +41,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
   }
 
   function AsagiR() {
-    futbolTopu
+    fakeBall
       .animate(
         [
           { transform: `translate(0px,0px)` },
@@ -57,7 +58,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
   }
 
   function Sol1() {
-    futbolTopu
+    fakeBall
       .animate(
         [
           { transform: `translate(0px,0px) rotate(360deg)`, offset: 0 },
@@ -79,7 +80,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
     setTimeout(siradakiAnimasyon, 3000);
   }
   function Sag1() {
-    futbolTopu
+    fakeBall
       .animate(
         [
           { transform: `translate(0px,0px) rotate(0deg)`, offset: 0 },
@@ -102,7 +103,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
   }
 
   function Sol2PR() {
-    futbolTopu
+    fakeBall
       .animate(
         [
           { transform: `translate(0px,0px) rotate(0deg)`, offset: 0 },
@@ -121,7 +122,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
     setTimeout(siradakiAnimasyon, 2000);
   }
   function Sag2PR() {
-    futbolTopu
+    fakeBall
       .animate(
         [
           { transform: `translate(0px,0px) rotate(0deg)`, offset: 0 },
@@ -141,7 +142,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
   }
 
   function Sol2T() {
-    futbolTopu
+    fakeBall
       .animate(
         [
           { transform: `translate(0px,0px) rotate(0deg)`, offset: 0 },
@@ -178,7 +179,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
     setTimeout(siradakiAnimasyon, 4000);
   }
   function Sag2T() {
-    futbolTopu
+    fakeBall
       .animate(
         [
           { transform: `translate(0px,0px) rotate(0deg)`, offset: 0 },
@@ -213,7 +214,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
   }
 
   function siradakiAnimasyon() {
-    let rect = futbolTopu.getBoundingClientRect();
+    let rect = fakeBall.getBoundingClientRect();
     let elemBelow = document.elementFromPoint(
       rect.left - 5,
       (rect.top + rect.bottom) / 2

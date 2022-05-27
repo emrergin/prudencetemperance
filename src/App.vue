@@ -1,4 +1,5 @@
 <template>
+<!-- {{treatments}} -->
   <div v-if="mode === `demo`">
     <IntroScreen
       v-if="currentPhase === `intro`"

@@ -40,6 +40,7 @@ Some introductory readings for the concepts.
 - There is no universally consistent way to send data if the user just prefers to exit.
     - https://volument.com/blog/sendbeacon-is-broken
 - An image is rendered inline by default, thus have extra space below it to account for descenders.
+- Persisting animations and Vue components don't behave well together.
     
 
 ## Thanks
