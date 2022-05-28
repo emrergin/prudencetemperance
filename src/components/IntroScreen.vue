@@ -4,8 +4,7 @@
 
   <ul class="girisMetni">
     <li>
-      Bu deney, Doç. Dr. Mehmet Yiğit Gürdal, Dr. Öğr. Üyesi Emre Ergin ve ...
-      'in risk tutumları hakkındaki bir çalışmasına yöneliktir.
+      Bu deney, Mehmet Yiğit Gürdal ve Emre Ergin'in risk tutumları hakkındaki bir çalışmasına yöneliktir.
     </li>
     <li>
       Çalışmamız için sizden, üç adet oyunu alacağınız puanları hesaba katarak
