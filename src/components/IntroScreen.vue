@@ -1,37 +1,43 @@
 <template>
-  <p>Lütfen isminizi ve soyisminizi giriniz.</p>
-  <input v-model="store.isim" />
-
   <ul class="girisMetni">
     <li>
-      Bu deney, Mehmet Yiğit Gürdal ve Emre Ergin'in risk tutumları hakkındaki bir çalışmasına yöneliktir.
+      Bu deney, <strong>Mehmet Yiğit Gürdal</strong> ve <strong>Emre Ergin</strong>'in risk tutumları hakkındaki bir çalışmasına yöneliktir.
     </li>
     <li>
-      Çalışmamız için sizden, üç adet oyunu alacağınız puanları hesaba katarak
-      oynamanızı bekliyoruz.
+      Deneye <strong>Windows</strong> veya <strong>Linux</strong> kullanan bir cihazla katılmalısınız. Yani, mobil cihazlar ve <i>iOS</i> işletim sistemi deneye uygun değildir.
     </li>
     <li>
-      Bu oyunlarda alacağınız kararlar, en sonunda ne kadar puan/para
-      kazanacağınızı etkileyecek.
+      Lütfen kullandığınız tarayıcının güncel olduğuna emin olun. Deney, <i>Internet Explorer</i> üzerinden çalışmamaktadır.
     </li>
     <li>
       Oyunlarda bir ses bileşeni bulunmamaktadır. Bütün oyunlarda fare
-      kullanımınız beklenmektedir.
+      kullanmanız beklenmektedir.
+    </li>
+    <li>
+      Çalışmamız için sizden üç adet oyunu, alacağınız puanları hesaba katarak
+      oynamanızı bekliyoruz.
+    </li>
+    <li>
+      Bu oyunlarda alacağınız kararlar, en sonunda ne kadar puan
+      kazanacağınızı etkileyecek.
     </li>
     <li>
       Her oyunun öncesinde o oyunu anlatan bir kısım bulunmaktadır. Bu
-      kısımlarda yönergenin devamını okumak için, metnin istediği şeyi yapmanız,
-      yahut sol tıklamanız bekleniyor.
+      kısımlarda yönergenin devamını okumak için metnin istediği şeyi yapmanız
+      yahut farenin sol tuşuyla ekrana tıklamanız bekleniyor.
     </li>
     <li>
-      Oyunun herhangi bir aşamasında çıkmakta özgürsünüz. Bu durumda o ana
-      kadarki puanlarınız değerlendirilecek.
+      Oyunun herhangi bir aşamasında çıkmakta özgürsünüz. 
+      Bu durumda o ana kadarki puanlarınız değerlendirilecek.
     </li>
     <li>
       Bulunduğunuz sayfayı değiştirmeniz veya sayfayı yenilemeniz gibi
-      hareketler durumunda deneyden erken ayrılmış sayılacaksınız.
+      durumlarda deneyden erken ayrılmış sayılacaksınız.
     </li>
   </ul>
+
+  <p>Çalışmaya katılmayı kabul ediyorum.</p>
+  <input style="display:block;margin-inline: auto;" v-model="store.isim" placeholder="Ad Soyad"/>
   <button
     v-if="store.isim"
     @click="logData();
@@ -79,6 +85,17 @@
 .girisMetni {
   text-align: left;
   font-size: 1.5rem;
-  width: 1200px;
+  width: 75ch;
+  margin: 1.5rem auto 1rem auto;
+}
+
+.girisMetni>li+li{
+  margin-top:0.5em;
+}
+</style>
+
+<style scoped>
+.stepButton{
+  margin: 1em auto 20px auto;
 }
 </style>
