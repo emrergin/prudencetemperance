@@ -137,6 +137,45 @@ export default {
   beforeMount() {
     window.addEventListener("beforeunload", this.preventNav);
     this.treatments=this.nextTreatment[Math.floor(Math.random()*this.nextTreatment.length)];
+    for (let satir of this.pruPayOffs){
+      if (Math.floor(Math.random() * 2)){
+        let geciciPar=satir[0];
+        satir[0]=satir[1];
+        satir[1]=geciciPar;
+      }
+    }
+    for (let satir of this.rskPayOffs){
+      if (Math.floor(Math.random() * 2)){
+        let geciciPar1=satir[0];
+        let geciciPar2=satir[1];
+        satir[0]=satir[2];
+        satir[1]=satir[3];
+        satir[2]=geciciPar1;
+        satir[3]=geciciPar2;
+      }
+    }
+    for (let satir of this.temPayOffs){
+      if (Math.floor(Math.random() * 2)){
+        let geciciPar1=satir[2];
+        let geciciPar2=satir[3];
+        satir[2]=satir[4];
+        satir[3]=satir[5];
+        satir[4]=geciciPar1;
+        satir[5]=geciciPar2;
+      }
+    }
+    function shuffle(array) {
+      let resArray=array;
+      for (let i = resArray.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [resArray[i], resArray[j]] = [resArray[j], resArray[i]];
+      }
+      return resArray;
+    }  
+    this.pruPayOffs=shuffle(this.pruPayOffs);
+    this.rskPayOffs=shuffle(this.rskPayOffs);
+    this.temPayOffs=shuffle(this.temPayOffs);
+    console.log(this.pruPayOffs,this.rskPayOffs,this.temPayOffs);
   },
   beforeUnmount() {
     window.removeEventListener("beforeunload", this.preventNav);
