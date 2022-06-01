@@ -1,7 +1,11 @@
 <template>
   <ul class="girisMetni">
+
     <li>
-      Bu deney, <strong>Mehmet Yiğit Gürdal</strong> ve <strong>Emre Ergin</strong>'in risk tutumları hakkındaki bir çalışmasına yöneliktir.
+      Hoş geldiniz.
+    </li>
+    <li>
+      Bu deneyi belli durumlarda alınan ekonomik kararları anlamak icin hazırladık.
     </li>
     <li>
       Deneye <strong>Windows</strong> veya <strong>Linux</strong> kullanan bir cihazla katılmalısınız. Yani, mobil cihazlar ve <i>iOS</i> işletim sistemi deneye uygun değildir.
@@ -10,29 +14,17 @@
       Lütfen kullandığınız tarayıcının güncel olduğuna emin olun. Deney, <i>Internet Explorer</i> üzerinden çalışmamaktadır.
     </li>
     <li>
-      Oyunlarda bir ses bileşeni bulunmamaktadır. Bütün oyunlarda fare
-      kullanmanız beklenmektedir.
+      Deneyde her biri 5 tur sürecek 3 oyun bulunuyor. 
+      Her oyunun öncesinde o oyunu anlatan bir yönerge olacak. 
+      Yönergeyi okurken devam etmek için metnin istediği şeyi yapmanız yahut farenin sol tuşuyla ekrana tıklamanız bekleniyor.
     </li>
     <li>
-      Çalışmamız için sizden üç adet oyunu, alacağınız puanları hesaba katarak
-      oynamanızı bekliyoruz.
+      Oyunlarda kazancınızı "puan" cinsinden hesaplayacağız. 
+      Toplam kazancınız oyun boyunca topladığınız puanlara eşittir. 
     </li>
     <li>
-      Bu oyunlarda alacağınız kararlar, en sonunda ne kadar puan
-      kazanacağınızı etkileyecek.
-    </li>
-    <li>
-      Her oyunun öncesinde o oyunu anlatan bir kısım bulunmaktadır. Bu
-      kısımlarda yönergenin devamını okumak için metnin istediği şeyi yapmanız
-      yahut farenin sol tuşuyla ekrana tıklamanız bekleniyor.
-    </li>
-    <li>
-      Oyunun herhangi bir aşamasında çıkmakta özgürsünüz. 
-      Bu durumda o ana kadarki puanlarınız değerlendirilecek.
-    </li>
-    <li>
-      Bulunduğunuz sayfayı değiştirmeniz veya sayfayı yenilemeniz gibi
-      durumlarda deneyden erken ayrılmış sayılacaksınız.
+      Oyunun herhangi bir aşamasında çıkmakta serbestsiniz. 
+      Bu durumda, yahut bulunduğunuz sayfayı değiştirmeniz ve yenilemeniz gibi durumlarda deneyden ayrılmış sayılacaksınız.
     </li>
   </ul>
 
@@ -90,7 +82,7 @@
 }
 
 .girisMetni>li+li{
-  margin-top:0.25em;
+  margin-top:0.75em;
 }
 </style>
 
