@@ -1,23 +1,23 @@
 import { store } from "../store.js";
 
 function veriGuncelle() {
-    const someData = {
-      title: "kisi verileri",
-      kisiVerisi: store.veriler,
-      odeme: store.kazanc,
-      isim: store.isim,
-      _id: store._id
-    };
-    const putMethod = {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json  ; charset=UTF-8",
-      },
-      body: JSON.stringify(someData),
-    };
-    fetch(`https://prudencetemperance.herokuapp.com/api/kisiveri`, putMethod)
+  const someData = {
+    title: "kisi verileri",
+    kisiVerisi: store.veriler,
+    odeme: store.kazanc,
+    isim: store.isim,
+    _id: store._id,
+  };
+  const putMethod = {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json  ; charset=UTF-8",
+    },
+    body: JSON.stringify(someData),
+  };
+  fetch(`https://prudencetemperance.herokuapp.com/api/kisiveri`, putMethod)
     // fetch(`http://localhost:3000/api/kisiveri`, putMethod)
-      .catch((err) => console.log(err));
+    .catch((err) => console.log(err));
 }
 
 export default veriGuncelle;

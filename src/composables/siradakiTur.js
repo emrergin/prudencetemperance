@@ -32,8 +32,6 @@ function siradakiTur(
   const kucukBorular = document.querySelectorAll(`.${boruClass}`);
   kucukBorular.forEach((kucukBoru) => kucukBoru.remove());
 
-
-
   if (currentRound.value >= totalRounds - 1) {
     oyunSonu.value = true;
     return;
@@ -42,9 +40,8 @@ function siradakiTur(
   const etiketler = document.querySelectorAll(".etiket");
   etiketler.forEach((etiket) => etiket.classList.remove(`yaklasilmis`));
 
-  document.getElementById(`fakeBall`).remove();    
+  document.getElementById(`fakeBall`).remove();
   document.getElementById("futbolTopu").style.visibility = "visible";
-  
 
   baslangic.value = new Date();
   asama.value = `baslangic`;

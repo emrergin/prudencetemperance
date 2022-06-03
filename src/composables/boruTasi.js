@@ -82,7 +82,7 @@ function boruTasi(e, dropClass, asama, boruClass, currentDroppable, secimler) {
       } else {
         secimler.value[currentDroppable.value.id.slice(1)] =
           kucukBoru.id.slice(9);
-        currentDroppable.value=null;
+        currentDroppable.value = null;
       }
     }
 

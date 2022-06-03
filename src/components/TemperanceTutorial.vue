@@ -18,7 +18,7 @@
           Alttaki borulardan birine tıklayın ve onu seçtiğiniz yere sürükleyin.
         </p>
         <p :key="3" v-if="step > 5">
-          Şimdi diğer boruyu {{remainingPlaces}}'ye yerleştirin.
+          Şimdi diğer boruyu {{ remainingPlaces }}'ye yerleştirin.
         </p>
         <p :key="4" v-if="step > 6">Şimdi, topa tıklayın.</p>
 
@@ -70,26 +70,26 @@
         </div>
         <img src="../assets/soccer_ball.svg" style="align-self: flex-end" />
       </div>
-    <div id="buyukBoru"
+      <div
+        id="buyukBoru"
         src="../assets/buyukboru.svg"
         class="beliren"
         :class="[{ odakli: step > 2 }, { odaksiz: step <= 2 }]"
-    >
-      <div
-        id="buyukEtiketler"
-        class="beliren"
-        :class="[
-          { kirmiziKenarli: step === 11 },
-          { odakli: step > 10 },
-          { odaksiz: step <= 10 },
-        ]"
       >
-        <div id="solBuyukEtiket" class="buyukEtiket etiket">+9</div>
-        <div id="sagBuyukEtiket" class="buyukEtiket etiket">+9</div>
+        <div
+          id="buyukEtiketler"
+          class="beliren"
+          :class="[
+            { kirmiziKenarli: step === 11 },
+            { odakli: step > 10 },
+            { odaksiz: step <= 10 },
+          ]"
+        >
+          <div id="solBuyukEtiket" class="buyukEtiket etiket">+9</div>
+          <div id="sagBuyukEtiket" class="buyukEtiket etiket">+9</div>
+        </div>
+        <img src="../assets/buyukboru.svg" />
       </div>
-      <img src="../assets/buyukboru.svg"
-      />
-    </div>
       <div class="buyukInputlar">
         <div
           class="droppable2 beliren"
@@ -216,15 +216,15 @@ export default {
       secimler: [null, null, null, null],
       zarlar: [],
       currentDroppable: null,
-      remainingPlaces: ``
+      remainingPlaces: ``,
     };
   },
   emits: ["end"],
   mounted: function () {
-    window.addEventListener('click', this.nextStep);
+    window.addEventListener("click", this.nextStep);
   },
-  beforeUnmount(){
-    window.removeEventListener('click', this.nextStep);
+  beforeUnmount() {
+    window.removeEventListener("click", this.nextStep);
   },
   methods: {
     nextStep() {
@@ -318,14 +318,13 @@ export default {
           kucukBoru.style.position = `relative`;
           vm.step++;
 
-          if (vm.remainingPlaces===``){
-            if (vm.secimler[1]){
-              vm.remainingPlaces="A'ya veya D";
+          if (vm.remainingPlaces === ``) {
+            if (vm.secimler[1]) {
+              vm.remainingPlaces = "A'ya veya D";
+            } else {
+              vm.remainingPlaces = "C'ye veya B";
             }
-            else{
-              vm.remainingPlaces="C'ye veya B";
-            } 
-          } 
+          }
         }
         kucukBoru.onmouseup = null;
       };
@@ -567,7 +566,7 @@ export default {
       }
       sonucMetin += `=` + sonucSayi;
       return sonucMetin;
-    }
+    },
   },
 };
 </script>

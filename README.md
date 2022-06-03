@@ -1,6 +1,6 @@
 # Prudence and Temperance Testing
 
-Web based experimentation for the concepts of *Prudence* and *Temperance*. Also will include a treatment for *Risk Aversion*.
+Web based experimentation for the concepts of _Prudence_ and _Temperance_. Also will include a treatment for _Risk Aversion_.
 
 Joint project with [Mehmet Yiğit Gürdal](https://econ.boun.edu.tr/mehmet-yigit-gurdal-0) who also designed the experiments.
 
@@ -15,6 +15,7 @@ Some introductory readings for the concepts.
 - http://www.restud.com/wp-content/uploads/2013/08/MS-17166-Manuscript.pdf
 
 ## Usage
+
 - `npm install` to install necessary packages.
 - `npm run serve` to have a file that is served by a local server.
 - `npm run build` to build a file that works without a server.
@@ -38,10 +39,9 @@ Some introductory readings for the concepts.
 - Accurately modifying data with event listeners is best done with passing the relevant data as an object property.
 - For multiple components referencing the same functions, Composition API is a better fit.
 - There is no universally consistent way to send data if the user just prefers to exit.
-    - https://volument.com/blog/sendbeacon-is-broken
+  - https://volument.com/blog/sendbeacon-is-broken
 - An image is rendered inline by default, thus have extra space below it to account for descenders.
 - Persisting animations and Vue components don't behave well together.
-    
 
 ## Thanks
 

@@ -37,7 +37,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
         }
       )
       .persist();
-    setTimeout(siradakiAnimasyon, 1000);
+    setTimeout(nextAnimation, 1000);
   }
 
   function AsagiR() {
@@ -54,7 +54,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
         }
       )
       .persist();
-    setTimeout(siradakiAnimasyon, 1000);
+    setTimeout(nextAnimation, 1000);
   }
 
   function Sol1() {
@@ -77,7 +77,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
         }
       )
       .persist();
-    setTimeout(siradakiAnimasyon, 3000);
+    setTimeout(nextAnimation, 3000);
   }
   function Sag1() {
     fakeBall
@@ -99,7 +99,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
         }
       )
       .persist();
-    setTimeout(siradakiAnimasyon, 3000);
+    setTimeout(nextAnimation, 3000);
   }
 
   function Sol2PR() {
@@ -119,7 +119,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
         }
       )
       .persist();
-    setTimeout(siradakiAnimasyon, 2000);
+    setTimeout(nextAnimation, 2000);
   }
   function Sag2PR() {
     fakeBall
@@ -138,7 +138,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
         }
       )
       .persist();
-    setTimeout(siradakiAnimasyon, 2000);
+    setTimeout(nextAnimation, 2000);
   }
 
   function Sol2T() {
@@ -176,7 +176,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
         }
       )
       .persist();
-    setTimeout(siradakiAnimasyon, 4000);
+    setTimeout(nextAnimation, 4000);
   }
   function Sag2T() {
     fakeBall
@@ -210,19 +210,19 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
         }
       )
       .persist();
-    setTimeout(siradakiAnimasyon, 4000);
+    setTimeout(nextAnimation, 4000);
   }
 
-  function siradakiAnimasyon() {
+  function nextAnimation() {
     let rect = fakeBall.getBoundingClientRect();
-    fakeBall.style.display = 'none';
+    fakeBall.style.display = "none";
     let elemBelow = document.elementFromPoint(
       // rect.left - 5,
       // (rect.top + rect.bottom) / 2
       (rect.left + rect.right) / 2,
       (rect.top + rect.bottom) / 2
     );
-    fakeBall.style.display = 'block';
+    fakeBall.style.display = "block";
     let zar = Math.floor(Math.random() * 2) + 1;
 
     if (elemBelow.closest(`.kucukBoru,.riskBoru`)) {

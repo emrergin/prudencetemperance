@@ -77,14 +77,15 @@
           class="beliren"
         />
       </div>
-      <div id="buyukBoru"
+      <div
+        id="buyukBoru"
         class="beliren"
-          :class="[
-            { kirmiziKenarli: step === 3 },
-            { odakli: step > 2 },
-            { odaksiz: step <= 2 },
-          ]"
-        >
+        :class="[
+          { kirmiziKenarli: step === 3 },
+          { odakli: step > 2 },
+          { odaksiz: step <= 2 },
+        ]"
+      >
         <div
           id="buyukEtiketler"
           class="beliren"
@@ -97,9 +98,7 @@
           <div id="solBuyukEtiket" class="buyukEtiket etiket">+7</div>
           <div id="sagBuyukEtiket" class="buyukEtiket etiket">+4</div>
         </div>
-        <img        
-          src="../assets/buyukboru.svg"
-        />
+        <img src="../assets/buyukboru.svg" />
       </div>
       <div id="inputlar">
         <div
@@ -136,7 +135,7 @@
           { kirmiziKenarli: step === 2 },
           { odakli: step > 1 },
           { odaksiz: step <= 1 },
-        ]"        
+        ]"
       >
         <div
           id="kucukEtiketler"
@@ -150,9 +149,7 @@
           <div id="solKucukEtiket" class="kucukEtiket etiket">+2</div>
           <div id="sagKucukEtiket" class="kucukEtiket etiket">-2</div>
         </div>
-        <img
-          src="../assets/kucukboru.svg"
-        />
+        <img src="../assets/kucukboru.svg" />
       </div>
     </div>
   </div>
@@ -169,10 +166,10 @@ export default {
   },
   emits: ["end"],
   mounted: function () {
-    window.addEventListener('click', this.nextStep);
+    window.addEventListener("click", this.nextStep);
   },
-  beforeUnmount(){
-    window.removeEventListener('click', this.nextStep);
+  beforeUnmount() {
+    window.removeEventListener("click", this.nextStep);
   },
   methods: {
     nextStep() {
@@ -357,7 +354,7 @@ export default {
   min-height: 568px;
   justify-content: space-around;
   padding: 20px;
-  padding-top:8ch;
+  padding-top: 8ch;
 }
 
 .tutorial-enter-from {
@@ -383,11 +380,10 @@ export default {
   text-align: center;
 }
 
-
 .sutun1 {
-  padding-left:10ch;
-  padding-right:10ch;
-  inline-size:70ch;
+  padding-left: 10ch;
+  padding-right: 10ch;
+  inline-size: 70ch;
   max-width: 66%;
 }
 
@@ -434,50 +430,50 @@ export default {
 }
 .asagiHareketli0PT {
   position: absolute;
-  -webkit-animation:PTtoDown0 1000ms linear 1;
-  animation: PTtoDown0 1000ms linear 1;  
+  -webkit-animation: PTtoDown0 1000ms linear 1;
+  animation: PTtoDown0 1000ms linear 1;
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli1PT {
   position: absolute;
   -webkit-animation: PTtoDown1 4000ms linear 1;
-  animation: PTtoDown1 4000ms linear 1;  
+  animation: PTtoDown1 4000ms linear 1;
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli2PT {
   position: absolute;
   -webkit-animation: PTtoDown2 4000ms linear 1;
-  animation: PTtoDown2 4000ms linear 1;  
+  animation: PTtoDown2 4000ms linear 1;
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli3PT {
   position: absolute;
   -webkit-animation: PTtoDown3 3000ms linear 1;
-  animation: PTtoDown3 3000ms linear 1;  
+  animation: PTtoDown3 3000ms linear 1;
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli4PT {
   position: absolute;
   -webkit-animation: PTtoDown4 4000ms linear 1;
-  animation: PTtoDown4 4000ms linear 1;  
+  animation: PTtoDown4 4000ms linear 1;
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli5PT {
   position: absolute;
   -webkit-animation: PTtoDown5 4000ms linear 1;
-  animation: PTtoDown5 4000ms linear 1;  
+  animation: PTtoDown5 4000ms linear 1;
   animation-fill-mode: forwards;
 }
 
 .asagiHareketli6PT {
   position: absolute;
   -webkit-animation: PTtoDown6 3000ms linear 1;
-  animation: PTtoDown6 3000ms linear 1;  
+  animation: PTtoDown6 3000ms linear 1;
   animation-fill-mode: forwards;
 }
 

@@ -38,7 +38,7 @@
           Hazırsanız başlayalım mı?
         </div>
         <div :key="12" class="centered" v-if="step > 12">
-          <button @click="$emit('end', true);" class="stepButton">
+          <button @click="$emit('end', true)" class="stepButton">
             Hazırım!
           </button>
         </div>
@@ -89,11 +89,7 @@
         </div>
       </div>
 
-      <div
-        id="kucukBorular"
-        class="gorunur"
-        :class="[{ gorulmez: step >= 6 }]"
-      >
+      <div id="kucukBorular" class="gorunur" :class="[{ gorulmez: step >= 6 }]">
         <div
           id="kucukBoru1"
           oncontextmenu="return false"
@@ -170,11 +166,11 @@ export default {
   },
   emits: ["end"],
   mounted: function () {
-    window.addEventListener('click', this.nextStep);
+    window.addEventListener("click", this.nextStep);
   },
-  beforeUnmount(){
-    document.querySelectorAll('.riskBoru').forEach(e => e.remove());
-    window.removeEventListener('click', this.nextStep);
+  beforeUnmount() {
+    document.querySelectorAll(".riskBoru").forEach((e) => e.remove());
+    window.removeEventListener("click", this.nextStep);
   },
   methods: {
     nextStep() {
@@ -281,8 +277,8 @@ export default {
       if (this.step !== 6) {
         return;
       }
-      if (document.querySelector('#app> .riskBoru')){
-        document.querySelector('#app> .riskBoru').remove();
+      if (document.querySelector("#app> .riskBoru")) {
+        document.querySelector("#app> .riskBoru").remove();
       }
 
       let vm = this;
@@ -415,7 +411,7 @@ export default {
   display: none !important;
 }
 
-#kucukBorular{
-  min-width:458px;
+#kucukBorular {
+  min-width: 458px;
 }
 </style>
