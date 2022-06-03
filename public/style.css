@@ -23,3 +23,17 @@ body{
     min-height: calc(100vh - 6px);
     background-color: #ffffff;
 }
+
+
+@media (max-width:1200px) { 
+    body{
+        width:100vw;
+        min-width: initial;
+    }
+    #mobileWarning{
+        display:block;
+    }
+    #mainWrapper{
+        display:none;
+    }
+}

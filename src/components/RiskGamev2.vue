@@ -13,10 +13,10 @@
         src="../assets/soccer_ball.svg"
         oncontextmenu="return false"
         @click="hareketE($event)"
-        :class="{ clickReminder: (secim && currentRound===0 && asama===`baslangic`) }"
+        :class="{
+          clickReminder: secim && currentRound === 0 && asama === `baslangic`,
+        }"
       />
-              <!-- :style=" (secim && currentRound===0 && asama===`baslangic`) ? 
-        'filter: drop-shadow(0 0 0.5rem turquoise); outline: 2px solid turquoise;' : '' " -->
       <img id="girisBoru" src="../assets/kucukboru3.svg" />
       <div id="inputlar">
         <div
@@ -105,14 +105,13 @@ import siradakiTur from "../composables/siradakiTur";
 import { defineEmits as defineEmits } from "@vue/runtime-dom";
 
 defineEmits(["end"]);
-// eslint-disable-next-line
 const props = defineProps({
   payOffs: undefined,
-  lastTreatment:{
-    type:Boolean,
-    default:false
-    }
-  });
+  lastTreatment: {
+    type: Boolean,
+    default: false,
+  },
+});
 // eslint-disable-next-line
 const totalRounds = props.payOffs.length;
 
@@ -152,7 +151,9 @@ function siradakiTurE() {
 }
 
 function convertNumbertoString(number) {
-  if (number===0) {return ` `+number}
+  if (number === 0) {
+    return ` ` + number;
+  }
   return number > 0 ? `+` + number : `-` + Math.abs(number);
 }
 </script>
@@ -164,11 +165,10 @@ function convertNumbertoString(number) {
 </style>
 
 <style>
-.clickReminder{
-  filter:drop-shadow(0 0 0.5rem turquoise); 
+.clickReminder {
+  filter: drop-shadow(0 0 0.5rem turquoise);
   border: 2px solid turquoise;
-  border-radius:50%;
-  margin:-2px;
+  border-radius: 50%;
+  margin: -2px;
 }
 </style>
-

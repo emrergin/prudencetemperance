@@ -1,6 +1,9 @@
 <template>
-<!-- {{treatments}} -->
-  <div v-if="mode === `demo`">
+  <div id="mobileWarning">
+    <div v-if="isTurkish">Daha geniş bir ekrana ihtiyacınız var.</div>
+    <div v-else>You need a larger screen for this.</div>
+  </div>
+  <!-- <div v-if="mode === `demo`" id="mainWrapper">
     <IntroScreen
       v-if="currentPhase === `intro`"
       @end="currentPhase = `temGam`"
@@ -22,8 +25,10 @@
     />
     <SonucEkrani v-if="currentPhase === `son`" />
   </div>
-  <div v-else>
+  <div v-else id="mainWrapper"> -->
+  <div id="mainWrapper">
     <IntroScreen
+      :isTurkish="isTurkish"
       v-if="currentPhase === `intro`"
       @end="currentPhase = treatments[`intro`]"
     />
@@ -32,8 +37,8 @@
       @end="currentPhase = `pruGam`"
     />
     <PrudenceGame
-    :payOffs="pruPayOffs"
-    :lastTreatment="treatments[`pruGam`]===`son`"
+      :payOffs="pruPayOffs"
+      :lastTreatment="treatments[`pruGam`] === `son`"
       v-if="currentPhase === `pruGam`"
       @end="currentPhase = treatments[`pruGam`]"
     />
@@ -42,8 +47,8 @@
       @end="currentPhase = `temGam`"
     />
     <TemperanceGame
-    :payOffs="temPayOffs"
-    :lastTreatment="treatments[`temGam`]===`son`"
+      :payOffs="temPayOffs"
+      :lastTreatment="treatments[`temGam`] === `son`"
       v-if="currentPhase === `temGam`"
       @end="currentPhase = treatments[`temGam`]"
     />
@@ -51,12 +56,13 @@
       v-if="currentPhase === `rskTut`"
       @end="currentPhase = `rskGam`"
     />
-    <RiskGame 
-    :payOffs="rskPayOffs"
-    :lastTreatment="treatments[`rskGam`]===`son`"
-    v-if="currentPhase === `rskGam`"
-     @end="currentPhase = treatments[`rskGam`]" />
-    <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true"/>
+    <RiskGame
+      :payOffs="rskPayOffs"
+      :lastTreatment="treatments[`rskGam`] === `son`"
+      v-if="currentPhase === `rskGam`"
+      @end="currentPhase = treatments[`rskGam`]"
+    />
+    <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true" />
   </div>
 
   <footer v-if="deneyBitisi === true || currentPhase === `intro`">
@@ -75,7 +81,6 @@ import RiskGame from "./components/RiskGamev2.vue";
 import RiskTutorial from "./components/RiskTutorial.vue";
 import SonucEkrani from "./components/SonucEkrani.vue";
 import { store } from "./store.js";
-
 
 export default {
   name: "App",
@@ -96,7 +101,7 @@ export default {
       store,
       deneyBitisi: false,
       treatments: null,
-      language: `turkish`,
+      isTurkish: false,
       pruPayOffs: [
         [9, 6, 2, -2],
         [9, 6, 1, -1],
@@ -118,72 +123,76 @@ export default {
         [3, 3, 1, -1, 1, -1],
         [7, 7, 3, -3, 3, -3],
       ],
-      nextTreatment:[
-          {
-            intro: `rskTut`,
-            rskGam: `pruTut`,
-            pruGam: `temTut`,
-            temGam: `son`
-          }
-          ,
-          {
-            intro: `rskTut`,
-            rskGam: `temTut`,
-            temGam: `pruTut`,
-            pruGam: `son`
-          }
-      ]
+      nextTreatment: [
+        {
+          intro: `rskTut`,
+          rskGam: `pruTut`,
+          pruGam: `temTut`,
+          temGam: `son`,
+        },
+        {
+          intro: `rskTut`,
+          rskGam: `temTut`,
+          temGam: `pruTut`,
+          pruGam: `son`,
+        },
+      ],
     };
   },
   beforeMount() {
     window.addEventListener("beforeunload", this.preventNav);
-    this.treatments=this.nextTreatment[Math.floor(Math.random()*this.nextTreatment.length)];
-    for (let satir of this.pruPayOffs){
-      if (Math.floor(Math.random() * 2)){
-        let geciciPar=satir[0];
-        satir[0]=satir[1];
-        satir[1]=geciciPar;
+    this.treatments =
+      this.nextTreatment[Math.floor(Math.random() * this.nextTreatment.length)];
+    for (let satir of this.pruPayOffs) {
+      if (Math.floor(Math.random() * 2)) {
+        let geciciPar = satir[0];
+        satir[0] = satir[1];
+        satir[1] = geciciPar;
       }
     }
-    for (let satir of this.rskPayOffs){
-      if (Math.floor(Math.random() * 2)){
-        let geciciPar1=satir[0];
-        let geciciPar2=satir[1];
-        satir[0]=satir[2];
-        satir[1]=satir[3];
-        satir[2]=geciciPar1;
-        satir[3]=geciciPar2;
+    for (let satir of this.rskPayOffs) {
+      if (Math.floor(Math.random() * 2)) {
+        let geciciPar1 = satir[0];
+        let geciciPar2 = satir[1];
+        satir[0] = satir[2];
+        satir[1] = satir[3];
+        satir[2] = geciciPar1;
+        satir[3] = geciciPar2;
       }
     }
-    for (let satir of this.temPayOffs){
-      if (Math.floor(Math.random() * 2)){
-        let geciciPar1=satir[2];
-        let geciciPar2=satir[3];
-        satir[2]=satir[4];
-        satir[3]=satir[5];
-        satir[4]=geciciPar1;
-        satir[5]=geciciPar2;
+    for (let satir of this.temPayOffs) {
+      if (Math.floor(Math.random() * 2)) {
+        let geciciPar1 = satir[2];
+        let geciciPar2 = satir[3];
+        satir[2] = satir[4];
+        satir[3] = satir[5];
+        satir[4] = geciciPar1;
+        satir[5] = geciciPar2;
       }
     }
     function shuffle(array) {
-      let resArray=array;
+      let resArray = array;
       for (let i = resArray.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [resArray[i], resArray[j]] = [resArray[j], resArray[i]];
       }
       return resArray;
-    }  
-    this.pruPayOffs=shuffle(this.pruPayOffs);
-    this.rskPayOffs=shuffle(this.rskPayOffs);
-    this.temPayOffs=shuffle(this.temPayOffs);
-    console.log(this.pruPayOffs,this.rskPayOffs,this.temPayOffs);
+    }
+    this.pruPayOffs = shuffle(this.pruPayOffs);
+    this.rskPayOffs = shuffle(this.rskPayOffs);
+    this.temPayOffs = shuffle(this.temPayOffs);
+    console.log(this.pruPayOffs, this.rskPayOffs, this.temPayOffs);
+
+    if (navigator.language === `tr-TR`) {
+      this.isTurkish = true;
+    }
   },
   beforeUnmount() {
     window.removeEventListener("beforeunload", this.preventNav);
   },
   methods: {
     preventNav(event) {
-      if (store.isim && !this.deneyBitisi){
+      if (store.isim && !this.deneyBitisi) {
         event.preventDefault();
         event.returnValue = "";
       }
@@ -203,7 +212,7 @@ export default {
 
   display: flex;
   flex-direction: column;
-  justify-content:center;
+  justify-content: center;
   padding: 0px;
 }
 
@@ -214,5 +223,15 @@ footer {
   padding: 20px;
   background-color: turquoise;
   margin-top: auto;
+}
+
+#mobileWarning {
+  /* width:100vw;
+  height:100vh; */
+  /* z-index:10;
+  position:absolute; */
+  font-size: 1.5rem;
+  padding-block: 10rem;
+  display: none;
 }
 </style>

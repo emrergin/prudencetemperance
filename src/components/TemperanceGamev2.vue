@@ -13,7 +13,12 @@
         src="../assets/soccer_ball.svg"
         oncontextmenu="return false"
         @click="hareketE($event)"
-        :class="{ clickReminder: (secimler.filter((a) => a).length === 2 && currentRound===0  && asama===`baslangic`) }"
+        :class="{
+          clickReminder:
+            secimler.filter((a) => a).length === 2 &&
+            currentRound === 0 &&
+            asama === `baslangic`,
+        }"
       />
       <div id="buyukBoru">
         <div id="buyukEtiketler">
@@ -27,10 +32,18 @@
         <img src="../assets/buyukboru.svg" />
       </div>
       <div class="buyukInputlar">
-        <div class="droppable2" id="i0" :class="{ gorulmez: secimler[0] || asama!== `baslangic`}">
+        <div
+          class="droppable2"
+          id="i0"
+          :class="{ gorulmez: secimler[0] || asama !== `baslangic` }"
+        >
           A
         </div>
-        <div class="droppable2" id="i1" :class="{ gorulmez: secimler[1] || asama!== `baslangic`}">
+        <div
+          class="droppable2"
+          id="i1"
+          :class="{ gorulmez: secimler[1] || asama !== `baslangic` }"
+        >
           B
         </div>
       </div>
@@ -38,14 +51,18 @@
         <div
           class="droppable2"
           id="i2"
-          :class="{ gorulmez: !secimler[0] || secimler[2] || asama!== `baslangic`}"
+          :class="{
+            gorulmez: !secimler[0] || secimler[2] || asama !== `baslangic`,
+          }"
         >
           C
         </div>
         <div
           class="droppable2"
           id="i3"
-          :class="{ gorulmez: !secimler[1] || secimler[3]  || asama!== `baslangic` }"
+          :class="{
+            gorulmez: !secimler[1] || secimler[3] || asama !== `baslangic`,
+          }"
         >
           D
         </div>
@@ -122,14 +139,13 @@ import siradakiTur from "../composables/siradakiTur";
 import { defineEmits as defineEmits } from "@vue/runtime-dom";
 
 defineEmits(["end"]);
-// eslint-disable-next-line
 const props = defineProps({
   payOffs: undefined,
-  lastTreatment:{
-    type:Boolean,
-    default:false
-    }
-  });
+  lastTreatment: {
+    type: Boolean,
+    default: false,
+  },
+});
 // eslint-disable-next-line
 const totalRounds = props.payOffs.length;
 
@@ -176,10 +192,11 @@ function siradakiTurE() {
 }
 
 function convertNumbertoString(number) {
-  if (number===0) {return `${number}`}
+  if (number === 0) {
+    return `${number}`;
+  }
   return number > 0 ? `+` + number : `-` + Math.abs(number);
 }
-
 </script>
 
 <style>

@@ -13,7 +13,9 @@
         src="../assets/soccer_ball.svg"
         oncontextmenu="return false"
         @click="hareketE($event)"
-        :class="{ clickReminder: (secim && currentRound===0 && asama===`baslangic`) }"
+        :class="{
+          clickReminder: secim && currentRound === 0 && asama === `baslangic`,
+        }"
       />
       <div id="buyukBoru">
         <div id="buyukEtiketler">
@@ -96,14 +98,13 @@ import siradakiTur from "../composables/siradakiTur";
 import { defineEmits as defineEmits } from "@vue/runtime-dom";
 
 defineEmits(["end"]);
-// eslint-disable-next-line
 const props = defineProps({
   payOffs: undefined,
-  lastTreatment:{
-    type:Boolean,
-    default:false
-    }
-  });
+  lastTreatment: {
+    type: Boolean,
+    default: false,
+  },
+});
 // eslint-disable-next-line
 const totalRounds = props.payOffs.length;
 
@@ -143,10 +144,11 @@ function siradakiTurE() {
 }
 
 function convertNumbertoString(number) {
-  if (number===0) {return `${number}`}
+  if (number === 0) {
+    return `${number}`;
+  }
   return number > 0 ? `+` + number : `-` + Math.abs(number);
 }
-
 </script>
 
 <style>
@@ -170,7 +172,7 @@ function convertNumbertoString(number) {
   display: flex;
   gap: 200px;
   justify-content: space-evenly;
-  width:100%;
+  width: 100%;
   /* top: 28px; */
 }
 
@@ -186,7 +188,7 @@ function convertNumbertoString(number) {
   position: relative;
 }
 
-img{
+img {
   display: block;
 }
 
@@ -204,7 +206,7 @@ img{
   border: 2px solid black;
   border-radius: 8px;
   padding: 2px;
-  min-width:3ch;
+  min-width: 3ch;
 }
 
 .yaklasilmis {
@@ -237,7 +239,7 @@ img{
   cursor: pointer;
 }
 
-#fakeBall{
+#fakeBall {
   z-index: 4;
 }
 
