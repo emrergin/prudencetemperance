@@ -5,7 +5,8 @@
       Hoş geldiniz.
     </li>
     <li>
-      Bu deneyi belli durumlarda alınan ekonomik kararları anlamak icin hazırladık.
+      Bu deney, <strong>Mehmet Yiğit Gürdal</strong> ve <strong>Emre Ergin</strong> tarafından       
+      belli durumlarda alınan ekonomik kararları anlamak için hazırlandı.
     </li>
     <li>
       Deneye <strong>Windows</strong> veya <strong>Linux</strong> kullanan bir cihazla katılmalısınız. Yani, mobil cihazlar ve <i>iOS</i> işletim sistemi deneye uygun değildir.
@@ -23,8 +24,9 @@
       Toplam kazancınız oyun boyunca topladığınız puanlara eşittir. 
     </li>
     <li>
-      Oyunun herhangi bir aşamasında çıkmakta serbestsiniz. 
-      Bu durumda, yahut bulunduğunuz sayfayı değiştirmeniz ve yenilemeniz gibi durumlarda deneyden ayrılmış sayılacaksınız.
+      Oyundan erken ayrılabilirsiniz.
+      Bulunduğunuz sayfayı değiştirmeniz ve yenilemeniz gibi durumlarda da deneyden erken ayrılmış sayılacaksınız.
+      Erken ayrılmanız durumunda o zamana kadarki kararlarınız değerlendirilecek.
     </li>
   </ul>
 

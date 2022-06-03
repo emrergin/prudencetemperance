@@ -96,6 +96,7 @@ export default {
       store,
       deneyBitisi: false,
       treatments: null,
+      language: `turkish`,
       pruPayOffs: [
         [9, 6, 2, -2],
         [9, 6, 1, -1],
@@ -104,11 +105,11 @@ export default {
         [7, 4, 2, -2],
       ],
       rskPayOffs: [
-        [1, 3, 0, 10],
-        [2, 4, 0, 10],
-        [3, 5, 0, 10],
-        [4, 6, 0, 10],
-        [5, 7, 0, 10],
+        [4, 4, 1, 13],
+        [5, 5, 1, 13],
+        [6, 6, 1, 13],
+        [7, 7, 1, 13],
+        [8, 8, 1, 13],
       ],
       temPayOffs: [
         [9, 9, 3, -3, 3, -3],

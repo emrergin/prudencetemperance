@@ -215,10 +215,14 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
 
   function siradakiAnimasyon() {
     let rect = fakeBall.getBoundingClientRect();
+    fakeBall.style.display = 'none';
     let elemBelow = document.elementFromPoint(
-      rect.left - 5,
+      // rect.left - 5,
+      // (rect.top + rect.bottom) / 2
+      (rect.left + rect.right) / 2,
       (rect.top + rect.bottom) / 2
     );
+    fakeBall.style.display = 'block';
     let zar = Math.floor(Math.random() * 2) + 1;
 
     if (elemBelow.closest(`.kucukBoru,.riskBoru`)) {
