@@ -1,4 +1,8 @@
 <template>
+  <div id="languagePicker" v-if="currentPhase === `intro`">
+    <button v-if="isTurkish" @click="isTurkish = false">English</button>
+    <button v-else @click="isTurkish = true">Türkçe</button>
+  </div>
   <div id="mobileWarning">
     <div v-if="isTurkish">Daha geniş bir ekrana ihtiyacınız var.</div>
     <div v-else>You need a larger screen for this.</div>
@@ -65,9 +69,17 @@
     <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true" />
   </div>
 
-  <footer v-if="deneyBitisi === true || currentPhase === `intro`">
+  <footer
+    v-if="(deneyBitisi === true || currentPhase === `intro`) && isTurkish"
+  >
     <a href="https://github.com/emrergin" target="_blank">Emre Ergin</a>
     tarafından yapılmıştır.
+  </footer>
+  <footer
+    v-if="(deneyBitisi === true || currentPhase === `intro`) && !isTurkish"
+  >
+    Made by
+    <a href="https://github.com/emrergin" target="_blank">Emre Ergin</a>.
   </footer>
 </template>
 
@@ -226,12 +238,20 @@ footer {
 }
 
 #mobileWarning {
-  /* width:100vw;
-  height:100vh; */
-  /* z-index:10;
-  position:absolute; */
   font-size: 1.5rem;
   padding-block: 10rem;
   display: none;
+}
+
+#languagePicker {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1em;
+  padding-inline: 2em;
+}
+
+#languagePicker > button {
+  font-size: 1rem;
+  padding-inline: 3ch;
 }
 </style>

@@ -6,13 +6,13 @@
       kararları anlamak için hazırlandı.
     </li>
     <li>
-      Deneye <strong>Windows</strong> veya <strong>Linux</strong> kullanan bir
-      cihazla katılmalısınız. Yani, mobil cihazlar ve <i>iOS</i> işletim sistemi
-      deneye uygun değildir.
+      Deneyde fare kullanmanız beklendiğinden, mobil cihazlar deneye uygun
+      değildir.
     </li>
     <li>
-      Lütfen kullandığınız tarayıcının güncel olduğuna emin olun. Deney,
-      <i>Internet Explorer</i> üzerinden çalışmamaktadır.
+      Deney, <i>Internet Explorer</i> ve <i>Safari</i> üzerinden
+      çalışmamaktadır. Lütfen kullandığınız tarayıcının güncel olduğuna emin
+      olun.
     </li>
     <li>
       Deneyde her biri 5 tur sürecek 3 oyun bulunuyor. Her oyunun öncesinde o
@@ -38,13 +38,13 @@
       situations.
     </li>
     <li>
-      You can take part in the experiment using a device with
-      <strong>Windows</strong> or <strong>Linux</strong>. This means, mobile or
-      <i>iOS</i> devices is not compatible.
+      Since the games need mouse use, mobile devices are not suitable for the
+      experiment.
     </li>
     <li>
-      Please make sure that the browser you are using is updated recently. The
-      experiment does not work with <i>Internet Explorer</i>.
+      The experiment does not work with <i>Internet Explorer</i> or
+      <i>Safari</i>. Please make sure that the browser you are using is updated
+      recently.
     </li>
     <li>
       In the experiment, there are 3 games with 5 rounds each. Before each game,
@@ -59,7 +59,7 @@
     <li>
       You can leave the experiment early. Changing the page or refreshing it
       will also be counted as leaving the experiment early. In this case, the
-      points you collected until then will be evaluated.
+      points you collected until then will still be evaluated.
     </li>
   </ul>
 
