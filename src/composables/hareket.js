@@ -246,7 +246,7 @@ function hareket(e, asama, bitis, secimler, totalRevenue, totalLoss, store) {
     }
     if (elemBelow.closest(`#buyukBoru`)) {
       zar === 1 ? Sol1() : Sag1();
-      let etiketler = document.getElementById(`buyukEtiketler`);
+      let etiketler = document.getElementById(`largeTags`);
       zar === 1
         ? etiketBoya(etiketler, `sol`, 1100)
         : etiketBoya(etiketler, `sag`, 1100);

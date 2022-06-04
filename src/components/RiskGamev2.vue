@@ -5,6 +5,7 @@
       :totalLoss="totalLoss"
       :totalRounds="totalRounds"
       :currentRound="currentRound"
+      :isTurkish="isTurkish"
     />
     <div id="oyunAsagi">
       <img
@@ -86,11 +87,20 @@
       </div>
     </div>
   </div>
-  <div v-if="oyunSonu" class="oyunKutusu">
+  <div v-if="oyunSonu && isTurkish" class="oyunKutusu">
     <p>Oyunu tamamladınız. Toplam kazancınız: {{ totalRevenue - totalLoss }}</p>
     <button @click="$emit('end', true)" class="stepButton">
       <span v-if="lastTreatment">Deneyi Bitir</span>
       <span v-else>Diğer Oyuna Geç!</span>
+    </button>
+  </div>
+  <div v-if="oyunSonu && !isTurkish" class="oyunKutusu">
+    <p>
+      You completed the game. Total earnings: {{ totalRevenue - totalLoss }}
+    </p>
+    <button @click="$emit('end', true)" class="stepButton">
+      <span v-if="lastTreatment">End the experiment</span>
+      <span v-else>Proceed to the next game!</span>
     </button>
   </div>
 </template>
@@ -110,6 +120,10 @@ const props = defineProps({
   lastTreatment: {
     type: Boolean,
     default: false,
+  },
+  isTurkish: {
+    type: Boolean,
+    default: true,
   },
 });
 // eslint-disable-next-line

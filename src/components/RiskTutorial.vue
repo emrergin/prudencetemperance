@@ -1,6 +1,6 @@
 <template>
   <div class="tutorialKutusu">
-    <div class="sutun1">
+    <div class="column1" v-if="isTurkish">
       <transition-group tag="div" name="tutorial" class="tutorialText">
         <p :key="1" v-if="step > 0">
           Bu oyunda,
@@ -44,14 +44,58 @@
         </div>
       </transition-group>
     </div>
+    <div class="column1" v-else>
+      <transition-group tag="div" name="tutorial" class="tutorialText">
+        <p :key="1" v-if="step > 0">
+          In this game you will pick,
+          <span :style="{ visibility: step > 1 ? `visible` : `hidden` }">
+            one of these pipes</span
+          >
+          <span :style="{ visibility: step > 2 ? `visible` : `hidden` }">
+            to place here
+          </span>
+          <span :style="{ visibility: step > 3 ? `visible` : `hidden` }">
+            as you want.</span
+          >
+        </p>
+        <p :key="2" v-if="step > 4">
+          Drag the pipe you pick to under the uppoer pipe.
+        </p>
+        <p :key="4" v-if="step > 5">Now, click the ball.</p>
 
-    <div class="sutun2" id="sut2">
+        <p :key="8" v-if="step > 6">
+          In forks like these, the ball will either go to the left or to the
+          right, <b>fifty percent</b> probability each.
+        </p>
+
+        <p :key="9" v-if="step > 9">
+          The numbers across the path the ball follows shows the points you gain
+          or you lose.
+        </p>
+
+        <p :key="10" v-if="step > 10">
+          In this sample turn, you gained {{ ciktiHesapla() }}. Each turn your
+          point will be calculated likewise.
+        </p>
+
+        <div :key="11" v-if="step > 11" class="centered">
+          Shall we start if you are ready?
+        </div>
+        <div :key="12" class="centered" v-if="step > 12">
+          <button @click="$emit('end', true)" class="stepButton">
+            I am ready!
+          </button>
+        </div>
+      </transition-group>
+    </div>
+
+    <div class="column2" id="sut2">
       <div
         id="futbolTopu"
         ref="futbolTopu"
         oncontextmenu="return false"
         @click="hareket()"
-        class="beliren"
+        class="phaseIn"
         :class="[
           { kirmiziKenarli: step === 6 },
           { odakli: step > 5 },
@@ -60,7 +104,7 @@
       >
         <div
           :class="[{ gorunur: step === 7 }, { gorunmez: step !== 7 }]"
-          class="beliren kirmiziOklar"
+          class="phaseIn kirmiziOklar"
         >
           <div>◄</div>
           <div>►</div>
@@ -71,12 +115,12 @@
       <img
         id="girisBoru"
         src="../assets/kucukboru3.svg"
-        class="beliren"
+        class="phaseIn"
         :class="[{ odakli: step > 2 }, { odaksiz: step <= 2 }]"
       />
       <div class="inputlar">
         <div
-          class="droppable beliren"
+          class="droppable phaseIn"
           id="i1"
           :class="[
             { kirmiziKenarli: step === 3 },
@@ -99,7 +143,7 @@
         >
           <div
             id="kucukEtiketler1"
-            class="beliren"
+            class="phaseIn"
             :class="[
               { kirmiziKenarli: step === 10 },
               { odakli: step > 9 },
@@ -111,7 +155,7 @@
           </div>
           <img
             src="../assets/kucukboru.svg"
-            class="draggable beliren"
+            class="draggable phaseIn"
             oncontextmenu="return false"
             :class="[
               { kirmiziKenarli: step === 2 },
@@ -129,7 +173,7 @@
         >
           <div
             id="kucukEtiketler2"
-            class="beliren"
+            class="phaseIn"
             :class="[
               { kirmiziKenarli: step === 10 },
               { odakli: step > 9 },
@@ -141,7 +185,7 @@
           </div>
           <img
             src="../assets/kucukboru.svg"
-            class="draggable beliren"
+            class="draggable phaseIn"
             oncontextmenu="return false"
             :class="[
               { kirmiziKenarli: step === 2 },
@@ -164,6 +208,7 @@ export default {
       currentDroppable: null,
     };
   },
+  props: ["isTurkish"],
   emits: ["end"],
   mounted: function () {
     window.addEventListener("click", this.nextStep);

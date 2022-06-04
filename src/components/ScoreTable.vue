@@ -1,5 +1,5 @@
 <template>
-  <ul class="plainList" id="oyunVerileri">
+  <ul class="plainList" id="oyunVerileri" v-if="isTurkish">
     <li>
       <span>Toplam Kazanç </span
       ><span class="veriKare" id="topKazanc">{{ totalRevenue }}</span>
@@ -21,10 +21,38 @@
       }}</span>
     </li>
   </ul>
+  <ul v-else>
+    <li>
+      <span>Total Earnings </span
+      ><span class="veriKare" id="topKazanc">{{ totalRevenue }}</span>
+    </li>
+    <li>
+      <span>Total Loss </span
+      ><span class="veriKare" id="topKayip">{{ totalLoss }}</span>
+    </li>
+    <li>
+      <span>Net Earnings </span
+      ><span class="veriKare" id="netKazanc">{{
+        totalRevenue - totalLoss
+      }}</span>
+    </li>
+    <li>
+      <span>Round </span
+      ><span class="veriKare" id="oyunRound">{{
+        currentRound + 1 + `/` + totalRounds
+      }}</span>
+    </li>
+  </ul>
 </template>
 <script>
 export default {
-  props: [`totalRevenue`, `totalLoss`, `currentRound`, `totalRounds`],
+  props: [
+    `totalRevenue`,
+    `totalLoss`,
+    `currentRound`,
+    `totalRounds`,
+    `isTurkish`,
+  ],
 };
 </script>
 <style>

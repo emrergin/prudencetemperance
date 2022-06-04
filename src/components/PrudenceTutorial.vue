@@ -1,6 +1,6 @@
 <template>
   <div class="tutorialKutusu">
-    <div class="sutun1">
+    <div class="column1" v-if="isTurkish">
       <transition-group tag="div" name="tutorial" class="tutorialText">
         <p :key="5" v-if="step > 0">
           Bu oyunda,
@@ -50,8 +50,58 @@
         </div>
       </transition-group>
     </div>
+    <div class="column1" v-else>
+      <transition-group tag="div" name="tutorial" class="tutorialText">
+        <p :key="5" v-if="step > 0">
+          In this game, you will place
+          <span :style="{ visibility: step > 1 ? `visible` : `hidden` }">
+            this pipe</span
+          >
+          <span :style="{ visibility: step > 2 ? `visible` : `hidden` }">
+            under this pipe</span
+          >
+          <span :style="{ visibility: step > 3 ? `visible` : `hidden` }">
+            in one of these ends</span
+          >
+          <span :style="{ visibility: step > 4 ? `visible` : `hidden` }">
+            using mouse.</span
+          >
+        </p>
+        <p :key="6" v-if="step > 5">
+          Click the pipe below and drag it to your selection.
+        </p>
+        <p :key="7" v-if="step > 6">Now, click the ball.</p>
+        <p :key="8" v-if="step > 7">
+          In forks like these, the ball will either go to the left or to the
+          right, <b>fifty percent</b> probability each.
+        </p>
+        <p :key="9" v-if="step > 9">
+          The numbers across the path the ball follows shows the points you gain
+          or you lose.
+        </p>
+        <p :key="10" v-if="step > 10">
+          In this sample turn, you gained
+          {{
+            odenek[durum - 1].length === 1
+              ? odenek[durum - 1][0]
+              : `${odenek[durum - 1][0]}${odenek[durum - 1][1]}=${
+                  odenek[durum - 1][2]
+                }`
+          }}
+          .Each turn your point will be calculated likewise.
+        </p>
+        <div :key="11" v-if="step > 11" class="centered">
+          Shall we start if you are ready?
+        </div>
+        <div :key="12" class="centered" v-if="step > 12">
+          <button @click="$emit('end', true)" class="stepButton">
+            I am ready!
+          </button>
+        </div>
+      </transition-group>
+    </div>
 
-    <div class="sutun2" id="sut2">
+    <div class="column2" id="sut2">
       <div
         id="futbolTopu"
         ref="futbolTopu"
@@ -60,7 +110,7 @@
       >
         <div
           :class="[{ gorunur: step === 8 }, { gorunmez: step !== 8 }]"
-          class="beliren kirmiziOklar"
+          class="phaseIn kirmiziOklar"
         >
           <div>◄</div>
           <div>►</div>
@@ -74,12 +124,12 @@
             { odakli: step > 6 },
             { odaksiz: step <= 6 },
           ]"
-          class="beliren"
+          class="phaseIn"
         />
       </div>
       <div
         id="buyukBoru"
-        class="beliren"
+        class="phaseIn"
         :class="[
           { kirmiziKenarli: step === 3 },
           { odakli: step > 2 },
@@ -87,22 +137,22 @@
         ]"
       >
         <div
-          id="buyukEtiketler"
-          class="beliren"
+          id="largeTags"
+          class="phaseIn"
           :class="[
             { kirmiziKenarli: step === 10 },
             { odakli: step > 9 },
             { odaksiz: step <= 9 },
           ]"
         >
-          <div id="solBuyukEtiket" class="buyukEtiket etiket">+7</div>
-          <div id="sagBuyukEtiket" class="buyukEtiket etiket">+4</div>
+          <div id="leftLargeTag" class="buyukEtiket etiket">+7</div>
+          <div id="rightLargeTag" class="buyukEtiket etiket">+4</div>
         </div>
         <img src="../assets/buyukboru.svg" />
       </div>
       <div id="inputlar">
         <div
-          class="droppable beliren"
+          class="droppable phaseIn"
           id="i1"
           :class="[
             { kirmiziKenarli: step === 4 },
@@ -113,7 +163,7 @@
           A
         </div>
         <div
-          class="droppable beliren"
+          class="droppable phaseIn"
           id="i2"
           :class="[
             { kirmiziKenarli: step === 4 },
@@ -130,7 +180,7 @@
         oncontextmenu="return false"
         @mousedown.left="boruTasi($event)"
         ondragstart="return false"
-        class="draggable beliren"
+        class="draggable phaseIn"
         :class="[
           { kirmiziKenarli: step === 2 },
           { odakli: step > 1 },
@@ -139,7 +189,7 @@
       >
         <div
           id="kucukEtiketler"
-          class="beliren"
+          class="phaseIn"
           :class="[
             { kirmiziKenarli: step === 10 },
             { odakli: step > 9 },
@@ -164,6 +214,7 @@ export default {
       odenek: [[4, -2, 2], [4, `+2`, 6], [4], [7, `+2`, 9], [7, -2, 5], [7]],
     };
   },
+  props: ["isTurkish"],
   emits: ["end"],
   mounted: function () {
     window.addEventListener("click", this.nextStep);
@@ -331,10 +382,10 @@ export default {
       };
 
       function solBEtiket() {
-        document.getElementById(`solBuyukEtiket`).classList.add(`yaklasilmis`);
+        document.getElementById(`leftLargeTag`).classList.add(`yaklasilmis`);
       }
       function sagBEtiket() {
-        document.getElementById(`sagBuyukEtiket`).classList.add(`yaklasilmis`);
+        document.getElementById(`rightLargeTag`).classList.add(`yaklasilmis`);
       }
       function solKEtiket() {
         document.getElementById(`solKucukEtiket`).classList.add(`yaklasilmis`);
@@ -380,14 +431,14 @@ export default {
   text-align: center;
 }
 
-.sutun1 {
+.column1 {
   padding-left: 10ch;
   padding-right: 10ch;
   inline-size: 70ch;
   max-width: 66%;
 }
 
-.sutun2 {
+.column2 {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -408,7 +459,7 @@ export default {
   opacity: 0.5;
 }
 
-.beliren {
+.phaseIn {
   transition: all 0.5s ease-in;
 }
 .kirmiziOklar {

@@ -1,9 +1,8 @@
 <template>
   <ul class="girisMetni" v-if="isTurkish">
     <li>
-      Bu deney, <strong>Mehmet Yiğit Gürdal</strong> ve
-      <strong>Emre Ergin</strong> tarafından belli durumlarda alınan ekonomik
-      kararları anlamak için hazırlandı.
+      Hoş geldiniz. Bu deneyi belli durumlarda alınan ekonomik kararları anlamak
+      için hazırladık.
     </li>
     <li>
       Deneyde fare kullanmanız beklendiğinden, mobil cihazlar deneye uygun
@@ -15,7 +14,7 @@
       olun.
     </li>
     <li>
-      Deneyde her biri 5 tur sürecek 3 oyun bulunuyor. Her oyunun öncesinde o
+      Deneyde her biri 15 tur sürecek 3 oyun bulunuyor. Her oyunun öncesinde o
       oyunu anlatan bir yönerge olacak. Yönergeyi okurken devam etmek için
       metnin istediği şeyi yapmanız yahut farenin sol tuşuyla ekrana tıklamanız
       bekleniyor.
@@ -33,9 +32,8 @@
   </ul>
   <ul class="girisMetni" v-else>
     <li>
-      This experiment is designed by <strong>Mehmet Yiğit Gürdal</strong> and
-      <strong>Emre Ergin</strong> to understand economic decisions in certain
-      situations.
+      Welcome. We designed this experiment to understand economic decisions in
+      certain situations.
     </li>
     <li>
       Since the games need mouse use, mobile devices are not suitable for the
@@ -47,8 +45,8 @@
       recently.
     </li>
     <li>
-      In the experiment, there are 3 games with 5 rounds each. Before each game,
-      there will be a corresponding instructions page. While reading the
+      In the experiment, there are 3 games with 15 rounds each. Before each
+      game, there will be a corresponding instructions page. While reading the
       instructions, to resume the text, you should either do what the text asks,
       or left-click to the screen.
     </li>

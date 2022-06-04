@@ -37,36 +37,46 @@
       @end="currentPhase = treatments[`intro`]"
     />
     <PrudenceTutorial
+      :isTurkish="isTurkish"
       v-if="currentPhase === `pruTut`"
       @end="currentPhase = `pruGam`"
     />
     <PrudenceGame
       :payOffs="pruPayOffs"
+      :isTurkish="isTurkish"
       :lastTreatment="treatments[`pruGam`] === `son`"
       v-if="currentPhase === `pruGam`"
       @end="currentPhase = treatments[`pruGam`]"
     />
     <TemperanceTutorial
+      :isTurkish="isTurkish"
       v-if="currentPhase === `temTut`"
       @end="currentPhase = `temGam`"
     />
     <TemperanceGame
       :payOffs="temPayOffs"
+      :isTurkish="isTurkish"
       :lastTreatment="treatments[`temGam`] === `son`"
       v-if="currentPhase === `temGam`"
       @end="currentPhase = treatments[`temGam`]"
     />
     <RiskTutorial
+      :isTurkish="isTurkish"
       v-if="currentPhase === `rskTut`"
       @end="currentPhase = `rskGam`"
     />
     <RiskGame
       :payOffs="rskPayOffs"
+      :isTurkish="isTurkish"
       :lastTreatment="treatments[`rskGam`] === `son`"
       v-if="currentPhase === `rskGam`"
       @end="currentPhase = treatments[`rskGam`]"
     />
-    <SonucEkrani v-if="currentPhase === `son`" @end="deneyBitisi = true" />
+    <SonucEkrani
+      v-if="currentPhase === `son`"
+      @end="deneyBitisi = true"
+      :isTurkish="isTurkish"
+    />
   </div>
 
   <footer

@@ -1,6 +1,6 @@
 <template>
   <div class="tutorialKutusu">
-    <div class="sutun1">
+    <div class="column1" v-if="isTurkish">
       <transition-group tag="div" name="tutorial" class="tutorialText">
         <p :key="1" v-if="step > 0">
           Bu oyunda,
@@ -48,13 +48,61 @@
       </transition-group>
     </div>
 
-    <div class="sutun2" id="sut2">
+    <div class="column1" v-else>
+      <transition-group tag="div" name="tutorial" class="tutorialText">
+        <p :key="1" v-if="step > 0">
+          In this game, you will place
+          <span :style="{ visibility: step > 1 ? `visible` : `hidden` }">
+            these pipes</span
+          >
+          <span :style="{ visibility: step > 2 ? `visible` : `hidden` }">
+            to these places</span
+          >
+          <span :style="{ visibility: step > 3 ? `visible` : `hidden` }">
+            as you want.</span
+          >
+        </p>
+        <p :key="2" v-if="step > 4">
+          Click one of the below pipes and drag it to a place you select.
+        </p>
+        <p :key="3" v-if="step > 5">
+          No place the other pipe to {{ remainingPlaces }}.
+        </p>
+        <p :key="4" v-if="step > 6">Now, click the ball.</p>
+
+        <p :key="8" v-if="step > 7">
+          In forks like these, the ball will either go to the left or to the
+          right, <b>fifty percent</b> probability each.
+        </p>
+
+        <p :key="9" v-if="step > 10">
+          The numbers across the path the ball follows shows the points you gain
+          or you lose.
+        </p>
+
+        <p :key="10" v-if="step > 11">
+          In this sample turn, you gained {{ ciktiHesapla() }}. Each turn your
+          point will be calculated likewise.
+        </p>
+
+        <div :key="11" v-if="step > 12" class="centered">
+          Shall we start if you are ready?
+        </div>
+        <div :key="12" class="centered" v-if="step > 13">
+          <button @click="$emit('end', true)" class="stepButton">
+            I am ready!
+          </button>
+        </div>
+      </transition-group>
+    </div>
+
+    <div class="column2" id="sut2">
       <div
         id="futbolTopu"
         ref="futbolTopu"
         oncontextmenu="return false"
         @click="hareket()"
-        class="beliren"
+        class="phaseIn"
         :class="[
           { kirmiziKenarli: step === 7 },
           { odakli: step > 6 },
@@ -63,7 +111,7 @@
       >
         <div
           :class="[{ gorunur: step === 8 }, { gorunmez: step !== 8 }]"
-          class="beliren kirmiziOklar"
+          class="phaseIn kirmiziOklar"
         >
           <div>◄</div>
           <div>►</div>
@@ -73,26 +121,26 @@
       <div
         id="buyukBoru"
         src="../assets/buyukboru.svg"
-        class="beliren"
+        class="phaseIn"
         :class="[{ odakli: step > 2 }, { odaksiz: step <= 2 }]"
       >
         <div
-          id="buyukEtiketler"
-          class="beliren"
+          id="largeTags"
+          class="phaseIn"
           :class="[
             { kirmiziKenarli: step === 11 },
             { odakli: step > 10 },
             { odaksiz: step <= 10 },
           ]"
         >
-          <div id="solBuyukEtiket" class="buyukEtiket etiket">+9</div>
-          <div id="sagBuyukEtiket" class="buyukEtiket etiket">+9</div>
+          <div id="leftLargeTag" class="buyukEtiket etiket">+9</div>
+          <div id="rightLargeTag" class="buyukEtiket etiket">+9</div>
         </div>
         <img src="../assets/buyukboru.svg" />
       </div>
       <div class="buyukInputlar">
         <div
-          class="droppable2 beliren"
+          class="droppable2 phaseIn"
           id="i0"
           :class="[
             { kirmiziKenarli: step === 3 },
@@ -104,7 +152,7 @@
           A
         </div>
         <div
-          class="droppable2 beliren"
+          class="droppable2 phaseIn"
           id="i1"
           :class="[
             { kirmiziKenarli: step === 3 },
@@ -118,7 +166,7 @@
       </div>
       <div class="buyukInputlar">
         <div
-          class="droppable2 beliren"
+          class="droppable2 phaseIn"
           id="i2"
           :class="[
             { kirmiziKenarli: step === 3 },
@@ -130,7 +178,7 @@
           C
         </div>
         <div
-          class="droppable2 beliren"
+          class="droppable2 phaseIn"
           id="i3"
           :class="[
             { kirmiziKenarli: step === 3 },
@@ -152,7 +200,7 @@
         >
           <div
             id="kucukEtiketler1"
-            class="beliren"
+            class="phaseIn"
             :class="[
               { kirmiziKenarli: step === 11 },
               { odakli: step > 10 },
@@ -164,7 +212,7 @@
           </div>
           <img
             src="../assets/kucukboru2.svg"
-            class="draggable beliren"
+            class="draggable phaseIn"
             oncontextmenu="return false"
             :class="[
               { kirmiziKenarli: step === 2 },
@@ -182,7 +230,7 @@
         >
           <div
             id="kucukEtiketler2"
-            class="beliren"
+            class="phaseIn"
             :class="[
               { kirmiziKenarli: step === 11 },
               { odakli: step > 10 },
@@ -194,7 +242,7 @@
           </div>
           <img
             src="../assets/kucukboru2.svg"
-            class="draggable beliren"
+            class="draggable phaseIn"
             oncontextmenu="return false"
             :class="[
               { kirmiziKenarli: step === 2 },
@@ -220,6 +268,7 @@ export default {
     };
   },
   emits: ["end"],
+  props: ["isTurkish"],
   mounted: function () {
     window.addEventListener("click", this.nextStep);
   },
@@ -319,10 +368,18 @@ export default {
           vm.step++;
 
           if (vm.remainingPlaces === ``) {
-            if (vm.secimler[1]) {
-              vm.remainingPlaces = "A'ya veya D";
+            if (vm.isTurkish) {
+              if (vm.secimler[1]) {
+                vm.remainingPlaces = "A'ya veya D";
+              } else {
+                vm.remainingPlaces = "C'ye veya B";
+              }
             } else {
-              vm.remainingPlaces = "C'ye veya B";
+              if (vm.secimler[1]) {
+                vm.remainingPlaces = "A or D";
+              } else {
+                vm.remainingPlaces = "C or B";
+              }
             }
           }
         }
@@ -526,10 +583,10 @@ export default {
         }
       }
       function solBEtiket() {
-        document.getElementById(`solBuyukEtiket`).classList.add(`yaklasilmis`);
+        document.getElementById(`leftLargeTag`).classList.add(`yaklasilmis`);
       }
       function sagBEtiket() {
-        document.getElementById(`sagBuyukEtiket`).classList.add(`yaklasilmis`);
+        document.getElementById(`rightLargeTag`).classList.add(`yaklasilmis`);
       }
       function kucukEtiketler(id, yon) {
         let idtext = yon === 1 ? `solKucukEtiket` : `sagKucukEtiket`;

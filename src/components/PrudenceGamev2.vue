@@ -5,6 +5,7 @@
       :totalLoss="totalLoss"
       :totalRounds="totalRounds"
       :currentRound="currentRound"
+      :isTurkish="isTurkish"
     />
     <div id="oyunAsagi">
       <img
@@ -18,11 +19,11 @@
         }"
       />
       <div id="buyukBoru">
-        <div id="buyukEtiketler">
-          <div id="solBuyukEtiket" class="buyukEtiket etiket soletiket">
+        <div id="largeTags">
+          <div id="leftLargeTag" class="buyukEtiket etiket soletiket">
             {{ convertNumbertoString(payOffs[currentRound][0]) }}
           </div>
-          <div id="sagBuyukEtiket" class="buyukEtiket etiket sagetiket">
+          <div id="rightLargeTag" class="buyukEtiket etiket sagetiket">
             {{ convertNumbertoString(payOffs[currentRound][1]) }}
           </div>
         </div>
@@ -79,11 +80,20 @@
       </button>
     </div>
   </div>
-  <div v-if="oyunSonu" class="oyunKutusu">
+  <div v-if="oyunSonu && isTurkish" class="oyunKutusu">
     <p>Oyunu tamamladınız. Toplam kazancınız: {{ totalRevenue - totalLoss }}</p>
     <button @click="$emit('end', true)" class="stepButton">
       <span v-if="lastTreatment">Deneyi Bitir</span>
       <span v-else>Diğer Oyuna Geç!</span>
+    </button>
+  </div>
+  <div v-if="oyunSonu && !isTurkish" class="oyunKutusu">
+    <p>
+      You completed the game. Total earnings: {{ totalRevenue - totalLoss }}
+    </p>
+    <button @click="$emit('end', true)" class="stepButton">
+      <span v-if="lastTreatment">End the experiment</span>
+      <span v-else>Proceed to the next game!</span>
     </button>
   </div>
 </template>
@@ -103,6 +113,10 @@ const props = defineProps({
   lastTreatment: {
     type: Boolean,
     default: false,
+  },
+  isTurkish: {
+    type: Boolean,
+    default: true,
   },
 });
 // eslint-disable-next-line
@@ -167,7 +181,7 @@ function convertNumbertoString(number) {
   position: relative;
 }
 
-#buyukEtiketler {
+#largeTags {
   position: absolute;
   display: flex;
   gap: 200px;
