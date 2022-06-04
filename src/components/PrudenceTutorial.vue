@@ -72,8 +72,9 @@
         </p>
         <p :key="7" v-if="step > 6">Now, click the ball.</p>
         <p :key="8" v-if="step > 7">
-          In forks like these, the ball will either go to the left or to the
-          right, <b>fifty percent</b> probability each.
+          When the pipe forks like this, the ball will either go to the left or
+          to the right, with a <b>fifty percent</b>
+          probability of each.
         </p>
         <p :key="9" v-if="step > 9">
           The numbers across the path the ball follows shows the points you gain
@@ -88,7 +89,7 @@
                   odenek[durum - 1][2]
                 }`
           }}
-          .Each turn your point will be calculated likewise.
+          points. Each turn your point will be calculated likewise.
         </p>
         <div :key="11" v-if="step > 11" class="centered">
           Shall we start if you are ready?

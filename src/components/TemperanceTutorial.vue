@@ -66,13 +66,14 @@
           Click one of the below pipes and drag it to a place you select.
         </p>
         <p :key="3" v-if="step > 5">
-          No place the other pipe to {{ remainingPlaces }}.
+          Now, place the other pipe to {{ remainingPlaces }}.
         </p>
         <p :key="4" v-if="step > 6">Now, click the ball.</p>
 
         <p :key="8" v-if="step > 7">
-          In forks like these, the ball will either go to the left or to the
-          right, <b>fifty percent</b> probability each.
+          When the pipe forks like this, the ball will either go to the left or
+          to the right, with a <b>fifty percent</b>
+          probability of each.
         </p>
 
         <p :key="9" v-if="step > 10">
@@ -81,8 +82,8 @@
         </p>
 
         <p :key="10" v-if="step > 11">
-          In this sample turn, you gained {{ ciktiHesapla() }}. Each turn your
-          point will be calculated likewise.
+          In this sample turn, you gained {{ ciktiHesapla() }} points. Each turn
+          your point will be calculated likewise.
         </p>
 
         <div :key="11" v-if="step > 12" class="centered">

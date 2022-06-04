@@ -47,7 +47,7 @@
     <div class="column1" v-else>
       <transition-group tag="div" name="tutorial" class="tutorialText">
         <p :key="1" v-if="step > 0">
-          In this game you will pick,
+          In this game you will pick
           <span :style="{ visibility: step > 1 ? `visible` : `hidden` }">
             one of these pipes</span
           >
@@ -59,13 +59,14 @@
           >
         </p>
         <p :key="2" v-if="step > 4">
-          Drag the pipe you pick to under the uppoer pipe.
+          Drag the pipe you picked to underneath the upper pipe.
         </p>
         <p :key="4" v-if="step > 5">Now, click the ball.</p>
 
         <p :key="8" v-if="step > 6">
-          In forks like these, the ball will either go to the left or to the
-          right, <b>fifty percent</b> probability each.
+          When the pipe forks like this, the ball will either go to the left or
+          to the right, with a <b>fifty percent</b>
+          probability of each.
         </p>
 
         <p :key="9" v-if="step > 9">
@@ -74,8 +75,8 @@
         </p>
 
         <p :key="10" v-if="step > 10">
-          In this sample turn, you gained {{ ciktiHesapla() }}. Each turn your
-          point will be calculated likewise.
+          In this sample turn, you gained {{ ciktiHesapla() }} points. Each turn
+          your point will be calculated likewise.
         </p>
 
         <div :key="11" v-if="step > 11" class="centered">

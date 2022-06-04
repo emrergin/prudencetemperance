@@ -21,7 +21,7 @@
       }}</span>
     </li>
   </ul>
-  <ul v-else>
+  <ul class="plainList" id="oyunVerileri" v-else>
     <li>
       <span>Total Earnings </span
       ><span class="veriKare" id="topKazanc">{{ totalRevenue }}</span>

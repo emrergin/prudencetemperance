@@ -113,9 +113,24 @@
         </div>
       </div>
       <div v-if="asama === `roundsonu`">
-        <button class="stepButton" id="nextRound" @click="siradakiTurE()">
+        <button
+          class="stepButton"
+          id="nextRound"
+          @click="siradakiTurE()"
+          v-if="isTurkish"
+        >
           {{
             currentRound === totalRounds - 1 ? `Oyunu Bitir` : `Sıradaki Tur >>`
+          }}
+        </button>
+        <button
+          class="stepButton"
+          id="nextRound"
+          @click="siradakiTurE()"
+          v-else
+        >
+          {{
+            currentRound === totalRounds - 1 ? `End the Game` : `Next Round >>`
           }}
         </button>
       </div>
