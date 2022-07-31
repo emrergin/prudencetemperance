@@ -404,7 +404,8 @@ export default {
   display: flex;
   margin: 0px;
   min-height: 568px;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 12ch;
   padding: 20px;
   padding-top: 8ch;
 }
