@@ -74,19 +74,19 @@
     />
     <SonucEkrani
       v-if="currentPhase === `son`"
-      @end="deneyBitisi = true"
+      @end="endOfExperiment = true"
       :isTurkish="isTurkish"
     />
   </div>
 
   <footer
-    v-if="(deneyBitisi === true || currentPhase === `intro`) && isTurkish"
+    v-if="(endOfExperiment === true || currentPhase === `intro`) && isTurkish"
   >
     <a href="https://github.com/emrergin" target="_blank">Emre Ergin</a>
     tarafından yapılmıştır.
   </footer>
   <footer
-    v-if="(deneyBitisi === true || currentPhase === `intro`) && !isTurkish"
+    v-if="(endOfExperiment === true || currentPhase === `intro`) && !isTurkish"
   >
     Made by
     <a href="https://github.com/emrergin" target="_blank">Emre Ergin</a>.
@@ -121,7 +121,7 @@ export default {
       currentPhase: `intro`,
       mode: `notDemo`,
       store,
-      deneyBitisi: false,
+      endOfExperiment: false,
       treatments: null,
       isTurkish: false,
       pruPayOffs: [
@@ -235,7 +235,7 @@ export default {
   },
   methods: {
     preventNav(event) {
-      if (store.isim && !this.deneyBitisi) {
+      if (store.isim && !this.endOfExperiment) {
         event.preventDefault();
         event.returnValue = "";
       }
