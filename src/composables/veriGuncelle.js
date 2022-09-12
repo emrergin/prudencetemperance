@@ -15,10 +15,11 @@ function veriGuncelle() {
     },
     body: JSON.stringify(someData),
   };
-  fetch(
-    `https://prudencetemperance.herokuapp.com/api/kisiveri`,
-    putMethod
-  ).catch((err) => console.log(err));
+  console.log(putMethod);
+  // fetch(
+  //   `https://prudencetemperance.herokuapp.com/api/kisiveri`,
+  //   putMethod
+  // ).catch((err) => console.log(err));
 }
 
 export default veriGuncelle;

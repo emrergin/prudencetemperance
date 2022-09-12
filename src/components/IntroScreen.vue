@@ -115,7 +115,8 @@ function logData() {
       "Content-type": "application/json  ; charset=UTF-8", // Indicates the content
     },
   };
-  fetch(`https://prudencetemperance.herokuapp.com/api/kisiveri`, postMethod);
+  console.log(postMethod);
+  //fetch(`https://prudencetemperance.herokuapp.com/api/kisiveri`, postMethod);
 }
 function tamEkran() {
   var requestMethod =
