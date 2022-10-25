@@ -1,4 +1,19 @@
 <template>
+  <div class="warning" v-if="isTurkish">
+    Bu site deneyin son hali, laboratuarda uygulanan son versiyonu değildir.
+    Önizleme kolaylığı açısından buraya konmuştur. Deneyin son hali için:
+    <a href="https://github.com/emrergin/prudence-labversion"
+      >https://github.com/emrergin/prudence-labversion</a
+    >
+  </div>
+  <div class="warning" v-else>
+    This is not the latest version of the experiment that is also used in the
+    laboratory setup. It is only here for ease of reviewing. For the last
+    version, visit:
+    <a href="https://github.com/emrergin/prudence-labversion"
+      >https://github.com/emrergin/prudence-labversion</a
+    >
+  </div>
   <ul class="girisMetni" v-if="isTurkish">
     <li>
       Hoş geldiniz. Bu deneyi belli durumlarda alınan ekonomik kararları anlamak
@@ -145,5 +160,12 @@ function tamEkran() {
 <style scoped>
 .stepButton {
   margin: 1em auto 20px auto;
+}
+
+.warning {
+  border: solid 4px red;
+  font-size: 1.5rem;
+  padding-block: 1ch;
+  font-weight: bold;
 }
 </style>

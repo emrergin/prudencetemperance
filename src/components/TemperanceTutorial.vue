@@ -599,7 +599,7 @@ export default {
       let rect = this.$refs.futbolTopu.getBoundingClientRect();
       let elemBelow = document.elementFromPoint(
         (rect.left + rect.right) / 2,
-        rect.top - 5
+        (rect.top + rect.bottom) / 2
       );
       return !elemBelow.closest(`.temperanceBoru,#buyukBoru`);
     },
