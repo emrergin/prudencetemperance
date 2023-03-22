@@ -7,29 +7,6 @@
     <div v-if="isTurkish">Daha geniş bir ekrana ihtiyacınız var.</div>
     <div v-else>You need a larger screen for this.</div>
   </div>
-  <!-- <div v-if="mode === `demo`" id="mainWrapper">
-    <IntroScreen
-      v-if="currentPhase === `intro`"
-      @end="currentPhase = `temGam`"
-    />
-    <PrudenceGame
-      :payOffs="pruPayOffs"
-      v-if="currentPhase === `pruGam`"
-      @end="currentPhase = `temGam`"
-    />
-    <TemperanceGame
-      :payOffs="temPayOffs"
-      v-if="currentPhase === `temGam`"
-      @end="currentPhase = `rskGam`"
-    />
-    <RiskGame
-      :payOffs="rskPayOffs"
-      v-if="currentPhase === `rskGam`"
-      @end="currentPhase = `son`"
-    />
-    <SonucEkrani v-if="currentPhase === `son`" />
-  </div>
-  <div v-else id="mainWrapper"> -->
   <div id="mainWrapper">
     <IntroScreen
       :isTurkish="isTurkish"
@@ -119,7 +96,6 @@ export default {
   data() {
     return {
       currentPhase: `intro`,
-      mode: `notDemo`,
       store,
       endOfExperiment: false,
       treatments: null,
