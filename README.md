@@ -2,7 +2,7 @@
 
 Web based experimentation for the concepts of _Prudence_ and _Temperance_. Also will include a treatment for _Risk Aversion_.
 
-Joint project with [Mehmet Yiğit Gürdal](https://econ.boun.edu.tr/mehmet-yigit-gurdal-0) who also designed the experiments.
+Joint project with [Mehmet Yiğit Gürdal](https://econ.boun.edu.tr/mehmet-yigit-gurdal-0) and [Tolga Umut Kuzubaş](https://econ.boun.edu.tr/tolga-umut-kuzubas).
 
 The front end is using **Vue3** while the backend uses **MongoDB** and **Node.js**. The backend code will not be hosted in this repo.
 
